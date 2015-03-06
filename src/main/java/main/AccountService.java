@@ -7,8 +7,14 @@ import java.util.Map;
  * Created by v.chibrikov on 13.09.2014.
  */
 public class AccountService {
+
     private Map<String, UserProfile> users = new HashMap<>();
     private Map<String, UserProfile> sessions = new HashMap<>();
+
+    public AccountService() {
+        this.addUser("admin", new UserProfile("admin", "admin", ""));
+        this.addUser("test", new UserProfile("test", "test", ""));
+    }
 
     public boolean addUser(String userName, UserProfile userProfile) {
         if (users.containsKey(userName))

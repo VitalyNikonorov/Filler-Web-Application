@@ -30,9 +30,6 @@ public class Main {
 
         AccountService accountService = new AccountService();
 
-        accountService.addUser("admin", new UserProfile("admin", "admin", ""));
-        accountService.addUser("test", new UserProfile("test", "test", ""));
-
         Servlet signIn = new SignInServlet(accountService);
         Servlet signUp = new SignUpServlet(accountService);
         Servlet profile = new ProfileServlet(accountService);
