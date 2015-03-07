@@ -35,9 +35,11 @@ public class SignInServlet extends HttpServlet {
         Map<String, Object> pageVariables = new HashMap<>();
         UserProfile profile = accountService.getUser(name);
 
-        if (profile != null && profile.getPassword().equals(password)) {
-            accountService.addSessions(session.getId(), accountService.getUser(name));
-            pageVariables.put("loginStatus", "Login passed");
+        if (profile != null ) {
+            if (profile.getPassword().equals(password)) {
+                accountService.addSessions(session.getId(), accountService.getUser(name));
+                pageVariables.put("loginStatus", "Login passed");
+            }
         } else {
             pageVariables.put("loginStatus", "Wrong login/password");
         }

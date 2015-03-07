@@ -43,7 +43,9 @@ public class AccountService {
         return sessions.get(sessionId);
     }
 
-    public boolean isAuthorised(String sessionId) { return sessions.containsKey(sessionId); };
+    public boolean isAuthorised(String sessionId) { return sessions.containsKey(sessionId); }
 
-    public void logout(String sessionId) { sessions.remove( sessionId); };
+    public void logout(String sessionId) { sessions.remove( sessionId); }
+
+    public boolean isExist(String sessionId) { return  sessions.containsKey(sessionId);}
 }

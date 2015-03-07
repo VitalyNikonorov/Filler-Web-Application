@@ -35,11 +35,12 @@ public class ProfileServlet extends HttpServlet {
         if (!accountService.isAuthorised(session.getId())) {
             response.sendRedirect("/api/v1/auth/signin");
         }
-
-        String name = accountService.getSessions(session.getId()).getLogin();
-        String password = accountService.getSessions(session.getId()).getPassword();
-        String email = accountService.getSessions(session.getId()).getEmail();
-
+        String name = "", password = "", email = "";
+        if (accountService.isExist(session.getId())) {
+            name = accountService.getSessions(session.getId()).getLogin();
+            password = accountService.getSessions(session.getId()).getPassword();
+            email = accountService.getSessions(session.getId()).getEmail();
+        }
         pageVariables.put("login", name);
         pageVariables.put("password", password);
         pageVariables.put("email", email);
