@@ -36,7 +36,6 @@ public class SignInServlet extends HttpServlet {
         UserProfile profile = accountService.getUser(name);
 
         if (profile != null && profile.getPassword().equals(password)) {
-            //session.setAttribute("User" + Integer.toString(accountService.getAuthUsersSize()+1), profile);
             accountService.addSessions(session.getId(), accountService.getUser(name));
             pageVariables.put("loginStatus", "Login passed");
         } else {

@@ -32,7 +32,7 @@ public class ProfileServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
 
-        if (session.isNew() ||  accountService.isAuthorised(session.getId())) {
+        if (/*session.isNew() || */ !accountService.isAuthorised(session.getId())) {
             response.sendRedirect("/api/v1/auth/signin");
         }
 
