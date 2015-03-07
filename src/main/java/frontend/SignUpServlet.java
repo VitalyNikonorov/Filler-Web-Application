@@ -29,10 +29,14 @@ public class SignUpServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         Map<String, Object> pageVariables = new HashMap<>();
-        if (accountService.addUser(name, new UserProfile(name, password, ""))) {
-            pageVariables.put("signUpStatus", "New user created");
+        if (name != null && password != null) {
+            if (accountService.addUser(name, new UserProfile(name, password, ""))) {
+                pageVariables.put("signUpStatus", "New user created");
+            } else {
+                pageVariables.put("signUpStatus", "User with name: " + name + " already exists");
+            }
         } else {
-            pageVariables.put("signUpStatus", "User with name: " + name + " already exists");
+            pageVariables.put("signUpStatus", "pass or/and name is null")   ;
         }
 
         response.getWriter().println(PageGenerator.getPage("signupstatus.html", pageVariables));
