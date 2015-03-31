@@ -1,10 +1,7 @@
 package main;
 
 import admin.AdminPageServlet;
-import frontend.LogOutServlet;
-import frontend.ProfileServlet;
-import frontend.SignInServlet;
-import frontend.SignUpServlet;
+import frontend.*;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -33,13 +30,19 @@ public class Main {
         Servlet signIn = new SignInServlet(accountService);
         Servlet signUp = new SignUpServlet(accountService);
         Servlet profile = new ProfileServlet(accountService);
-        Servlet logOut = new LogOutServlet(accountService);
+        Servlet logOut = new SignOutServlet(accountService);
+        Servlet check = new CheckServlet(accountService);
+        Servlet score = new ScoresServlet(accountService);
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(signIn), "/api/v1/auth/signin");
         context.addServlet(new ServletHolder(signUp), "/api/v1/auth/signup");
+        context.addServlet(new ServletHolder(check), "/api/v1/auth/check");
+        context.addServlet(new ServletHolder(score), "/api/v1/scores");
+
         context.addServlet(new ServletHolder(profile), "/profile");
         context.addServlet(new ServletHolder(logOut), "/logout");
+
 
         context.addServlet(new ServletHolder(new AdminPageServlet(accountService)), AdminPageServlet.adminPageURL);
         //Статика в public
