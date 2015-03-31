@@ -28,7 +28,7 @@ public class SignUpServlet extends HttpServlet {
                       HttpServletResponse response) throws ServletException, IOException {
 
         Map<String, Object> pageVariables = new HashMap<>();
-            pageVariables.put("signUpStatus", "SignUp Page");
+        pageVariables.put("signUpStatus", "SignUp Page");
 
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().println(PageGenerator.getPage("signupstatus.html", pageVariables));
