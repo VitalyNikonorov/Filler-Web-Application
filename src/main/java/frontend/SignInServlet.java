@@ -1,6 +1,6 @@
 package frontend;
 
-import main.AccountService;
+import base.AccountService;
 import main.UserProfile;
 import org.json.JSONObject;
 import templater.PageGenerator;
@@ -50,8 +50,6 @@ public class SignInServlet extends HttpServlet {
         JSONObject jsonResponse = new JSONObject();
         Map<String, Object> responseMap =  new HashMap<>();
         HttpSession session = request.getSession();
-
-
 
         if( jsonRequest.has("name")) {
             UserProfile profile = accountService.getUser(jsonRequest.get("name").toString());
