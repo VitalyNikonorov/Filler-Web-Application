@@ -2,6 +2,7 @@ package main;
 
 import admin.AdminPageServlet;
 import base.AccountService;
+import chat.WebSocketChatServlet;
 import frontend.*;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
@@ -34,6 +35,10 @@ public class Main {
         Servlet logOut = new SignOutServlet(accountService);
         Servlet check = new CheckServlet(accountService);
         Servlet score = new ScoresServlet(accountService);
+        Servlet chat = new WebSocketChatServlet();
+
+        //Sockets
+
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(signIn), "/api/v1/auth/signin");
@@ -43,6 +48,9 @@ public class Main {
 
         context.addServlet(new ServletHolder(profile), "/profile");
         context.addServlet(new ServletHolder(logOut), "/logout");
+
+        //Sockets
+        context.addServlet(new ServletHolder(chat), "/chat");
 
 
         context.addServlet(new ServletHolder(new AdminPageServlet(accountService)), AdminPageServlet.adminPageURL);
