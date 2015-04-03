@@ -13,8 +13,13 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.json.JSONObject;
+import sax.ReadXMLFileSAX;
+import xpath.xpathAdapter;
 
 import javax.servlet.Servlet;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author v.chibrikov
@@ -22,7 +27,11 @@ import javax.servlet.Servlet;
  */
 public class Main {
     public static void main(String[] args) throws Exception {
-        int port = 8080;
+        JSONObject resources = null;
+        resources = saxExample();
+        //int port = resources.getInt("port");
+        int port = new Integer(xpathAdapter.getValue("test1.xml", "/class/port" ));
+
         if (args.length == 1) {
             String portString = args[0];
             port = Integer.valueOf(portString);
@@ -82,4 +91,16 @@ public class Main {
         server.start();
         gameMechanics.run();
     }
+
+
+    private static JSONObject saxExample() {
+        JSONObject jsonResponse = null;
+        SerializationObject object = (SerializationObject) ReadXMLFileSAX.readXML("test.xml");
+        if (object != null) {
+            jsonResponse = new JSONObject(object);
+        }
+
+        return jsonResponse;
+    }
 }
+
