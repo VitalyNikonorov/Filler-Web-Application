@@ -15,7 +15,7 @@
 
     <p><a href="admin">Admin page</a></body></p>
     <a href="profile">Profile</a>
-<form method="post" action="#" id="myForm">
+<form method="post" action="game.html" id="myForm">
     <p><input type="text" name="name" id="name" /><label for="name">Поле 1</label></p>
     <p><input type="pass" name="password" id="password" /><label for="password">Поле 2</label></p>
     <p><input type="submit" name="sendBtn" value="Отправить" /></p>
@@ -35,15 +35,15 @@
                     , type:'POST'
                     , data: $.toJSON(formData)
                 });
+                setTimeout("document.location.href='/game.html'", 50);
                 return false;
             });
         });
-    </script>
+</script>
 
 
 <form name="auth" action="game.html" method="post">
-    <input type="text" name="name"/>
-    <input type="submit" value="Login">
+    <input type="submit" value="Play">
 </form>
 
 </body></html>
