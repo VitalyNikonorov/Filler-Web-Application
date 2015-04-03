@@ -1,6 +1,8 @@
 package frontend;
 
 import base.AccountService;
+import main.AccountServiceImpl;
+import main.ContextService;
 import org.json.JSONObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,10 +18,12 @@ import java.util.Map;
  * Created by Виталий on 06.03.2015.
  */
 public class SignOutServlet extends HttpServlet {
-    private AccountService accountService;
+    private AccountService accountService = new AccountServiceImpl();
+    private ContextService contextService;
 
-    public SignOutServlet(AccountService accountService) {
-        this.accountService = accountService;
+    public SignOutServlet(ContextService contextService) {
+        this.contextService = contextService;
+        accountService = (AccountService) contextService.get(accountService.getClass());
     }
 
     public void doPost(HttpServletRequest request,

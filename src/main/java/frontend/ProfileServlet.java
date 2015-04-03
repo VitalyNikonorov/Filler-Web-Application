@@ -2,6 +2,8 @@ package frontend;
 
 
 import base.AccountService;
+import main.AccountServiceImpl;
+import main.ContextService;
 import templater.PageGenerator;
 
 import javax.servlet.ServletException;
@@ -17,10 +19,12 @@ import java.util.Map;
  * Created by Виталий on 06.03.2015.
  */
 public class ProfileServlet extends HttpServlet {
-    private AccountService accountService;
+    private AccountService accountService = new AccountServiceImpl();
+    private ContextService contextService;
 
-    public ProfileServlet(AccountService accountService) {
-        this.accountService = accountService;
+    public ProfileServlet(ContextService contextService) {
+        this.contextService = contextService;
+        accountService = (AccountService) contextService.get(accountService.getClass());
     }
 
     public void doGet(HttpServletRequest request,

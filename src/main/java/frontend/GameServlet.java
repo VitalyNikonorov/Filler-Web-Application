@@ -2,6 +2,10 @@ package frontend;
 
 import base.AccountService;
 import base.GameMechanics;
+import base.WebSocketService;
+import main.AccountServiceImpl;
+import main.ContextService;
+import mechanics.GameMechanicsImpl;
 import templater.PageGenerator;
 
 
@@ -18,13 +22,16 @@ import java.util.Map;
  * @author v.chibrikov
  */
 public class GameServlet extends HttpServlet {
+    private AccountService accountService = new AccountServiceImpl();
+    private WebSocketService webSocketService = new WebSocketServiceImpl();
+    private GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService);
+    private ContextService contextService;
 
-    private GameMechanics gameMechanics;
-    private AccountService accountService;
-
-    public GameServlet(GameMechanics gameMechanics, AccountService accountService) {
-        this.gameMechanics = gameMechanics;
-        this.accountService = accountService;
+    public GameServlet(ContextService contextService) {
+        this.contextService = contextService;
+        this.accountService = (AccountService) contextService.get(accountService.getClass());
+        this.gameMechanics = (GameMechanics) contextService.get(gameMechanics.getClass());
+        this.webSocketService = (WebSocketService) contextService.get(webSocketService.getClass());
     }
 
     public void doGet(HttpServletRequest request,

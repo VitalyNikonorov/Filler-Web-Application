@@ -1,6 +1,8 @@
 package admin;
 
 import base.AccountService;
+import main.AccountServiceImpl;
+import main.ContextService;
 import main.TimeHelper;
 import templater.PageGenerator;
 
@@ -16,11 +18,13 @@ import java.util.Map;
  * Created by Виталий on 06.03.2015.
  */
 public class AdminPageServlet extends HttpServlet {
-    private AccountService accountService;
+    private AccountService accountService = new AccountServiceImpl();
+    private ContextService contextService;
     public static final String adminPageURL = "/admin"; //
 
-    public AdminPageServlet(AccountService accountService) {
-        this.accountService = accountService;
+    public AdminPageServlet(ContextService contextService) {
+        this.contextService = contextService;
+        accountService = (AccountService) contextService.get(accountService.getClass());
     }
 
     public void doGet(HttpServletRequest request,

@@ -2,6 +2,8 @@ package frontend;
 
 
 import base.AccountService;
+import main.AccountServiceImpl;
+import main.ContextService;
 import org.json.JSONObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,9 +18,12 @@ import java.util.Map;
  * Created by Виталий on 31.03.2015.
  */
 public class CheckServlet extends HttpServlet {
-    private AccountService accountService;
-    public CheckServlet(AccountService accountService) {
-        this.accountService = accountService;
+    private AccountService accountService = new AccountServiceImpl();
+    private ContextService contextService;
+
+    public CheckServlet(ContextService contextService) {
+        this.contextService = contextService;
+        accountService = (AccountService) contextService.get(accountService.getClass());
     }
 
     public void doGet(HttpServletRequest request,

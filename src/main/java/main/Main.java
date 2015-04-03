@@ -33,13 +33,18 @@ public class Main {
         WebSocketService webSocketService = new WebSocketServiceImpl();
         GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService);
         AccountService accountService = new AccountServiceImpl();
+        ContextService contextService = new ContextService();
 
-        Servlet signIn = new SignInServlet(accountService);
-        Servlet signUp = new SignUpServlet(accountService);
-        Servlet profile = new ProfileServlet(accountService);
-        Servlet logOut = new SignOutServlet(accountService);
-        Servlet check = new CheckServlet(accountService);
-        Servlet score = new ScoresServlet(accountService);
+        contextService.add(accountService.getClass(), accountService);
+        contextService.add(gameMechanics.getClass(), gameMechanics);
+        contextService.add(webSocketService.getClass(), webSocketService);
+
+        Servlet signIn = new SignInServlet(contextService);
+        Servlet signUp = new SignUpServlet(contextService);
+        Servlet profile = new ProfileServlet(contextService);
+        Servlet logOut = new SignOutServlet(contextService);
+        Servlet check = new CheckServlet(contextService);
+        Servlet score = new ScoresServlet(contextService);
         Servlet chat = new WebSocketChatServlet();
 
         //Sockets
@@ -58,11 +63,11 @@ public class Main {
         context.addServlet(new ServletHolder(chat), "/chat");
 
         //for game example
-        context.addServlet(new ServletHolder(new WebSocketGameServlet(accountService, gameMechanics, webSocketService)), "/gameplay");
-        context.addServlet(new ServletHolder(new GameServlet(gameMechanics, accountService)), "/game.html");
+        context.addServlet(new ServletHolder(new WebSocketGameServlet(contextService)), "/gameplay");
+        context.addServlet(new ServletHolder(new GameServlet(contextService)), "/game.html");
 
 
-        context.addServlet(new ServletHolder(new AdminPageServlet(accountService)), AdminPageServlet.adminPageURL);
+        context.addServlet(new ServletHolder(new AdminPageServlet(contextService)), AdminPageServlet.adminPageURL);
         //Статика в public
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);

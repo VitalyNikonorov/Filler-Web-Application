@@ -2,6 +2,8 @@ package frontend;
 
 
 import base.AccountService;
+import main.AccountServiceImpl;
+import main.ContextService;
 import main.UserProfile;
 import org.json.JSONObject;
 import templater.PageGenerator;
@@ -19,10 +21,12 @@ import java.io.BufferedReader;
  * Edited by WAATeam
  */
 public class SignUpServlet extends HttpServlet {
-    private AccountService accountService;
+    private AccountService accountService = new AccountServiceImpl();
+    private ContextService contextService;
 
-    public SignUpServlet(AccountService accountService) {
-        this.accountService = accountService;
+    public SignUpServlet(ContextService contextService) {
+        this.contextService = contextService;
+        accountService = (AccountService) contextService.get(accountService.getClass());
     }
 
     public void doGet(HttpServletRequest request,

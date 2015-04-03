@@ -1,6 +1,8 @@
 package frontend;
 
 import base.AccountService;
+import main.AccountServiceImpl;
+import main.ContextService;
 import main.UserProfile;
 import org.json.JSONObject;
 import templater.PageGenerator;
@@ -20,27 +22,22 @@ import java.util.Map;
  * Edited by WAATeam
  */
 public class SignInServlet extends HttpServlet {
-    private AccountService accountService;
+    private AccountService accountService = new AccountServiceImpl();
+    private ContextService contextService;
 
-    public SignInServlet(AccountService accountService) {
-        this.accountService = accountService;
+    public SignInServlet(ContextService contextService) {
+        this.contextService = contextService;
+        accountService = (AccountService) contextService.get(accountService.getClass());
     }
-
-    /*public void doGet(HttpServletRequest request,
-                      HttpServletResponse response) throws ServletException, IOException {
-
-        Map<String, Object> pageVariables = new HashMap<>();
-        pageVariables.put("loginStatus", "SignIn Page");
-
-        response.getWriter().println(PageGenerator.getPage("authstatus.html", pageVariables));
-    }
-*/
 
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
         HttpSession session = request.getSession();
+
+        AccountService accountService = new AccountServiceImpl();
+        accountService = (AccountService) contextService.get(accountService.getClass());
 
         response.setStatus(HttpServletResponse.SC_OK);
 
