@@ -26,7 +26,7 @@ public class SignInServlet extends HttpServlet {
         this.accountService = accountService;
     }
 
-    public void doGet(HttpServletRequest request,
+    /*public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
 
         Map<String, Object> pageVariables = new HashMap<>();
@@ -34,6 +34,28 @@ public class SignInServlet extends HttpServlet {
 
         response.getWriter().println(PageGenerator.getPage("authstatus.html", pageVariables));
     }
+*/
+
+    public void doGet(HttpServletRequest request,
+                      HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String password = request.getParameter("password");
+        HttpSession session = request.getSession();
+
+        response.setStatus(HttpServletResponse.SC_OK);
+
+       Map<String, Object> pageVariables = new HashMap<>();
+ UserProfile profile = accountService.getUser(name);
+           if (profile != null && profile.getPassword().equals(password)) {
+                  session.setAttribute("User", profile);
+                       accountService.addSessions(session.getId(), accountService.getUser(name));
+                        pageVariables.put("loginStatus", "Login passed");
+                    } else {
+                        pageVariables.put("loginStatus", "Wrong login/password");
+                    }
+
+                        response.getWriter().println(PageGenerator.getPage("authstatus.html", pageVariables));
+            }
 
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
@@ -61,8 +83,13 @@ public class SignInServlet extends HttpServlet {
                     responseMap.put("name", profile.getLogin());
                     responseMap.put("password", "");
                     responseMap.put("email", profile.getEmail());
-
                     jsonResponse.put("body", responseMap);
+
+
+                        session.setAttribute("User", profile);
+                        accountService.addSessions(session.getId(), accountService.getUser(jsonRequest.get("name").toString()));
+
+
                 } else {
                     jsonResponse.put("status", 400);
                     Map<String, Object> passMap = new HashMap<>();
@@ -88,6 +115,8 @@ public class SignInServlet extends HttpServlet {
             responseMap.put("name", nameMap);
             jsonResponse.put("body", responseMap);
         }
+
+
 
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().println(jsonResponse);

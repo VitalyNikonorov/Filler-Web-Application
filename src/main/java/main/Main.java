@@ -2,8 +2,11 @@ package main;
 
 import admin.AdminPageServlet;
 import base.AccountService;
+import base.GameMechanics;
+import base.WebSocketService;
 import chat.WebSocketChatServlet;
 import frontend.*;
+import mechanics.GameMechanicsImpl;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -27,6 +30,8 @@ public class Main {
 
         System.out.append("Starting at port: ").append(String.valueOf(port)).append('\n');
 
+        WebSocketService webSocketService = new WebSocketServiceImpl();
+        GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService);
         AccountService accountService = new AccountServiceImpl();
 
         Servlet signIn = new SignInServlet(accountService);
@@ -52,6 +57,10 @@ public class Main {
         //Sockets
         context.addServlet(new ServletHolder(chat), "/chat");
 
+        //for game example
+        context.addServlet(new ServletHolder(new WebSocketGameServlet(accountService, gameMechanics, webSocketService)), "/gameplay");
+        context.addServlet(new ServletHolder(new GameServlet(gameMechanics, accountService)), "/game.html");
+
 
         context.addServlet(new ServletHolder(new AdminPageServlet(accountService)), AdminPageServlet.adminPageURL);
         //Статика в public
@@ -66,6 +75,6 @@ public class Main {
         server.setHandler(handlers);
 
         server.start();
-        server.join();
+        gameMechanics.run();
     }
 }

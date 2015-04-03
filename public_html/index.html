@@ -15,37 +15,35 @@
 
     <p><a href="admin">Admin page</a></body></p>
     <a href="profile">Profile</a>
-    <script>
-        var $page = $('#page');
+<form method="post" action="#" id="myForm">
+    <p><input type="text" name="name" id="name" /><label for="name">Поле 1</label></p>
+    <p><input type="pass" name="password" id="password" /><label for="password">Поле 2</label></p>
+    <p><input type="submit" name="sendBtn" value="Отправить" /></p>
+</form>
 
-        function showScoreboardScreen() {
-            // TODO
-        }
-        function hideScoreboardScreen() {
-            // TODO
-        }
-
-        function showGameScreen() {
-            // TODO
-        }
-        function hideGameScreen() {
-            // TODO
-        }
-
-        function showLoginScreen() {
-            // TODO
-        }
-        function hideLoginScreen() {
-            // TODO
-        }
-
-        function showMainScreen() {
-            // TODO
-        }
-        function hideMainScreen() {
-            // TODO
-        }
-
-        showMainScreen();
+<script type="text/javascript" src="jquery-1.3.1.min.js"></script>
+<script type="text/javascript" src="jquery.json-1.3.js"></script>
+<script type="text/javascript">
+        $(function() {
+            $("#myForm").submit(function() {
+                var formData = {
+                    "name":$("#name").val()
+                    , "password":$("#password").val()
+                };
+                $.ajax({
+                    url:'api/v1/auth/signin'
+                    , type:'POST'
+                    , data: $.toJSON(formData)
+                });
+                return false;
+            });
+        });
     </script>
+
+
+<form name="auth" action="game.html" method="post">
+    <input type="text" name="name"/>
+    <input type="submit" value="Login">
+</form>
+
 </body></html>

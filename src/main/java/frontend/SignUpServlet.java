@@ -56,10 +56,12 @@ public class SignUpServlet extends HttpServlet {
             responseMap.put("id", 1);
             responseMap.put("name", jsonRequest.get("name").toString());
             responseMap.put("password", "");
-            responseMap.put("email", jsonRequest.get("email").toString());
+            responseMap.put("email", jsonRequest.get("name").toString());
 
             jsonResponse.put("body", responseMap);
             jsonResponse.put("status", 200);
+            accountService.addUser(jsonRequest.get("name").toString(),
+                    new UserProfile(jsonRequest.get("name").toString(), jsonRequest.get("password").toString(), jsonRequest.get("name").toString()));
         } else {
             jsonResponse.put("status", 400);
             Map<String, Object> nameMap =  new HashMap<>();
