@@ -13,8 +13,8 @@ public class AccountServiceImpl implements AccountService {
     private Map<String, UserProfile> sessions = new HashMap<>();
 
     public AccountServiceImpl() {
-        this.addUser("admin", new UserProfile("admin", "admin", ""));
-        this.addUser("test", new UserProfile("test", "test", ""));
+        this.addUser("admin@admin", new UserProfile("admin", "admin", ""));
+        this.addUser("test@test", new UserProfile("test", "test", ""));
     }
 
     public boolean addUser(String userName, UserProfile userProfile) {

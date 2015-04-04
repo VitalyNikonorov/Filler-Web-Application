@@ -1,49 +1,22 @@
-<!DOCTYPE  html>
+<!DOCTYPE HTML>
 <html><head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="bootstrap/css/main.css"/>
+    <link rel="stylesheet" href="css/my.css"/>
+    <script type="text/javascript" src="jquery-1.3.1.min.js"></script>
+    <script type="text/javascript" src="jquery.json-1.3.js"></script>
 
-        <title>Index</title>
-    <link rel="stylesheet" href="/css/main.css" />
-    <script src="/js/lib/jquery.js"></script>
-    <script src="/js/tmpl/main.js"></script>
-    <script src="/js/tmpl/scoreboard.js"></script>
-    <script src="/js/tmpl/game.js"></script>
-    <script src="/js/tmpl/login.js"></script>
 </head><body>
 
-    <div id="page"></div>
-
-    <p><a href="admin">Admin page</a></body></p>
-    <a href="profile">Profile</a>
-<form method="post" action="game.html" id="myForm">
-    <p><input type="text" name="name" id="name" /><label for="name">Поле 1</label></p>
-    <p><input type="pass" name="password" id="password" /><label for="password">Поле 2</label></p>
-    <p><input type="submit" name="sendBtn" value="Отправить" /></p>
-</form>
-
-<script type="text/javascript" src="jquery-1.3.1.min.js"></script>
-<script type="text/javascript" src="jquery.json-1.3.js"></script>
-<script type="text/javascript">
-        $(function() {
-            $("#myForm").submit(function() {
-                var formData = {
-                    "name":$("#name").val()
-                    , "password":$("#password").val()
-                };
-                $.ajax({
-                    url:'api/v1/auth/signin'
-                    , type:'POST'
-                    , data: $.toJSON(formData)
-                });
-                setTimeout("document.location.href='/game.html'", 200);
-                return false;
-            });
-        });
-</script>
-
-
-<form name="auth" action="game.html" method="post">
-    <input type="submit" value="Play">
-</form>
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-5">
+            <center>
+                <div class="page"></div>
+            </center>
+            </div>
+        </div>
+    </div>
+    <script src="//localhost:35729/livereload.js"></script>
+    <script data-main="js/main" src="js/lib/require.js"></script>
 </body></html>
