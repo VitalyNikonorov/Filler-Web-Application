@@ -25,7 +25,7 @@ import javax.servlet.annotation.WebServlet;
  */
 @WebServlet(name = "WebSocketGameServlet", urlPatterns = {"/gameplay"})
 public class WebSocketGameServlet extends WebSocketServlet {
-    private final static int IDLE_TIME = 60 * 1000;
+   private final static int IDLE_TIME = 60 * 1000;
     private AccountService accountService = new AccountServiceImpl();
     private WebSocketService webSocketService = new WebSocketServiceImpl();
     private GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService);
@@ -36,6 +36,15 @@ public class WebSocketGameServlet extends WebSocketServlet {
         this.accountService = (AccountService) contextService.get(accountService.getClass());
         this.gameMechanics = (GameMechanics) contextService.get(gameMechanics.getClass());
         this.webSocketService = (WebSocketService) contextService.get(webSocketService.getClass());
+    }
+/**/
+
+    public WebSocketGameServlet(AccountService accountService,
+                                GameMechanics gameMechanics,
+                                WebSocketService webSocketService) {
+        this.accountService = accountService;
+        this.gameMechanics = gameMechanics;
+        this.webSocketService = webSocketService;
     }
 
     @Override

@@ -72,9 +72,16 @@ public class Main {
         context.addServlet(new ServletHolder(chat), "/chat");
 
         //for game example
-        context.addServlet(new ServletHolder(new WebSocketGameServlet(contextService)), "/gameplay");
-        context.addServlet(new ServletHolder(new GameServlet(contextService)), "/game.html");
 
+        context.addServlet(new ServletHolder(new WebSocketGameServlet(contextService)), "/gameplay");
+
+        context.addServlet(new ServletHolder(new GameServlet(contextService)), "/game.html");  //ошибка в GameServlet
+/**/
+        //context.addServlet(new ServletHolder(new WebSocketGameServlet( (AccountService) contextService.get(accountService.getClass()),
+          //      (GameMechanics) contextService.get(gameMechanics.getClass()), (WebSocketService) contextService.get(webSocketService.getClass()))), "/gameplay");
+
+       // context.addServlet(new ServletHolder(new GameServlet((GameMechanics) contextService.get(gameMechanics.getClass()),
+         //       (AccountService) contextService.get(accountService.getClass()))), "/game.html");
 
         context.addServlet(new ServletHolder(new AdminPageServlet(contextService)), AdminPageServlet.adminPageURL);
         //Статика в public

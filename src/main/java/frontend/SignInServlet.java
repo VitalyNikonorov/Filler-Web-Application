@@ -74,7 +74,7 @@ public class SignInServlet extends HttpServlet {
             UserProfile profile = accountService.getUser(jsonRequest.get("name").toString());
             if (profile != null) {
                 if (profile.getPassword().equals(jsonRequest.get("password").toString())) {
-                    accountService.addSessions(session.getId(), accountService.getUser(jsonRequest.get("name").toString()));
+                    //accountService.addSessions(session.getId(), accountService.getUser(jsonRequest.get("name").toString()));
                     jsonResponse.put("status", 200);
                     responseMap.put("id", 1);
                     responseMap.put("name", profile.getLogin());
@@ -82,9 +82,8 @@ public class SignInServlet extends HttpServlet {
                     responseMap.put("email", profile.getEmail());
                     jsonResponse.put("body", responseMap);
 
-
-                        session.setAttribute("User", profile);
-                        accountService.addSessions(session.getId(), accountService.getUser(jsonRequest.get("name").toString()));
+                    session.setAttribute("User", profile);
+                    accountService.addSessions(session.getId(), accountService.getUser(jsonRequest.get("name").toString()));
 
 
                 } else {

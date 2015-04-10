@@ -29,6 +29,7 @@ public class GameMechanicsImpl implements GameMechanics {
     public GameMechanicsImpl(WebSocketService webSocketService) {
         this.webSocketService = webSocketService;
     }
+    public GameMechanicsImpl() { }
 
     public void addUser(String user) {
         if (waiter != null) {

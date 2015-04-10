@@ -11,6 +11,7 @@ public class AccountServiceImpl implements AccountService {
 
     private Map<String, UserProfile> users = new HashMap<>();
     private Map<String, UserProfile> sessions = new HashMap<>();
+    private Map<String, String> userSessions = new HashMap<>();
 
     public AccountServiceImpl() {
         this.addUser("admin@admin", new UserProfile("admin", "admin", ""));
@@ -49,4 +50,12 @@ public class AccountServiceImpl implements AccountService {
     public void logout(String sessionId) { sessions.remove( sessionId); }
 
     public boolean isExist(String sessionId) { return  sessions.containsKey(sessionId);}
+
+    public void saveUserName(String sessionId, String name) {
+        userSessions.put(sessionId, name);
+    }
+
+    public String getUserName(String sessionId) {
+        return userSessions.get(sessionId);
+    }
 }

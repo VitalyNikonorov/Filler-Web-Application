@@ -33,7 +33,7 @@ public class GameWebSocketCreator implements WebSocketCreator {
     @Override
     public Object createWebSocket(ServletUpgradeRequest req, ServletUpgradeResponse resp) {
         String sessionId = req.getHttpServletRequest().getSession().getId();
-        String name = accountService.getSessions(req.getHttpServletRequest().getSession().getId()).getLogin();;
+        String name = accountService.getUserName(sessionId); //.getSessions(req.getHttpServletRequest().getSession().getId()).getLogin();;
         return new GameWebSocket(name, gameMechanics, webSocketService);
     }
 }

@@ -21,23 +21,57 @@ import java.util.Map;
 /**
  * @author v.chibrikov
  */
+
+/*
 public class GameServlet extends HttpServlet {
-    private AccountService accountService = new AccountServiceImpl();
-    private WebSocketService webSocketService = new WebSocketServiceImpl();
-    private GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService);
-    private ContextService contextService;
+
+    private GameMechanics gameMechanics;
+    private AccountService authService;
+
+    public GameServlet(GameMechanics gameMechanics, AccountService authService) {
+        this.gameMechanics = gameMechanics;
+        this.authService = authService;
+    }
+
+    public void doGet(HttpServletRequest request,
+                      HttpServletResponse response) throws ServletException, IOException {
+    }
+
+    public void doPost(HttpServletRequest request,
+                       HttpServletResponse response) throws ServletException, IOException {
+
+        Map<String, Object> pageVariables = new HashMap<>();
+        String name = request.getParameter("name");
+        String safeName = name == null ? "NoName" : name;
+        authService.saveUserName(request.getSession().getId(), name);
+        pageVariables.put("myName", safeName);
+
+        response.getWriter().println(PageGenerator.getPage("game.html", pageVariables));
+
+        response.setContentType("text/html;charset=utf-8");
+        response.setStatus(HttpServletResponse.SC_OK);
+    }
+}*/
+
+
+
+public class GameServlet extends HttpServlet {
+    private AccountService accountService;
+    //private WebSocketService webSocketService = new WebSocketServiceImpl();
+    private GameMechanics gameMechanics;
+    public ContextService contextService;
 
     public GameServlet(ContextService contextService) {
         this.contextService = contextService;
-        this.accountService = (AccountService) contextService.get(accountService.getClass());
-        this.gameMechanics = (GameMechanics) contextService.get(gameMechanics.getClass());
-        this.webSocketService = (WebSocketService) contextService.get(webSocketService.getClass());
+        this.accountService = (AccountService) contextService.get((new AccountServiceImpl()).getClass());
+        this.gameMechanics = (GameMechanics) contextService.get((new GameMechanicsImpl()).getClass());
+        //this.webSocketService = (WebSocketService) contextService.get(webSocketService.getClass());
     }
 
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
 
-        Map<String, Object> pageVariables = new HashMap<>();
+        /*Map<String, Object> pageVariables = new HashMap<>();
         HttpSession session = request.getSession();
         String name = "";
         if (accountService.isExist(session.getId())) {
@@ -51,7 +85,7 @@ public class GameServlet extends HttpServlet {
         response.getWriter().println(PageGenerator.getPage("game.html", pageVariables));
 
         response.setContentType("text/html;charset=utf-8");
-        response.setStatus(HttpServletResponse.SC_OK);
+        response.setStatus(HttpServletResponse.SC_OK);*/
 
     }
 
@@ -67,7 +101,7 @@ public class GameServlet extends HttpServlet {
         }
 
         String safeName = name == null ? "NoName" : name;
-        accountService.addSessions(request.getSession().getId(), accountService.getUser(name));
+        accountService.saveUserName(session.getId(), name);
         pageVariables.put("myName", safeName);
 
         response.getWriter().println(PageGenerator.getPage("game.html", pageVariables));
@@ -76,3 +110,4 @@ public class GameServlet extends HttpServlet {
         response.setStatus(HttpServletResponse.SC_OK);
     }
 }
+

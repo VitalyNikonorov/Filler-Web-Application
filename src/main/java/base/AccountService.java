@@ -25,4 +25,7 @@ public interface AccountService {
 
     boolean addUser(String userName, UserProfile userProfile);
 
+    void saveUserName(String sessionId, String name);
+
+    public String getUserName(String sessionId);
 }
