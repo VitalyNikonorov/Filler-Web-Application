@@ -61,7 +61,13 @@ public class GameUser {
                 cells[i][j] = 0;
             }
         }
-        cells[cells.length - 1][0] = 2;
+        if (player == 1){
+            cells[cells.length - 1][0] = 2;
+        }else{
+            cells[0][cells[0].length - 1] = 2;
+        }
+
+
         makeBinaryMask(Mask);
         calculateCells(Mask, cells);
     }

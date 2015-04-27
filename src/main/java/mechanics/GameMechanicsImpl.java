@@ -88,7 +88,7 @@ public class GameMechanicsImpl implements GameMechanics {
         gameSession.getFirst().setGameField(gameField);
         gameSession.getFirst().setCells();
 
-        gameSession.getSecond().setGameField(inverceField(gameField));
+        gameSession.getSecond().setGameField(gameField);
         gameSession.getSecond().setCells();
 
         nameToGame.put(first, gameSession);
