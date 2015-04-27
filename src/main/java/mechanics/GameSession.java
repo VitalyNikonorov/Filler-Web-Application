@@ -5,6 +5,7 @@ import base.GameUser;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  *
@@ -20,9 +21,11 @@ public class GameSession {
         startTime = new Date().getTime();
         GameUser gameUser1 = new GameUser(user1);
         gameUser1.setEnemyName(user2);
+        gameUser1.setPlayer(1);
 
         GameUser gameUser2 = new GameUser(user2);
         gameUser2.setEnemyName(user1);
+        gameUser2.setPlayer(2);
 
         users.put(user1, gameUser1);
         users.put(user2, gameUser2);
@@ -55,4 +58,5 @@ public class GameSession {
     public  boolean isFirstWin(){
         return first.getMyScore() > second.getMyScore();
     }
+
 }

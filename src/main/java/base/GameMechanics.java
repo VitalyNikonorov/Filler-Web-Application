@@ -5,9 +5,13 @@ package base;
  */
 public interface GameMechanics {
 
+    public Integer[][] getGameFuild();
+
     public void addUser(String user);
 
     public void incrementScore(String userName);
+
+    public void move(String userName, int color);
 
     public void run();
 }

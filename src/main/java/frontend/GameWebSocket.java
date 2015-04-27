@@ -43,6 +43,7 @@ public class GameWebSocket {
             JSONObject jsonStart = new JSONObject();
             jsonStart.put("status", "start");
             jsonStart.put("enemyName", user.getEnemyName());
+            jsonStart.put("pole", gameMechanics.getGameFuild());
             session.getRemote().sendString(jsonStart.toString());
         } catch (Exception e) {
             System.out.print(e.toString());
@@ -62,7 +63,15 @@ public class GameWebSocket {
 
     @OnWebSocketMessage
     public void onMessage(String data) {
-        gameMechanics.incrementScore(myName);
+            try {
+                JSONObject jsonMove = new JSONObject(data);
+                String username = myName;
+                int color = new Integer(jsonMove.get("color").toString());
+                gameMechanics.move(username, color);
+                session.getRemote().sendString(jsonMove.toString());
+            } catch (Exception e) {
+                System.out.print(e);
+            }
     }
 
     @OnWebSocketConnect
@@ -77,6 +86,18 @@ public class GameWebSocket {
         jsonStart.put("status", "increment");
         jsonStart.put("name", myName);
         jsonStart.put("score", user.getMyScore());
+        try {
+            session.getRemote().sendString(jsonStart.toString());
+        } catch (Exception e) {
+            System.out.print(e.toString());
+        }
+    }
+
+    public void setNewField(GameUser user) {
+        JSONObject jsonStart = new JSONObject();
+        jsonStart.put("status", "move");
+        jsonStart.put("name", myName);
+        jsonStart.put("field", user.getGameField());
         try {
             session.getRemote().sendString(jsonStart.toString());
         } catch (Exception e) {

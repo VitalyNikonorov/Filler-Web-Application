@@ -42,6 +42,9 @@
                 if(data.status == "increment" && data.name == document.getElementById("enemyName").innerHTML){
                     document.getElementById("enemyScore").innerHTML = data.score;
                 }
+
+                var $textarea = document.getElementById("messages");
+                $textarea.value = $textarea.value + event.data + "\n";
             }
 
             ws.onclose = function (event) {
@@ -51,8 +54,10 @@
         };
 
         function sendMessage() {
-            var message = "{}";
+            var messageField = document.getElementById("message");
+            var message = "{\"color\":" + messageField.value + "}";
             ws.send(message);
+            messageField.value = '';
         }
 
     </script>
@@ -74,9 +79,15 @@
             <p><span id="enemyName"></span>: <span id="enemyScore">0</span></p>
         </div>
 
-        <form name="gamePlay" action="">
-            <input type="button" name="submit" value="Press to win!" onclick="sendMessage();"/>
+        <div id="chatbox">
+            <textarea id="messages" rows="16" cols="48" readonly="readonly"></textarea>
+        </div>
+
+        <form name="message" action="">
+            <input name="usermsg" type="text" id="message" size="63"/>
+            <input type="button" name="submitmsg" value="Send..." onclick="sendMessage();"/>
         </form>
+
     </div>
 
     <div id="gameOver" style="display: none">
