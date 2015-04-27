@@ -184,4 +184,15 @@ public class GameUser {
         }
 
     }
+
+    public Integer[][] inverceField(Integer[][] field){
+        Integer[][] inverce = new Integer[field.length][field[0].length];
+        for (int i = 0; i < field.length; i++){
+            for (int j = 0; j < field[0].length; j++){
+                inverce[i][j] = field[field.length - i - 1][field[0].length - j - 1];
+            }
+        }
+        return inverce;
+    }
+
 }

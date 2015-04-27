@@ -22,6 +22,7 @@ public class WebSocketServiceImpl implements WebSocketService {
 
     public void notifyNewGameField(GameUser user) {
         userSockets.get(user.getMyName()).setNewField(user);
+        userSockets.get(user.getEnemyName()).setNewField(user);
     }
 
     public void notifyEnemyNewScore(GameUser user) {
