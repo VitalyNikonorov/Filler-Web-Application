@@ -36,6 +36,13 @@ public class GameUser {
         myScore++;
     }
 
+    public void reScore(){
+    };
+
+    public int getScore(){
+        return myScore;
+    }
+
     public void incrementEnemyScore() {
         enemyScore++;
     }
@@ -140,7 +147,7 @@ public class GameUser {
         }
     }
 
-    public void move(int choise){
+    public void move(int color){
         int counter = 0;
         do {
             counter = 0;
@@ -148,28 +155,28 @@ public class GameUser {
                 for (int j = 0; j < cells[0].length; j++) {
                     if (cells[i][j] == 2) {
                         if (i < cells.length - 1) {
-                            if ((gameField[i + 1][j] == choise) && (cells[i + 1][j] != 3)) {
+                            if ((gameField[i + 1][j] == color) && (cells[i + 1][j] != 3)) {
                                 cells[i + 1][j] = 2;
                                 counter++;
                             }
                         }
 
                         if (i > 0) {
-                            if ((gameField[i - 1][j] == choise) && (cells[i - 1][j] != 3)) {
+                            if ((gameField[i - 1][j] == color) && (cells[i - 1][j] != 3)) {
                                 cells[i - 1][j] = 2;
                                 counter++;
                             }
                         }
 
                         if (j < cells[0].length - 1) {
-                            if ((gameField[i][j + 1] == choise) && (cells[i][j + 1] != 3)) {
+                            if ((gameField[i][j + 1] == color) && (cells[i][j + 1] != 3)) {
                                 cells[i][j + 1] = 2;
                                 counter++;
                             }
                         }
 
                         if (j > 0) {
-                            if ((gameField[i][j - 1] == choise) && (cells[i][j - 1] != 3)) {
+                            if ((gameField[i][j - 1] == color) && (cells[i][j - 1] != 3)) {
                                 cells[i][j - 1] = 2;
                                 counter++;
                             }
@@ -179,16 +186,18 @@ public class GameUser {
                 }
             }
         }while (counter != 0);
-
+        int score = 0;
         for (int k = 0; k < cells.length; k++){
+
             for(int p = 0; p < cells[0].length; p++){
                 if(cells[k][p] == 3){
-                    gameField[k][p] = choise;
+                    score++;
+                    gameField[k][p] = color;
                     cells[k][p] = 2;
                 }
             }
         }
-
+        myScore = score;
     }
 
     public Integer[][] inverceField(Integer[][] field){

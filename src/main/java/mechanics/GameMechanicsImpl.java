@@ -13,7 +13,7 @@ import java.util.*;
 public class GameMechanicsImpl implements GameMechanics {
     private static final int STEP_TIME = 100;
 
-    private static final int gameTime = 3000 * 1000;
+    private static final int gameTime = 60 * 1000;
 
     private WebSocketService webSocketService;
 
@@ -53,7 +53,8 @@ public class GameMechanicsImpl implements GameMechanics {
         GameSession myGameSession = nameToGame.get(userName);
         GameUser myUser = myGameSession.getSelf(userName);
         myUser.move(color);
-        //GameUser enemyUser = myGameSession.getEnemy(userName);
+        //myUser.reScore();
+        GameUser enemyUser = myGameSession.getEnemy(userName);
         //enemyUser.incrementEnemyScore();
 
         webSocketService.notifyNewGameField(myUser);
