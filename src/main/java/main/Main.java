@@ -58,7 +58,6 @@ public class Main {
 
         //Sockets
 
-
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(signIn), "/api/v1/auth/signin");
         context.addServlet(new ServletHolder(signUp), "/api/v1/auth/signup");

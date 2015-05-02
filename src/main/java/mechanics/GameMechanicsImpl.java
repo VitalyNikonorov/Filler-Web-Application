@@ -13,7 +13,7 @@ import java.util.*;
 public class GameMechanicsImpl implements GameMechanics {
     private static final int STEP_TIME = 100;
 
-    private static final int gameTime = 90 * 1000;
+    private static final int gameTime = 30 * 1000;
 
     private WebSocketService webSocketService;
 
@@ -76,7 +76,7 @@ public class GameMechanicsImpl implements GameMechanics {
                 boolean firstWin = session.isFirstWin();
                 webSocketService.notifyGameOver(session.getFirst(), firstWin);
                 webSocketService.notifyGameOver(session.getSecond(), !firstWin);
-                allSessions.remove(session);/////////////////////////////////////////////////////////////////////////
+                //allSessions.remove(session);/////////////////////////////////////////////////////////////////////////
             }
         }
     }
