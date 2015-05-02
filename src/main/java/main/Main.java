@@ -2,9 +2,12 @@ package main;
 
 import admin.AdminPageServlet;
 import base.AccountService;
+import base.DBService;
 import base.GameMechanics;
 import base.WebSocketService;
+import base.dataSets.UserDataSet;
 import chat.WebSocketChatServlet;
+import dbService.DBServiceImpl;
 import frontend.*;
 import mechanics.GameMechanicsImpl;
 import org.eclipse.jetty.server.Handler;
@@ -19,6 +22,7 @@ import xpath.xpathAdapter;
 
 import javax.servlet.Servlet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,6 +42,31 @@ public class Main {
         }
 
         System.out.append("Starting at port: ").append(String.valueOf(port)).append('\n');
+
+        /*DB*/
+
+        DBService dbService = new DBServiceImpl();
+
+
+        String status = dbService.getLocalStatus();
+        System.out.println(status);
+
+        dbService.save(new UserDataSet("test1", "test1@test", "test1"));
+        dbService.save(new UserDataSet("john1", "john1@john", "john1"));
+
+        UserDataSet dataSet = dbService.read(1);
+        System.out.println(dataSet);
+
+        dataSet = dbService.readByName("john");
+        System.out.println(dataSet);
+
+        List<UserDataSet> dataSets = dbService.readAll();
+        for (UserDataSet userDataSet : dataSets) {
+            System.out.println(userDataSet);
+        }
+
+        dbService.shutdown();
+       //BD OFF
 
         WebSocketService webSocketService = new WebSocketServiceImpl();
         GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService);
