@@ -26,7 +26,7 @@ public class DBServiceImpl implements DBService {
         configuration.setProperty("hibernate.temp.use_jdbc_metadata_defaults","false");
         configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
         configuration.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-        configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/filler");
+        configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://127.0.0.1:5432/filler");
         configuration.setProperty("hibernate.connection.username", "postgres");
         configuration.setProperty("hibernate.connection.password", "rEVRXtarK6");
         configuration.setProperty("hibernate.show_sql", "true");
