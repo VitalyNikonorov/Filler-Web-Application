@@ -30,7 +30,7 @@ public class DBServiceImpl implements DBService {
         configuration.setProperty("hibernate.connection.username", "postgres");
         configuration.setProperty("hibernate.connection.password", "test"); //test
         configuration.setProperty("hibernate.show_sql", "true");
-        configuration.setProperty("hibernate.hbm2ddl.auto", "validate");
+        configuration.setProperty("hibernate.hbm2ddl.auto", "create");
         configuration.setProperty("hibernate.temp.use_jdbc_metadata_defaults","false");
 
         sessionFactory = createSessionFactory(configuration);
