@@ -1,15 +1,20 @@
 define([
     'backbone',
-    'tmpl/main'
+    'tmpl/main',
+    'models/user'
 ], function(
     Backbone,
-    tmpl
+    tmpl,
+    userm
 ){
 
     var View = Backbone.View.extend({
-
+        model: userm,
         template: tmpl,
         className: "main-view",
+        events: {
+            "click .button-logout": "logout"
+        },
         initialize: function () {
             this.render();
             this.hide();
@@ -19,9 +24,13 @@ define([
         },
         show: function () {
             this.trigger('show', this);
+            this.$el.show();
         },
         hide: function () {
             this.$el.hide();
+        },
+        logout: function () {
+            this.model.logout();
         }
 
     });

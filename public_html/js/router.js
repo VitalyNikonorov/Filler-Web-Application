@@ -5,6 +5,7 @@ define([
     'views/login',
     'views/game',
     'views/registration',
+    'views/profile',
     'views/viewManager'
 ], function(
     Backbone,
@@ -13,27 +14,29 @@ define([
     loginView,
     gameView,
     registrationView,
+    profile,
     VM
 ){
-    $(".page").append(mainView.el);
-    $(".page").append(scoreView.el);
-    $(".page").append(loginView.el);
-    $(".page").append(gameView.el);
-    $(".page").append(registrationView.el);
-    VM.add(mainView);
-    VM.add(scoreView);
-    VM.add(loginView);
-    VM.add(gameView);
-    VM.add(registrationView);
-
     var Router = Backbone.Router.extend({
         vm: VM,
+        initialize: function() {
+            this.vm = VM;
+            this.vm.add({
+                "mainView": mainView,
+                "scoreView": scoreView,
+                "loginView": loginView,
+                "gameView": gameView,
+                "registrationView": registrationView,
+                "profileView": profile
+            });
+        },
         routes: {
             'scoreboard': 'scoreboardAction',
             'game': 'gameAction',
             'login': 'loginAction',
             'back': 'defaultActions',
             'registration': 'registrationAction',
+            'profile': 'profileAction',
             '*default': 'defaultActions'
         },
 
@@ -52,6 +55,9 @@ define([
         },
         registrationAction: function () {
             registrationView.show();
+        },
+        profileAction: function () {
+            profile.show();
         }
 
     });

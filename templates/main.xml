@@ -1,2 +1,11 @@
-<fest:template xmlns:fest="http://fest.mail.ru">
+<fest:template xmlns:fest="http://fest.mail.ru"
+    context_name="json">
+    <fest:include src='addons/header.xml'/>
+    <div> 
+        <h3>Main menu</h3>
+    </div>
+    <a href="#scoreboard" class="btn btn-info">Scoreboard</a> <br/><br/>
+    <a href="#game" class="btn btn-success">Game</a> <br/><br/>
+    <a href="#login" class="btn btn-primary">login</a>
+    <a class="btn btn-danger button-logout">logout</a>
 </fest:template>

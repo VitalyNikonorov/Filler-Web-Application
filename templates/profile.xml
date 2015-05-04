@@ -1,0 +1,16 @@
+<fest:template xmlns:fest="http://fest.mail.ru"
+    context_name="json">
+    
+    <div>
+        <h3>profile</h3>
+    </div>
+
+    <div class="your-name">
+        Name: <fest:value>json.name</fest:value> <br/>
+        Email: <fest:value>json.email</fest:value>
+    </div>
+
+
+    <br/>
+    <a href="#" class="btn btn-danger">back</a>
+</fest:template>

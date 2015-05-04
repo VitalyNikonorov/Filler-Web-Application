@@ -1,0 +1,27 @@
+<fest:template xmlns:fest="http://fest.mail.ru"
+               context_name="json">
+    <fest:include src='addons/header.xml'/>
+    <div>
+        <h3>Registration</h3>
+    </div>
+    <form method="post" class="form-horizontal signup-form">
+        <fieldset>
+            <div class="form-group">
+                <input type="email" class="form-control signup-form__email" name="email" placeholder="e-mail" required="true" title="Input Email"/>
+            </div>
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Your name" class="form-control signup-form__name" required="true" pattern="[A-Za-z0-9_-]+" /> <br />
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" id="password" required="true" class="form-control signup-form__password"/> <br />
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Confirm Password" id="confirm_password" required="true" class="form-control signup-form__password"/> <br />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="submit" class="btn btn-success"/>
+            </div>
+        </fieldset>
+    </form>
+    <a href="#" class="btn btn-danger">back</a>
+</fest:template>

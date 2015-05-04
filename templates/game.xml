@@ -1,2 +1,30 @@
-<fest:template xmlns:fest="http://fest.mail.ru">
+<fest:template xmlns:fest="http://fest.mail.ru"
+    context_name="json">
+    <div>
+        <h3>game</h3>
+    </div>
+    <div class="score">
+        You score: <fest:value>json.score</fest:value>
+    </div>
+    <div>
+        <table class="gameTable" border="2">
+            <fest:for from="1" to="10" index="i">
+                <tr class="gameTable__row">
+                    <fest:for from="1" to="10" index="j">
+                        <td  class="gameTable__cell"  style="background-color: red;"><fest:value>j</fest:value><fest:space/><fest:value>i</fest:value></td>
+                    </fest:for>
+                </tr>
+            </fest:for>
+        </table>
+    </div>
+    <div class="control-buttons">
+        <div class="control-buttons__button control-buttons__button_red">1</div>
+        <div class="control-buttons__button control-buttons__button_green">2</div>
+        <div class="control-buttons__button control-buttons__button_blue">3</div>
+        <div class="control-buttons__button control-buttons__button_yellow">4</div>
+        <div class="control-buttons__button control-buttons__button_pink">5</div>
+    </div>
+
+    <br/>
+    <a href="#" class="btn btn-danger">back</a>
 </fest:template>

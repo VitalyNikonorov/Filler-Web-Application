@@ -1,0 +1,36 @@
+$pink_color: pink;
+$red_color: red;
+$blue_color: blue;
+$green_color: green;
+$yellow_color: yellow;
+
+.control-buttons{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.control-buttons__button {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(0,0,0,.2);
+}
+
+.control-buttons__button_red {
+	background-color: $red_color;
+}
+.control-buttons__button_green {
+	background-color: $green_color;
+}
+.control-buttons__button_blue {
+	background-color: $blue_color;
+}
+.control-buttons__button_pink {
+	background-color: $pink_color;
+}
+.control-buttons__button_yellow {
+	background-color: $yellow_color;
+}

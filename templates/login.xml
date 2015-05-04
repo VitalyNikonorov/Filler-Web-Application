@@ -1,2 +1,22 @@
-<fest:template xmlns:fest="http://fest.mail.ru">
+<fest:template xmlns:fest="http://fest.mail.ru"
+    context_name="json">
+    <fest:include src='addons/header.xml'/>
+    <div>
+        <h3>Login</h3>
+    </div>
+    <form method="post" class="form-horizontal login-form">
+    	<fieldset>
+    		<div class="form-group">
+   					<input type="email"  name="name" class="form-control login-form__email" placeholder="e-mail" required="true"/>
+    		</div>
+    		<div class="form-group">
+ 				<input type="password" name="password" placeholder="your pass" class="form-control login-form__password" required="true"/> <br />
+ 			</div>
+ 			<div class="form-group">
+ 				<input type="submit" value="send" class="btn btn-success"/>
+ 			</div>
+ 		</fieldset>
+ 	</form>
+	<a href="#registration" class="btn btn-info">registration</a>
+    <a href="#" class="btn btn-danger">back</a> 
 </fest:template>

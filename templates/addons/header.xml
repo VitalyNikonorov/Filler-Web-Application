@@ -1,0 +1,6 @@
+<fest:template xmlns:fest="http://fest.mail.ru"
+    context_name="json">
+        <div style="color: red">
+            <h1>Filler_game</h1>
+        </div>    
+</fest:template>

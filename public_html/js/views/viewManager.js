@@ -8,18 +8,22 @@ define([
 
     var View = Backbone.View.extend({
    
-        add: function (view) {
-            this.listenTo(view, "show", this.hide_and_show)
-            this.views.push(view);
+        add: function (views) {
+            this.views = views;
+            var page = $(".page");
+            _.forEach(this.views, function(val, i) {
+                page.append(val.$el)
+                this.listenTo(val, "show", this.hide_and_show);
+            }, this)
         },
         initialize: function () {
-            this.views = [];
+            this.views = {};
         },
         hide_and_show: function(arg) {
             _.forEach(this.views, function (arg) {
                 arg.hide();
             });
-            arg.$el.show();
+            
         }
     });
 
