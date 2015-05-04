@@ -15,9 +15,11 @@ public interface DBService {
 
     UserDataSet read(int id);
 
-    UserDataSet readByName(String name);
+    UserDataSet readByEmail(String name);
 
     List<UserDataSet> readAll();
+
+    List<UserDataSet> getScoreBoard();
 
     void shutdown();
 }

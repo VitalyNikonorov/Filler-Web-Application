@@ -1,6 +1,8 @@
 package main;
 
 import base.AccountService;
+import base.dataSets.UserDataSet;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,23 +11,18 @@ import java.util.Map;
  */
 public class AccountServiceImpl implements AccountService {
 
-    private Map<String, UserProfile> users = new HashMap<>();
-    private Map<String, UserProfile> sessions = new HashMap<>();
+    private Map<String, UserDataSet> users = new HashMap<>();
+    private Map<String, UserDataSet> sessions = new HashMap<>();
     private Map<String, String> userSessions = new HashMap<>();
 
-    public AccountServiceImpl() {
-        this.addUser("admin@admin", new UserProfile("admin", "admin", ""));
-        this.addUser("test@test", new UserProfile("test", "test", ""));
-    }
-
-    public boolean addUser(String userName, UserProfile userProfile) {
+    public boolean addUser(String userName, UserDataSet userProfile) {
         if (users.containsKey(userName))
             return false;
         users.put(userName, userProfile);
         return true;
     }
 
-    public void addSessions(String sessionId, UserProfile userProfile) {
+    public void addSessions(String sessionId, UserDataSet userProfile) {
         sessions.put(sessionId, userProfile);
     }
 
@@ -37,11 +34,11 @@ public class AccountServiceImpl implements AccountService {
         return sessions.size();
     }
 
-    public UserProfile getUser(String userName) {
+    public UserDataSet getUser(String userName) {
         return users.get(userName);
     }
 
-    public UserProfile getSessions(String sessionId) {
+    public UserDataSet getSessions(String sessionId) {
         return sessions.get(sessionId);
     }
 

@@ -35,7 +35,7 @@ public class CheckServlet extends HttpServlet {
 
 
         if (accountService.isExist(session.getId())) {
-            responseMap.put("name", accountService.getSessions(session.getId()).getLogin());
+            responseMap.put("name", accountService.getSessions(session.getId()).getName());
             responseMap.put("password", "");
             responseMap.put("email", accountService.getSessions(session.getId()).getEmail());
             jsonResponse.put("status", 200);

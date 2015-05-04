@@ -1,6 +1,9 @@
 package frontend;
 
 import base.AccountService;
+import base.DBService;
+import base.dataSets.UserDataSet;
+import dbService.DBServiceImpl;
 import main.AccountServiceImpl;
 import main.ContextService;
 import org.json.JSONObject;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,11 +21,27 @@ import java.util.Map;
  */
 public class ScoresServlet extends HttpServlet {
     private AccountService accountService = new AccountServiceImpl();
-    private ContextService contextService;
+    private DBService dbService = new DBServiceImpl(0);
+
 
     public ScoresServlet(ContextService contextService) {
-        this.contextService = contextService;
         accountService = (AccountService) contextService.get(accountService.getClass());
+        dbService = (DBService) contextService.get(dbService.getClass());
+    }
+
+    public void doGet(HttpServletRequest request,
+                       HttpServletResponse response) throws ServletException, IOException {
+
+        JSONObject jsonResponse = new JSONObject();
+        Map<String, Object> responseMap =  new HashMap<>();
+
+        List<UserDataSet> dataSets = dbService.getScoreBoard();
+
+        responseMap.put("users", dataSets.toString());
+        jsonResponse.put("status", 200);
+        jsonResponse.put("body", responseMap);
+
+        response.getWriter().println(jsonResponse);
     }
 
     public void doPost(HttpServletRequest request,
@@ -31,8 +51,15 @@ public class ScoresServlet extends HttpServlet {
         Map<String, Object> responseMap =  new HashMap<>();
         Map<String, Object> sortMap =  new HashMap<>();
 
-        sortMap.put("by", request.getParameter("by"));
-        sortMap.put("order", request.getParameter("order"));
+        String status = dbService.getLocalStatus();
+        System.out.println(status);
+
+        List<UserDataSet> dataSets = dbService.readAll();
+        for (UserDataSet userDataSet : dataSets) {
+            System.out.println(userDataSet);
+        }
+
+        //dbService.shutdown();
 
         jsonResponse.put("status", 200);
         jsonResponse.put("body", responseMap);

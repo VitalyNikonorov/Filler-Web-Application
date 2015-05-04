@@ -49,7 +49,7 @@ public class GameServlet extends HttpServlet {
 
         String name = "";
         if (accountService.isExist(session.getId())) {
-            name = accountService.getSessions(session.getId()).getLogin();
+            name = accountService.getSessions(session.getId()).getName();
         }
 
         String safeName = name == null ? "NoName" : name;

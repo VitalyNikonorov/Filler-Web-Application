@@ -1,6 +1,9 @@
 package frontend;
 
 import base.AccountService;
+import base.DBService;
+import base.dataSets.UserDataSet;
+import dbService.DBServiceImpl;
 import main.AccountServiceImpl;
 import main.ContextService;
 import main.UserProfile;
@@ -24,35 +27,13 @@ import java.util.Map;
 public class SignInServlet extends HttpServlet {
     private AccountService accountService = new AccountServiceImpl();
     private ContextService contextService;
+    private DBService dbService = new DBServiceImpl(0);
 
     public SignInServlet(ContextService contextService) {
         this.contextService = contextService;
         accountService = (AccountService) contextService.get(accountService.getClass());
+        dbService = (DBService) contextService.get(dbService.getClass());
     }
-
-    public void doGet(HttpServletRequest request,
-                      HttpServletResponse response) throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String password = request.getParameter("password");
-        HttpSession session = request.getSession();
-
-        AccountService accountService = new AccountServiceImpl();
-        accountService = (AccountService) contextService.get(accountService.getClass());
-
-        response.setStatus(HttpServletResponse.SC_OK);
-
-       Map<String, Object> pageVariables = new HashMap<>();
- UserProfile profile = accountService.getUser(name);
-           if (profile != null && profile.getPassword().equals(password)) {
-                  session.setAttribute("User", profile);
-                       accountService.addSessions(session.getId(), accountService.getUser(name));
-                        pageVariables.put("loginStatus", "Login passed");
-                    } else {
-                        pageVariables.put("loginStatus", "Wrong login/password");
-                    }
-
-                        response.getWriter().println(PageGenerator.getPage("authstatus.html", pageVariables));
-            }
 
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
@@ -71,21 +52,18 @@ public class SignInServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         if( jsonRequest.has("name")) {
-            UserProfile profile = accountService.getUser(jsonRequest.get("name").toString());
+            UserDataSet profile = dbService.readByEmail(jsonRequest.get("name").toString());
             if (profile != null) {
                 if (profile.getPassword().equals(jsonRequest.get("password").toString())) {
-                    //accountService.addSessions(session.getId(), accountService.getUser(jsonRequest.get("name").toString()));
                     jsonResponse.put("status", 200);
                     responseMap.put("id", 1);
-                    responseMap.put("name", profile.getLogin());
+                    responseMap.put("name", profile.getName());
                     responseMap.put("password", "");
                     responseMap.put("email", profile.getEmail());
                     jsonResponse.put("body", responseMap);
 
                     session.setAttribute("User", profile);
-                    accountService.addSessions(session.getId(), accountService.getUser(jsonRequest.get("name").toString()));
-
-
+                    accountService.addSessions(session.getId(), profile);
                 } else {
                     jsonResponse.put("status", 400);
                     Map<String, Object> passMap = new HashMap<>();

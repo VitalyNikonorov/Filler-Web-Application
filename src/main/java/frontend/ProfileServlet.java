@@ -2,6 +2,8 @@ package frontend;
 
 
 import base.AccountService;
+import base.DBService;
+import dbService.DBServiceImpl;
 import main.AccountServiceImpl;
 import main.ContextService;
 import templater.PageGenerator;
@@ -21,16 +23,16 @@ import java.util.Map;
 public class ProfileServlet extends HttpServlet {
     private AccountService accountService = new AccountServiceImpl();
     private ContextService contextService;
+    private DBService dbService = new DBServiceImpl(0);
 
     public ProfileServlet(ContextService contextService) {
         this.contextService = contextService;
         accountService = (AccountService) contextService.get(accountService.getClass());
+        dbService = (DBService) contextService.get(dbService.getClass());
     }
 
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
-        response.setStatus(HttpServletResponse.SC_OK);
-
 
         Map<String, Object> pageVariables = new HashMap<>();
         HttpSession session = request.getSession();
@@ -41,25 +43,18 @@ public class ProfileServlet extends HttpServlet {
         }
         String name = "", password = "", email = "";
         if (accountService.isExist(session.getId())) {
-            name = accountService.getSessions(session.getId()).getLogin();
+            name = accountService.getSessions(session.getId()).getName();
             password = accountService.getSessions(session.getId()).getPassword();
             email = accountService.getSessions(session.getId()).getEmail();
         }
+
         pageVariables.put("login", name);
         pageVariables.put("password", password);
         pageVariables.put("email", email);
 
-        response.getWriter().println(PageGenerator.getPage("profile.html", pageVariables));
-
-    }
-
-
-    public void doPost(HttpServletRequest request,
-                       HttpServletResponse response) throws ServletException, IOException {
-
         response.setStatus(HttpServletResponse.SC_OK);
-
-        Map<String, Object> pageVariables = new HashMap<>();
         response.getWriter().println(PageGenerator.getPage("profile.html", pageVariables));
+
     }
+
 }

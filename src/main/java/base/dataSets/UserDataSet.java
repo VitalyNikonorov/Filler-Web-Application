@@ -23,14 +23,18 @@ public class UserDataSet implements Serializable {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "score")
+    private int score;
+
     public UserDataSet() {
     }
 
-    public UserDataSet(int id, String name, String email, String password) {
+    public UserDataSet(int id, String name, String email, String password, int score) {
         this.setId(id);
         this.setName(name);
         this.setEmail(email);
         this.setPassword(password);
+        this.setScore(score);
     }
 
     public UserDataSet(String name, String email, String password) {
@@ -38,6 +42,15 @@ public class UserDataSet implements Serializable {
         this.setName(name);
         this.setEmail(email);
         this.setPassword(password);
+        this.setScore(0);
+    }
+
+    public UserDataSet(String name, String email, String password, int score) {
+        this.setId(-1);
+        this.setName(name);
+        this.setEmail(email);
+        this.setPassword(password);
+        this.setScore(score);
     }
 
     public String getName() {
@@ -61,7 +74,28 @@ public class UserDataSet implements Serializable {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", score=" + score +
+                '}';
     }
 }

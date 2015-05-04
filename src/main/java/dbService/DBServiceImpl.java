@@ -2,7 +2,6 @@ package dbService;
 
 import base.DBService;
 import base.dataSets.UserDataSet;
-
 import dbService.dao.UserDataSetDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,6 +18,8 @@ import java.util.List;
 public class DBServiceImpl implements DBService {
     private SessionFactory sessionFactory;
 
+    public DBServiceImpl(int o) { }
+
     public DBServiceImpl() {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(UserDataSet.class);
@@ -30,7 +31,7 @@ public class DBServiceImpl implements DBService {
         configuration.setProperty("hibernate.connection.username", "postgres");
         configuration.setProperty("hibernate.connection.password", "test"); //test
         configuration.setProperty("hibernate.show_sql", "true");
-        configuration.setProperty("hibernate.hbm2ddl.auto", "create");
+        configuration.setProperty("hibernate.hbm2ddl.auto", "validate"); //create
         configuration.setProperty("hibernate.temp.use_jdbc_metadata_defaults","false");
 
         sessionFactory = createSessionFactory(configuration);
@@ -58,16 +59,22 @@ public class DBServiceImpl implements DBService {
         return dao.read(id);
     }
 
-    public UserDataSet readByName(String name) {
+    public UserDataSet readByEmail(String email) {
         Session session = sessionFactory.openSession();
         UserDataSetDAO dao = new UserDataSetDAO(session);
-        return dao.readByName(name);
+        return dao.readByEmail(email);
     }
 
     public List<UserDataSet> readAll() {
         Session session = sessionFactory.openSession();
         UserDataSetDAO dao = new UserDataSetDAO(session);
         return dao.readAll();
+    }
+
+    public List<UserDataSet> getScoreBoard() {
+        Session session = sessionFactory.openSession();
+        UserDataSetDAO dao = new UserDataSetDAO(session);
+        return dao.getScoreBoard();
     }
 
     public void shutdown(){

@@ -1,5 +1,6 @@
 package base;
 
+import base.dataSets.UserDataSet;
 import main.UserProfile;
 
 /**
@@ -7,15 +8,15 @@ import main.UserProfile;
  */
 public interface AccountService {
 
-    void addSessions(String sessionId, UserProfile userProfile);
+    void addSessions(String sessionId, UserDataSet userProfile);
 
     int getUsersSize();
 
     int getAuthUsersSize();
 
-    UserProfile getUser(String userName);
+    UserDataSet getUser(String userName);
 
-    UserProfile getSessions(String sessionId);
+    UserDataSet getSessions(String sessionId);
 
     boolean isAuthorised(String sessionId);
 
@@ -23,7 +24,7 @@ public interface AccountService {
 
     boolean isExist(String sessionId);
 
-    boolean addUser(String userName, UserProfile userProfile);
+    boolean addUser(String userName, UserDataSet userProfile);
 
     void saveUserName(String sessionId, String name);
 

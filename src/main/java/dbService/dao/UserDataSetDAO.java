@@ -3,6 +3,7 @@ package dbService.dao;
 import base.dataSets.UserDataSet;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -26,9 +27,9 @@ public class UserDataSetDAO {
         return (UserDataSet) session.load(UserDataSet.class, id);
     }
 
-    public UserDataSet readByName(String name) {
+    public UserDataSet readByEmail(String email) {
         Criteria criteria = session.createCriteria(UserDataSet.class);
-        return (UserDataSet) criteria.add(Restrictions.eq("name", name)).uniqueResult();
+        return (UserDataSet) criteria.add(Restrictions.eq("email", email)).uniqueResult();
     }
 
     @SuppressWarnings("unchecked")
@@ -37,5 +38,11 @@ public class UserDataSetDAO {
         return (List<UserDataSet>) criteria.list();
     }
 
+    public List<UserDataSet> getScoreBoard() {
+        Criteria criteria = session.createCriteria(UserDataSet.class);
+        criteria.addOrder(Order.desc("score"));
+        criteria.setMaxResults(10);
+        return (List<UserDataSet>) criteria.list();
+    }
 
 }
