@@ -44,7 +44,7 @@ public class SignUpServlet extends HttpServlet {
 
         try {
             dbService.save(new UserDataSet(jsonRequest.get("name").toString(), jsonRequest.get("email").toString(), jsonRequest.get("password").toString()));
-            UserDataSet profile = dbService.readByEmail(jsonRequest.get("name").toString());
+            UserDataSet profile = dbService.readByEmail(jsonRequest.get("email").toString());
             responseMap.put("id", profile.getId());
             responseMap.put("name", profile.getName());
             responseMap.put("password", "");

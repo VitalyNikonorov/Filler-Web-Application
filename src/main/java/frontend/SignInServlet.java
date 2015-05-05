@@ -6,9 +6,7 @@ import base.dataSets.UserDataSet;
 import dbService.DBServiceImpl;
 import main.AccountServiceImpl;
 import main.ContextService;
-import main.UserProfile;
 import org.json.JSONObject;
-import templater.PageGenerator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

@@ -21,5 +21,7 @@ public interface DBService {
 
     List<UserDataSet> getScoreBoard();
 
+    public int getUsersSize();
+
     void shutdown();
 }

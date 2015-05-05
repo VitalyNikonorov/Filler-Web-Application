@@ -1,7 +1,6 @@
 package base;
 
 import base.dataSets.UserDataSet;
-import main.UserProfile;
 
 /**
  * Created by Виталий on 31.03.2015.
@@ -14,7 +13,7 @@ public interface AccountService {
 
     int getAuthUsersSize();
 
-    UserDataSet getUser(String userName);
+    UserDataSet getUser(String email);
 
     UserDataSet getSessions(String sessionId);
 
@@ -23,8 +22,6 @@ public interface AccountService {
     void logout(String sessionId);
 
     boolean isExist(String sessionId);
-
-    boolean addUser(String userName, UserDataSet userProfile);
 
     void saveUserName(String sessionId, String name);
 

@@ -5,7 +5,6 @@ import base.AccountService;
 import base.DBService;
 import base.GameMechanics;
 import base.WebSocketService;
-import base.dataSets.UserDataSet;
 import chat.WebSocketChatServlet;
 import dbService.DBServiceImpl;
 import frontend.*;
@@ -19,11 +18,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.json.JSONObject;
 import sax.ReadXMLFileSAX;
 import xpath.xpathAdapter;
-
 import javax.servlet.Servlet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -41,9 +36,9 @@ public class Main {
 
         WebSocketService webSocketService = new WebSocketServiceImpl();
         GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService);
-        AccountService accountService = new AccountServiceImpl();
         ContextService contextService = new ContextService();
         DBService dbService = new DBServiceImpl();
+        AccountService accountService = new AccountServiceImpl(dbService);
 
         String status = dbService.getLocalStatus();
         System.out.println(status);

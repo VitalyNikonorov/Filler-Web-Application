@@ -65,6 +65,12 @@ public class DBServiceImpl implements DBService {
         return dao.readByEmail(email);
     }
 
+    public int getUsersSize() {
+        Session session = sessionFactory.openSession();
+        UserDataSetDAO dao = new UserDataSetDAO(session);
+        return dao.getUsersSize();
+    }
+
     public List<UserDataSet> readAll() {
         Session session = sessionFactory.openSession();
         UserDataSetDAO dao = new UserDataSetDAO(session);

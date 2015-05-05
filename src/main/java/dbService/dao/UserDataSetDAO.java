@@ -4,6 +4,7 @@ import base.dataSets.UserDataSet;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -43,6 +44,12 @@ public class UserDataSetDAO {
         criteria.addOrder(Order.desc("score"));
         criteria.setMaxResults(10);
         return (List<UserDataSet>) criteria.list();
+    }
+
+    public int getUsersSize() {
+        Criteria criteria = session.createCriteria(UserDataSet.class);
+        Object result = criteria.setProjection(Projections.rowCount()).uniqueResult();
+        return new Integer(result.toString());
     }
 
 }
