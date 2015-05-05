@@ -46,11 +46,11 @@ public class DBServiceImpl implements DBService {
     }
 
     public void save(UserDataSet dataSet) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        UserDataSetDAO dao = new UserDataSetDAO(session);
-        dao.save(dataSet);
-        transaction.commit();
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            UserDataSetDAO dao = new UserDataSetDAO(session);
+            dao.save(dataSet);
+            transaction.commit();
     }
 
     public UserDataSet read(int id) {

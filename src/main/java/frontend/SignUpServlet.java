@@ -6,7 +6,6 @@ import base.dataSets.UserDataSet;
 import dbService.DBServiceImpl;
 import main.AccountServiceImpl;
 import main.ContextService;
-import main.UserProfile;
 import org.json.JSONObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,28 +42,26 @@ public class SignUpServlet extends HttpServlet {
         JSONObject jsonResponse = new JSONObject();
         Map<String, Object> responseMap =  new HashMap<>();
 
- /*       if (accountService.addUser(jsonRequest.get("name").toString(),
-                new UserProfile(jsonRequest.get("name").toString(), jsonRequest.get("password").toString(), jsonRequest.get("email").toString()))) {  //        dbService.save(new UserDataSet("sully"));
-            responseMap.put("id", 1);
-            responseMap.put("name", jsonRequest.get("name").toString());
+        try {
+            dbService.save(new UserDataSet(jsonRequest.get("name").toString(), jsonRequest.get("email").toString(), jsonRequest.get("password").toString()));
+            UserDataSet profile = dbService.readByEmail(jsonRequest.get("name").toString());
+            responseMap.put("id", profile.getId());
+            responseMap.put("name", profile.getName());
             responseMap.put("password", "");
-            responseMap.put("email", jsonRequest.get("name").toString());
+            responseMap.put("email", profile.getEmail());
 
             jsonResponse.put("body", responseMap);
             jsonResponse.put("status", 200);
-            accountService.addUser(jsonRequest.get("name").toString(),
-                    new UserProfile(jsonRequest.get("name").toString(), jsonRequest.get("password").toString(), jsonRequest.get("name").toString()));
-        } else {
-            jsonResponse.put("status", 400);
-            Map<String, Object> nameMap =  new HashMap<>();
-            nameMap.put("error", "already exists");
-            nameMap.put("value", jsonRequest.get("name").toString());
-            responseMap.put("name", nameMap);
-            jsonResponse.put("body", responseMap);
+            response.getWriter().println(jsonResponse);
+        }catch (Exception e){
+                jsonResponse.put("status", 400);
+                Map<String, Object> nameMap = new HashMap<>();
+                nameMap.put("error", "already exists");
+                nameMap.put("value", jsonRequest.get("email").toString());
+                responseMap.put("name", nameMap);
+                jsonResponse.put("body", responseMap);
+                response.getWriter().println(jsonResponse);
         }
-*/
-        dbService.save(new UserDataSet(jsonRequest.get("name").toString(), jsonRequest.get("email").toString(), jsonRequest.get("password").toString()));
-        response.getWriter().println(jsonResponse);
     }
 
 }
