@@ -21,12 +21,12 @@ import java.util.Map;
  */
 public class ScoresServlet extends HttpServlet {
     private AccountService accountService = new AccountServiceImpl();
-    private DBService dbService = new DBServiceImpl(0);
+    private DBService dbService;
 
 
     public ScoresServlet(ContextService contextService) {
         accountService = (AccountService) contextService.get(accountService.getClass());
-        dbService = (DBService) contextService.get(dbService.getClass());
+        dbService = (DBService) contextService.get(DBServiceImpl.class);
     }
 
     public void doGet(HttpServletRequest request,
@@ -36,18 +36,12 @@ public class ScoresServlet extends HttpServlet {
         Map<String, Object> responseMap =  new HashMap<>();
 
         List<UserDataSet> dataSets = dbService.getScoreBoard();
-        String[] data = new String[dataSets.size()];
+        Map<String, Object>[] userMap =  new HashMap[dataSets.size()];
 
-        for (int i = 0; i < dataSets.size(); i++){
-            data[i] = "{\"name\":\"" + dataSets.get(i).getName() +"\", " + "score: " + dataSets.get(i).getScore() + "}";
-            if (i < dataSets.size() - 1 ) {
-                data[i] += ",";
-            }
-        }
 
         //responseMap.put("users", data);
         jsonResponse.put("status", 200);
-        jsonResponse.put("users", data);
+        jsonResponse.put("users", dataSets);
 
         response.getWriter().println(jsonResponse);
     }

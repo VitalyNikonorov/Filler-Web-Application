@@ -25,7 +25,7 @@ public class Main {
         JSONObject resources = null;
         resources = saxExample();
         //int port = resources.getInt("port");
-        int port = new Integer(xpathAdapter.getValue("test1.xml", "/class/port" ));
+        int port = new Integer(xpathAdapter.getValue("resources/test1.xml", "/class/port" ));
 
         if (args.length == 1) {
             String portString = args[0];
@@ -75,9 +75,7 @@ public class Main {
         context.addServlet(new ServletHolder(admin), "/admin");
 
         //for game example
-
         context.addServlet(new ServletHolder(gameplay), "/gameplay");
-
         context.addServlet(new ServletHolder(game), "/game.html");  //ошибка в GameServlet
 
         //Статика в public

@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class AccountServiceImpl implements AccountService {
 
-    private DBService dbService = new DBServiceImpl(0);
+    private DBService dbService;
     private Map<String, UserDataSet> sessions = new HashMap<>();
     private Map<String, String> userSessions = new HashMap<>();
 

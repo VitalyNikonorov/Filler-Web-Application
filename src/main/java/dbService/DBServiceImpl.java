@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import xpath.xpathAdapter;
 
 import java.util.List;
 
@@ -18,21 +19,19 @@ import java.util.List;
 public class DBServiceImpl implements DBService {
     private SessionFactory sessionFactory;
 
-    public DBServiceImpl(int o) { }
-
     public DBServiceImpl() {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(UserDataSet.class);
 
-        configuration.setProperty("hibernate.temp.use_jdbc_metadata_defaults","false");
-        configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
-        configuration.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-        configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/filler");
-        configuration.setProperty("hibernate.connection.username", "postgres");
-        configuration.setProperty("hibernate.connection.password", "test"); //test
-        configuration.setProperty("hibernate.show_sql", "true");
-        configuration.setProperty("hibernate.hbm2ddl.auto", "validate"); //create
-        configuration.setProperty("hibernate.temp.use_jdbc_metadata_defaults","false");
+        configuration.setProperty("hibernate.temp.use_jdbc_metadata_defaults", xpathAdapter.getValue("resources/DB.xml", "/class/hibernate.temp.use_jdbc_metadata_defaults"));
+        configuration.setProperty("hibernate.dialect", xpathAdapter.getValue("resources/DB.xml", "/class/hibernate.dialect" ));
+        configuration.setProperty("hibernate.connection.driver_class", xpathAdapter.getValue("resources/DB.xml", "/class/hibernate.connection.driver_class" ));
+        configuration.setProperty("hibernate.connection.url", xpathAdapter.getValue("resources/DB.xml", "/class/hibernate.connection.url" ));
+        configuration.setProperty("hibernate.connection.username", xpathAdapter.getValue("resources/DB.xml", "/class/hibernate.connection.username" ));
+        configuration.setProperty("hibernate.connection.password", xpathAdapter.getValue("resources/DB.xml", "/class/hibernate.connection.password" )); //test
+        configuration.setProperty("hibernate.show_sql", xpathAdapter.getValue("resources/DB.xml", "/class/hibernate.show_sql" ));
+        configuration.setProperty("hibernate.hbm2ddl.auto", xpathAdapter.getValue("resources/DB.xml", "/class/hibernate.hbm2ddl.auto" )); //create
+        configuration.setProperty("hibernate.temp.use_jdbc_metadata_defaults",xpathAdapter.getValue("resources/DB.xml", "/class/hibernate.temp.use_jdbc_metadata_defaults" ));
 
         sessionFactory = createSessionFactory(configuration);
     }

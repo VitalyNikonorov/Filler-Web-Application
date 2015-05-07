@@ -48,6 +48,10 @@ public class UserDataSetDAO {
         Criteria criteria = session.createCriteria(UserDataSet.class);
         criteria.addOrder(Order.desc("score"));
         criteria.setMaxResults(10);
+        //criteria.setProjection(Projections.property("name"));
+
+        criteria.setProjection(Projections.projectionList().add(Projections.property("name"), "name").add(Projections.property("score"), "score"));
+
         return (List<UserDataSet>) criteria.list();
     }
 

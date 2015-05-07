@@ -25,12 +25,12 @@ import java.util.Map;
 public class SignInServlet extends HttpServlet {
     private AccountService accountService = new AccountServiceImpl();
     private ContextService contextService;
-    private DBService dbService = new DBServiceImpl(0);
+    private DBService dbService;
 
     public SignInServlet(ContextService contextService) {
         this.contextService = contextService;
         accountService = (AccountService) contextService.get(accountService.getClass());
-        dbService = (DBService) contextService.get(dbService.getClass());
+        dbService = (DBService) contextService.get(DBServiceImpl.class);
     }
 
     public void doPost(HttpServletRequest request,
