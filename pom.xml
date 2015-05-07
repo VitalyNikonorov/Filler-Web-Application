@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>L1.2</groupId>
-    <artifactId>L1.2</artifactId>
+    <groupId>WAATeam</groupId>
+    <artifactId>Filler</artifactId>
     <version>1.0</version>
 
     <properties>

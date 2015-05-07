@@ -24,6 +24,11 @@ public class UserDataSetDAO {
         session.close();
     }
 
+    public void updateScore(UserDataSet dataSet) {
+        session.save(dataSet);
+        session.close();
+    }
+
     public UserDataSet read(int id) {
         return (UserDataSet) session.load(UserDataSet.class, id);
     }

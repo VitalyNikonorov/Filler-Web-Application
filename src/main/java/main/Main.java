@@ -55,6 +55,9 @@ public class Main {
         Servlet check = new CheckServlet(contextService);
         Servlet score = new ScoresServlet(contextService);
         Servlet chat = new WebSocketChatServlet();
+        Servlet admin = new AdminPageServlet(contextService);
+        Servlet game = new GameServlet(contextService);
+        Servlet gameplay = new WebSocketGameServlet(contextService);
 
         //Sockets
 
@@ -69,14 +72,14 @@ public class Main {
 
         //Sockets
         context.addServlet(new ServletHolder(chat), "/chat");
+        context.addServlet(new ServletHolder(admin), "/admin");
 
         //for game example
 
-        context.addServlet(new ServletHolder(new WebSocketGameServlet(contextService)), "/gameplay");
+        context.addServlet(new ServletHolder(gameplay), "/gameplay");
 
-        context.addServlet(new ServletHolder(new GameServlet(contextService)), "/game.html");  //ошибка в GameServlet
+        context.addServlet(new ServletHolder(game), "/game.html");  //ошибка в GameServlet
 
-        context.addServlet(new ServletHolder(new AdminPageServlet(contextService)), AdminPageServlet.adminPageURL);
         //Статика в public
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);

@@ -62,8 +62,12 @@ public class UserDataSet implements Serializable {
     }
 
 
-    public long getId() {
+    public int getId() {
         return id;
+    }
+
+    public int getScore() {
+        return score;
     }
 
     public void setId(int id) {

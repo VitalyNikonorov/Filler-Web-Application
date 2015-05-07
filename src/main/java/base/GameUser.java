@@ -14,7 +14,8 @@ public class GameUser {
     private Integer[][] gameField;
 
     public GameUser(String myName) {
-        this.myName = myName; }
+        this.myName = myName;
+    }
 
     public String getMyName() {
         return myName;

@@ -38,6 +38,7 @@ public class CheckServlet extends HttpServlet {
             responseMap.put("name", accountService.getSessions(session.getId()).getName());
             responseMap.put("password", "");
             responseMap.put("email", accountService.getSessions(session.getId()).getEmail());
+            responseMap.put("id", accountService.getSessions(session.getId()).getId());
             jsonResponse.put("status", 200);
         }else{
             jsonResponse.put("status", 401);

@@ -36,10 +36,18 @@ public class ScoresServlet extends HttpServlet {
         Map<String, Object> responseMap =  new HashMap<>();
 
         List<UserDataSet> dataSets = dbService.getScoreBoard();
+        String[] data = new String[dataSets.size()];
 
-        responseMap.put("users", dataSets.toString());
+        for (int i = 0; i < dataSets.size(); i++){
+            data[i] = "{\"name\":\"" + dataSets.get(i).getName() +"\", " + "score: " + dataSets.get(i).getScore() + "}";
+            if (i < dataSets.size() - 1 ) {
+                data[i] += ",";
+            }
+        }
+
+        //responseMap.put("users", data);
         jsonResponse.put("status", 200);
-        jsonResponse.put("body", responseMap);
+        jsonResponse.put("users", data);
 
         response.getWriter().println(jsonResponse);
     }

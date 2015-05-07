@@ -7,9 +7,6 @@ import main.TimeHelper;
 
 import java.util.*;
 
-/**
- * @author v.chibrikov
- */
 public class GameMechanicsImpl implements GameMechanics {
     private static final int STEP_TIME = 100;
 

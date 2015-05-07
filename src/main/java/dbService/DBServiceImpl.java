@@ -53,6 +53,14 @@ public class DBServiceImpl implements DBService {
             transaction.commit();
     }
 
+    public void updateScore(UserDataSet dataSet) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        UserDataSetDAO dao = new UserDataSetDAO(session);
+        dao.save(dataSet);
+        transaction.commit();
+    }
+
     public UserDataSet read(int id) {
         Session session = sessionFactory.openSession();
         UserDataSetDAO dao = new UserDataSetDAO(session);

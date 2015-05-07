@@ -1,7 +1,6 @@
 package base;
 
 import base.dataSets.UserDataSet;
-
 import java.util.List;
 
 /**
@@ -22,6 +21,8 @@ public interface DBService {
     List<UserDataSet> getScoreBoard();
 
     public int getUsersSize();
+
+    public void updateScore(UserDataSet dataSet);
 
     void shutdown();
 }

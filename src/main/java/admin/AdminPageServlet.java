@@ -20,7 +20,6 @@ import java.util.Map;
 public class AdminPageServlet extends HttpServlet {
     private AccountService accountService = new AccountServiceImpl();
     private ContextService contextService;
-    public static final String adminPageURL = "/admin"; //
 
     public AdminPageServlet(ContextService contextService) {
         this.contextService = contextService;
