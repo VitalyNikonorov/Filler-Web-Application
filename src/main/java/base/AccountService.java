@@ -2,9 +2,6 @@ package base;
 
 import base.dataSets.UserDataSet;
 
-/**
- * Created by Виталий on 31.03.2015.
- */
 public interface AccountService {
 
     void addSessions(String sessionId, UserDataSet userProfile);

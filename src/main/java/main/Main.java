@@ -76,7 +76,7 @@ public class Main {
 
         //for game example
         context.addServlet(new ServletHolder(gameplay), "/gameplay");
-        context.addServlet(new ServletHolder(game), "/game.html");  //ошибка в GameServlet
+        context.addServlet(new ServletHolder(game), "/game.html");  //TODO
 
         //Статика в public
         ResourceHandler resource_handler = new ResourceHandler();

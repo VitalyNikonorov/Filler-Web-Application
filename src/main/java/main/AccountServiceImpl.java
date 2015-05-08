@@ -3,20 +3,14 @@ package main;
 import base.AccountService;
 import base.DBService;
 import base.dataSets.UserDataSet;
-import dbService.DBServiceImpl;
-
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by v.chibrikov on 13.09.2014.
- */
 public class AccountServiceImpl implements AccountService {
 
     private DBService dbService;
     private Map<String, UserDataSet> sessions = new HashMap<>();
     private Map<String, String> userSessions = new HashMap<>();
-
 
     public void addSessions(String sessionId, UserDataSet userProfile) {
         sessions.put(sessionId, userProfile);

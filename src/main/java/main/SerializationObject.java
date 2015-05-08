@@ -12,15 +12,12 @@ public class SerializationObject implements Serializable {
     public SerializationObject() {
         this.port = 80;
     }
-
     public SerializationObject(int port) {
         this.setPort(port);
     }
-
     public int getPort() {
         return port;
     }
-
     public void setPort(int port) {
         this.port = port;
     }

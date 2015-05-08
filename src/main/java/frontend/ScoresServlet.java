@@ -36,8 +36,6 @@ public class ScoresServlet extends HttpServlet {
         Map<String, Object> responseMap =  new HashMap<>();
 
         List<UserDataSet> dataSets = dbService.getScoreBoard();
-        Map<String, Object>[] userMap =  new HashMap[dataSets.size()];
-
 
         //responseMap.put("users", data);
         jsonResponse.put("status", 200);

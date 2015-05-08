@@ -4,13 +4,14 @@ import base.GameMechanics;
 import base.GameUser;
 import base.WebSocketService;
 import main.TimeHelper;
+import xpath.xpathAdapter;
 
 import java.util.*;
 
 public class GameMechanicsImpl implements GameMechanics {
     private static final int STEP_TIME = 100;
 
-    private static final int gameTime = 30 * 1000;
+    private static final int gameTime = new Integer(xpathAdapter.getValue("resources/game.xml", "/class/matchTime")) * 1000;
 
     private WebSocketService webSocketService;
 
