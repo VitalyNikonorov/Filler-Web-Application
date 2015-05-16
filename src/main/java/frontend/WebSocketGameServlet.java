@@ -15,10 +15,6 @@ import javax.servlet.annotation.WebServlet;
 import base.AccountService;
 import base.GameMechanics;
 import base.WebSocketService;
-import org.eclipse.jetty.websocket.servlet.WebSocketServlet;
-import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
-
-import javax.servlet.annotation.WebServlet;
 
 /**
  * This class represents a servlet starting a webSocket application

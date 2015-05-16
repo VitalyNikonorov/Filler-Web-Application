@@ -1,0 +1,8 @@
+passlib
+py-bcrypt
+pycrypto
+Flask
+Flask-Login
+Flask-Mail
+Flask-SQLAlchemy
+Flask-WTF

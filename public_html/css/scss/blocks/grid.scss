@@ -1,0 +1,80 @@
+.grid_cols_7 {
+    padding-right: 28.060000000000002%;
+    position: relative;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    &:before {
+        clear: both;
+        content: '';
+        display: block;
+    };
+    &:after {
+        clear: both;
+        content: '';
+        display: block;
+    };
+}
+
+.grid__row:before, .grid__row:after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
+.grid__module {
+    float: left;
+    position: relative;
+    &_first_yes {
+        clear: left;
+    }
+    &_span_1 {
+        margin-right: -19%;
+        width: 19%;
+    };
+    &_span_2 {
+        margin-right: -39%;
+        width: 39%;
+    };
+    &_span_3 {
+        margin-right: -59%;
+        width: 59%;
+    };
+    &_span_4 {
+        margin-right: -79%;
+        width: 79%;
+    };
+    &_span_5 {
+        margin-right: -99%;
+        width: 99%;
+    };
+    &_span_6 {
+        margin-right: -119%;
+        width: 119%;
+    };
+    &_span_7 {
+        margin-right: -139%;
+        width: 139%;
+    };
+    &_col_1 {
+        left: 0%;
+    };
+    &_col_2 {
+        left: 20%;
+    };
+    &_col_3 {
+        left: 40%;
+    };
+    &_col_4 {
+        left: 60%;
+    };
+    &_col_5 {
+        left: 80%;
+    };
+    &_col_6 {
+        left: 100%;
+    };
+    &_col_7 {
+        left: 120%;
+    };
+}

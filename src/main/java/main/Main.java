@@ -22,8 +22,8 @@ import javax.servlet.Servlet;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        JSONObject resources = null;
-        resources = saxExample();
+        //JSONObject resources = null;
+        //resources = saxExample();
         //int port = resources.getInt("port");
         int port = new Integer(xpathAdapter.getValue("resources/test1.xml", "/class/port" ));
 

@@ -1,0 +1,10 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Admin panel</title>
+
+</head>
+<body>
+<p>There are ${numOfUsers} registered users, and logined ${numOfAuthUsers} users in session</p>
+<a href="?shutdown=1000">Shutdown</a>
+</body>
+</html>

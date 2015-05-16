@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html><head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="bootstrap/css/main.css"/>
+    <link rel="stylesheet" href="css/my.css"/>
+
+</head><body>   
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+ <center>
+    <div class="application"></div>
+    </center>
+    <script type="text/javascript">
+    var ws;
+    var user1 = {
+    	"name": "qq",
+    	"password": "qq"
+    }
+    var user2 = {
+    	"name": "ww",
+    	"password": "ww"
+    }
+
+    function game() {
+    	$.ajax({
+    			async: false,
+    			method: 'POST',
+    			url: "/game.html",
+    			dataType: 'json'
+    		}).done(function(data) {
+    			console.log(data)
+    		});
+    }
+    function check() {
+    	$.ajax({
+    			async: false,
+    			method: 'GET',
+    			url: "/api/v1/auth/check",
+    			dataType: 'json'
+    		}).done(function(data) {
+    			console.log(data)
+    		});
+    }
+    function login(data) {
+    	$.ajax({
+			type: "POST",
+			contentType: "application/json; charset=utf-8",
+			url: "api/v1/auth/signin",
+			data: JSON.stringify(data),
+			dataType: "json"
+		}).done(function(data) {
+			console.log(data);
+		})
+    }
+
+    function init () {
+    	ws = new WebSocket("ws://localhost:8080/gameplay");
+    	ws.onopen = function (data) {
+    		console.log("WebSocket opened");
+    		console.log(data);
+    		
+
+    	}
+    	ws.onmessage = function (data) {
+    		console.log(data);
+    	}
+    	ws.onclose = function () {
+    		alert("close");
+    	}
+    }
+    </script>
+    <div class="grid_cols_7">
+        <div class="grid__row">
+            <div class="grid__module grid__module_col_3 grid__module_span_3">
+                Main menu sakl;dfmsadfb;n lsma; df;asnl ;mdfas; kdlfnsad fsa dfsadfasdg saknld;asdfsd
+                fsadfsdgsfawefrgerwfsfsdfg sdfsidvj k h lh nif gnunfuy iifunugi nyyuyidfs wf
+                sd fasdhfkuwqopifh saodf isahdfposa;kdf wajsdf;lhkwejlks dfoisa djfl sadfl;sdfoihaslkj sodhflksajfp oiwqe;fkl;sd flqs;kdfophlwajs fposakhdfj qwhkds .c
+                wqedfsagwerfdsserfdewfsd
+                wedfssedfwe
+            </div>
+            
+        </div>
+        <a href="#scoreboard" class="btn btn-info">Scoreboard</a> <br/><br/>
+        <a href="#game" class="btn btn-success">Game</a> <br/><br/>
+    </div>
+
+
+
+
+    <div class="btn btn-primary" onclick="init()">socket start</div>
+    <div class="btn btn-primary" onclick="game()">game.html</div>
+    <div class="btn btn-primary" onclick="login(user1)">user1</div>
+    <div class="btn btn-primary" onclick="login(user2)">user2</div>
+</body></html>

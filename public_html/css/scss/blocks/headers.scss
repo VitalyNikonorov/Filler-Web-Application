@@ -1,0 +1,22 @@
+.header {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-variant: normal;	
+	&-welcome {
+		font-size: 30px;
+		line-height: 30px;
+		font-weight: 100;
+		color: blue;
+	};
+	&-game {
+		font-size: 50px;
+		line-height: 50px;
+		font-weight: 100;
+		color: red;
+	}
+	&-other {
+		font-size: 30px;
+		line-height: 30px;
+		font-weight: 100;
+	}
+}

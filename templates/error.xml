@@ -1,0 +1,5 @@
+<fest:template xmlns:fest="http://fest.mail.ru"
+    context_name="json">
+    <div class="error_message"> <fest:value> json </fest:value> </div>
+    <div class="btn btn-primary error_message_close">close</div>
+</fest:template>
