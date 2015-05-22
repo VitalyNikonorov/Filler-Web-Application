@@ -98,7 +98,10 @@ define([
             console.log(this.game.data.status)
             if (this.game.data.status == "start") {
                 var obj = {
-                    'score': 0,
+                    'myScore': this.game.data.Score1,
+                    'enemyScore': this.game.data.Score2,
+                    'myName': this.game.data.User1,
+                    'enemyName': this.game.data.User2,
                     'field': this.game.data.field,
                     'h': this.game.data.field.length,
                     'w': this.game.data.field[0].length
@@ -108,8 +111,10 @@ define([
             } 
             if (this.game.data.status == "move") {
                 this.render({
-                    'myScore': this.game.data.myScore,
-                    'enemyScore': this.game.data.enemyScore,
+                    'myScore': this.game.data.Score1,
+                    'enemyScore': this.game.data.Score2,
+                    'myName': this.game.data.User1,
+                    'enemyName': this.game.data.User2,
                     'field': this.game.data.field,
                     'h': this.game.data.field.length,
                     'w': this.game.data.field[0].length
