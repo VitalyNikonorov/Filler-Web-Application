@@ -97,27 +97,38 @@ define([
             console.log(this.game.data)
             console.log(this.game.data.status)
             if (this.game.data.status == "start") {
+                var white = [0,0,0,0,0]
+                white[this.game.data.color1-1] = 1;
+                white[this.game.data.color2-1] = 1;
                 var obj = {
-                    'myScore': this.game.data.Score1,
-                    'enemyScore': this.game.data.Score2,
-                    'myName': this.game.data.User1,
-                    'enemyName': this.game.data.User2,
+                    
+                    'myScore': this.game.data.score1,
+                    'enemyScore': this.game.data.score2,
+                    'myName': this.game.data.user1,
+                    'enemyName': this.game.data.user2,
                     'field': this.game.data.field,
                     'h': this.game.data.field.length,
-                    'w': this.game.data.field[0].length
+                    'w': this.game.data.field[0].length,
+                    'white': white
+
                 }
                 console.log(obj)
                 this.render(obj)
             } 
             if (this.game.data.status == "move") {
+                var white = [0,0,0,0,0]
+                white[this.game.data.color1-1] = 1;
+                white[this.game.data.color2-1] = 1;
+
                 this.render({
-                    'myScore': this.game.data.Score1,
-                    'enemyScore': this.game.data.Score2,
-                    'myName': this.game.data.User1,
-                    'enemyName': this.game.data.User2,
+                    'myScore': this.game.data.score1,
+                    'enemyScore': this.game.data.score2,
+                    'myName': this.game.data.user1,
+                    'enemyName': this.game.data.user2,
                     'field': this.game.data.field,
                     'h': this.game.data.field.length,
-                    'w': this.game.data.field[0].length
+                    'w': this.game.data.field[0].length,
+                    'white': white
                 })
             }
             if (this.game.data.status == "finish") {

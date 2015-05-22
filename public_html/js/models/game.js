@@ -12,7 +12,7 @@ define([
             self = this;
     	},
         start: function () {
-            this.ws = new WebSocket("ws://localhost:8080/gameplay");
+            this.ws = new WebSocket("ws://91.215.138.197:8080/gameplay");
             this.ws.onopen = this.open;
             this.ws.onmessage = this.message;
             this.ws.onclose = this.console;
@@ -20,19 +20,17 @@ define([
             console.log(this.ws)
             
         },
-        open: function(data) {
+        open: function() {
             console.log("gamemodel")
             console.log(self)
             console.log("gamemodel stop")
             console.log("open");
-            console.log(data);
-            self.data = JSON.parse(data);
+            console.log();
             self.trigger('socket:open');
         },
-        close: function(data) {
+        close: function() {
             console.log("close");
             console.log("data");
-            self.data = JSON.parse(data.data);
             self.trigger("socket:close")
         },
         message: function(data) {
