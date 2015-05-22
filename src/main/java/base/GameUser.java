@@ -6,6 +6,7 @@ package base;
 public class GameUser {
     private final String myName;
     private String enemyName;
+    private GameUser enemy;
     private int myScore = 0;
     private int enemyScore = 0;
 
@@ -30,26 +31,31 @@ public class GameUser {
     }
 
     public int getEnemyScore() {
-        return enemyScore;
+        return enemy.getMyScore();
     }
 
     public void incrementMyScore() {
         myScore++;
     }
 
-    public void reScore(){
-    };
-
-    public int getScore(){
-        return myScore;
-    }
-
     public void incrementEnemyScore() {
         enemyScore++;
     }
 
+    public void setEnemy(GameUser enemy) {
+        this.enemy = enemy;
+    }
+
+    public GameUser getEnemy() {
+        return this.enemy;
+    }
+
     public void setEnemyName(String enemyName) {
         this.enemyName = enemyName;
+    }
+
+    public void setEnemyScore(int enemyScore){
+        this.enemyScore = enemyScore;
     }
 
     public Integer[][] getGameField(){ return gameField; };

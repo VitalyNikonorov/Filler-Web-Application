@@ -51,13 +51,8 @@ public class GameMechanicsImpl implements GameMechanics {
         GameSession myGameSession = nameToGame.get(userName);
         GameUser myUser = myGameSession.getSelf(userName);
         myUser.move(color);
-        //myUser.reScore();
-        GameUser enemyUser = myGameSession.getEnemy(userName);
-        //enemyUser.incrementEnemyScore();
-
+        //myGameSession.getSecond().setEnemyScore(myUser.getMyScore());
         webSocketService.notifyNewGameField(myUser);
-        //webSocketService.notifyMyNewScore(myUser);
-        //webSocketService.notifyEnemyNewScore(enemyUser);
     }
 
     @Override

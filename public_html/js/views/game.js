@@ -99,16 +99,17 @@ define([
             if (this.game.data.status == "start") {
                 var obj = {
                     'score': 0,
-                    'field': this.game.data.pole,
-                    'h': this.game.data.pole.length,
-                    'w': this.game.data.pole[0].length
+                    'field': this.game.data.field,
+                    'h': this.game.data.field.length,
+                    'w': this.game.data.field[0].length
                 }
                 console.log(obj)
                 this.render(obj)
             } 
             if (this.game.data.status == "move") {
                 this.render({
-                    'score': this.game.data.score,
+                    'myScore': this.game.data.myScore,
+                    'enemyScore': this.game.data.enemyScore,
                     'field': this.game.data.field,
                     'h': this.game.data.field.length,
                     'w': this.game.data.field[0].length
