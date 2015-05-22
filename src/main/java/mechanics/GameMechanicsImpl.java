@@ -53,6 +53,7 @@ public class GameMechanicsImpl implements GameMechanics {
         GameUser enemyUser = myGameSession.getEnemy(userName);
         if ((myUser.getColor() != color) && (enemyUser.getColor() != color) ) {
             myUser.move(color);
+            myUser.setColor(color);
             webSocketService.notifyNewGameField(myUser);
         }else{
             myUser.setScore(-100);
