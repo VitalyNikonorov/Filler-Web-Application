@@ -34,19 +34,57 @@ public class Main {
 
         System.out.append("Starting at port: ").append(String.valueOf(port)).append('\n');
 
+        ContextService contextService = createContextServices();
+        ServletContextHandler context = createServletHandler(contextService);
+
+        //Статика в public
+        ResourceHandler resource_handler = new ResourceHandler();
+        resource_handler.setDirectoriesListed(true);
+        resource_handler.setResourceBase("public_html");
+
+        HandlerList handlers = new HandlerList();
+        handlers.setHandlers(new Handler[]{resource_handler, context});
+
+        Server server = new Server(port);
+        server.setHandler(handlers);
+
+        server.start();
+        //server.join();
+        GameMechanics gameMechanics = (GameMechanics) contextService.get(GameMechanicsImpl.class);
+        gameMechanics.run();
+    }
+
+
+    private static JSONObject saxExample() {
+        JSONObject jsonResponse = null;
+        SerializationObject object = (SerializationObject) ReadXMLFileSAX.readXML("test.xml");
+        if (object != null) {
+            jsonResponse = new JSONObject(object);
+        }
+
+        return jsonResponse;
+    }
+
+    private static ContextService createContextServices(){
+        ContextService contextService = new ContextService();
+
         WebSocketService webSocketService = new WebSocketServiceImpl();
         GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService);
-        ContextService contextService = new ContextService();
         DBService dbService = new DBServiceImpl();
         AccountService accountService = new AccountServiceImpl(dbService);
-
-        String status = dbService.getLocalStatus();
-        System.out.println(status);
 
         contextService.add(accountService.getClass(), accountService);
         contextService.add(gameMechanics.getClass(), gameMechanics);
         contextService.add(webSocketService.getClass(), webSocketService);
         contextService.add(dbService.getClass(), dbService);
+
+        String status = dbService.getLocalStatus();
+        System.out.println(status);
+        return contextService;
+    }
+
+    private static ServletContextHandler createServletHandler(ContextService contextService){
+        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
 
         Servlet signIn = new SignInServlet(contextService);
         Servlet signUp = new SignUpServlet(contextService);
@@ -60,8 +98,6 @@ public class Main {
         Servlet gameplay = new WebSocketGameServlet(contextService);
 
         //Sockets
-
-        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(signIn), "/api/v1/auth/signin");
         context.addServlet(new ServletHolder(signUp), "/api/v1/auth/signup");
         context.addServlet(new ServletHolder(check), "/api/v1/auth/check");
@@ -78,30 +114,7 @@ public class Main {
         context.addServlet(new ServletHolder(gameplay), "/gameplay");
         context.addServlet(new ServletHolder(game), "/game.html");  //TODO
 
-        //Статика в public
-        ResourceHandler resource_handler = new ResourceHandler();
-        resource_handler.setDirectoriesListed(true);
-        resource_handler.setResourceBase("public_html");
-
-        HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[]{resource_handler, context});
-
-        Server server = new Server(port);
-        server.setHandler(handlers);
-
-        server.start();
-        gameMechanics.run();
+        return context;
     }
 
-
-    private static JSONObject saxExample() {
-        JSONObject jsonResponse = null;
-        SerializationObject object = (SerializationObject) ReadXMLFileSAX.readXML("test.xml");
-        if (object != null) {
-            jsonResponse = new JSONObject(object);
-        }
-
-        return jsonResponse;
-    }
 }
-

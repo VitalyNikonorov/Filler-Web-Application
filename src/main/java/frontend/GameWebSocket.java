@@ -56,6 +56,7 @@ public class GameWebSocket {
             jsonStart.put("status", "finish");
             jsonStart.put("win", win);
             session.getRemote().sendString(jsonStart.toString());
+            session.close();
         } catch (Exception e) {
             System.out.print(e.toString());
         }

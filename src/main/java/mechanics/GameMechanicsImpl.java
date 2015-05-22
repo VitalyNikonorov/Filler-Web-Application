@@ -74,7 +74,7 @@ public class GameMechanicsImpl implements GameMechanics {
                 boolean firstWin = session.isFirstWin();
                 webSocketService.notifyGameOver(session.getFirst(), firstWin);
                 webSocketService.notifyGameOver(session.getSecond(), !firstWin);
-                //allSessions.remove(session);/////////////////////////////////////////////////////////////////////////
+                allSessions.remove(session);/////////////////////////////////////////////////////////////////////////
             }
         }
     }
