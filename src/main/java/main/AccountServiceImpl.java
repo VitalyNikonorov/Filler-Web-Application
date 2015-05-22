@@ -28,6 +28,10 @@ public class AccountServiceImpl implements AccountService {
         return dbService.readByEmail(email);
     }
 
+    public UserDataSet getUserByName(String name) {
+        return dbService.readByName(name);
+    }
+
     public UserDataSet getSessions(String sessionId) {
         return sessions.get(sessionId);
     }

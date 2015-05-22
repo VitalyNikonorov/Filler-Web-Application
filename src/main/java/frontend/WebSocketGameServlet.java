@@ -24,8 +24,8 @@ public class WebSocketGameServlet extends WebSocketServlet {
    private final static int IDLE_TIME = 60 * 1000;
     private AccountService accountService = new AccountServiceImpl();
     private WebSocketService webSocketService = new WebSocketServiceImpl();
-    private GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService);
     private ContextService contextService;
+    private GameMechanics gameMechanics = new GameMechanicsImpl();
 
     public WebSocketGameServlet(ContextService contextService) {
         this.contextService = contextService;

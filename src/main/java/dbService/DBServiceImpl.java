@@ -56,8 +56,9 @@ public class DBServiceImpl implements DBService {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         UserDataSetDAO dao = new UserDataSetDAO(session);
-        dao.save(dataSet);
+        dao.updateScore(dataSet);
         transaction.commit();
+
     }
 
     public UserDataSet read(int id) {
@@ -70,6 +71,12 @@ public class DBServiceImpl implements DBService {
         Session session = sessionFactory.openSession();
         UserDataSetDAO dao = new UserDataSetDAO(session);
         return dao.readByEmail(email);
+    }
+
+    public UserDataSet readByName(String name) {
+        Session session = sessionFactory.openSession();
+        UserDataSetDAO dao = new UserDataSetDAO(session);
+        return dao.readByName(name);
     }
 
     public int getUsersSize() {

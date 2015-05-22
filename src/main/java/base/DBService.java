@@ -16,6 +16,8 @@ public interface DBService {
 
     UserDataSet readByEmail(String name);
 
+    UserDataSet readByName(String name);
+
     List<UserDataSet> readAll();
 
     List<UserDataSet> getScoreBoard();

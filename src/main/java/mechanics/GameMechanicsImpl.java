@@ -1,8 +1,9 @@
 package mechanics;
 
-import base.GameMechanics;
-import base.GameUser;
-import base.WebSocketService;
+import base.*;
+import base.dataSets.UserDataSet;
+import dbService.DBServiceImpl;
+import main.ContextService;
 import main.TimeHelper;
 import xpath.xpathAdapter;
 
@@ -13,7 +14,11 @@ public class GameMechanicsImpl implements GameMechanics {
 
     private static final int gameTime = new Integer(xpathAdapter.getValue("resources/game.xml", "/class/matchTime")) * 1000;
 
+    private DBService dbService;
+
     private WebSocketService webSocketService;
+
+    private AccountService accountService;
 
     private Map<String, GameSession> nameToGame = new HashMap<>();
 
@@ -23,9 +28,16 @@ public class GameMechanicsImpl implements GameMechanics {
 
     private Integer[][] gameField = new Integer[20][15];
 
+    public GameMechanicsImpl(WebSocketService webSocketService, AccountService accountService, DBService dbService) {
+        this.dbService = dbService;
+        this.webSocketService = webSocketService;
+        this.accountService = accountService;
+    }
+/*
     public GameMechanicsImpl(WebSocketService webSocketService) {
         this.webSocketService = webSocketService;
     }
+*/
     public GameMechanicsImpl() { }
 
     public void addUser(String user) {
@@ -78,6 +90,19 @@ public class GameMechanicsImpl implements GameMechanics {
                 boolean firstWin = session.isFirstWin();
                 webSocketService.notifyGameOver(session.getFirst(), firstWin);
                 webSocketService.notifyGameOver(session.getSecond(), !firstWin);
+
+                accountService.getUserByName(session.getFirst().getMyName());
+                accountService.getUserByName(session.getFirst().getMyName());
+
+
+                UserDataSet user1 = accountService.getUserByName(session.getFirst().getMyName());
+                user1.setScore(user1.getScore() + session.getFirst().getMyScore() );
+                UserDataSet user2 = accountService.getUserByName(session.getSecond().getMyName());
+                user2.setScore(user2.getScore() + session.getSecond().getMyScore() );
+
+                dbService.updateScore(user1);
+                dbService.updateScore(user2);
+
                 nameToGame.remove(session.getFirst());
                 nameToGame.remove(session.getSecond());
 

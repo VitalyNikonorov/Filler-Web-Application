@@ -69,9 +69,9 @@ public class Main {
         ContextService contextService = new ContextService();
 
         WebSocketService webSocketService = new WebSocketServiceImpl();
-        GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService);
         DBService dbService = new DBServiceImpl();
         AccountService accountService = new AccountServiceImpl(dbService);
+        GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService, accountService, dbService);
 
         contextService.add(accountService.getClass(), accountService);
         contextService.add(gameMechanics.getClass(), gameMechanics);

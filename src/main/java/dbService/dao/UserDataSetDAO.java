@@ -25,7 +25,12 @@ public class UserDataSetDAO {
     }
 
     public void updateScore(UserDataSet dataSet) {
-        session.save(dataSet);
+        /*session.saveOrUpdate(dataSet);*/
+        String hqlUpdate = "update UserDataSet u set u.score = :newScore where u.email = :email";
+        int updatedEntities = session.createQuery( hqlUpdate )
+                .setInteger("newScore", dataSet.getScore())
+                .setString( "email", dataSet.getEmail() )
+                .executeUpdate();
         session.close();
     }
 
@@ -36,6 +41,11 @@ public class UserDataSetDAO {
     public UserDataSet readByEmail(String email) {
         Criteria criteria = session.createCriteria(UserDataSet.class);
         return (UserDataSet) criteria.add(Restrictions.eq("email", email)).uniqueResult();
+    }
+
+    public UserDataSet readByName(String name) {
+        Criteria criteria = session.createCriteria(UserDataSet.class);
+        return (UserDataSet) criteria.add(Restrictions.eq("name", name)).uniqueResult();
     }
 
     @SuppressWarnings("unchecked")

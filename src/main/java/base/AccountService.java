@@ -12,6 +12,8 @@ public interface AccountService {
 
     UserDataSet getUser(String email);
 
+    UserDataSet getUserByName(String name);
+
     UserDataSet getSessions(String sessionId);
 
     boolean isAuthorised(String sessionId);
