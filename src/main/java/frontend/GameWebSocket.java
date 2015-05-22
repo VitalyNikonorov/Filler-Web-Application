@@ -13,11 +13,6 @@ import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import base.GameMechanics;
 import base.GameUser;
 import base.WebSocketService;
-import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
-import org.eclipse.jetty.websocket.api.annotations.OnWebSocketConnect;
-import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
-import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import org.json.JSONObject;
 
 
@@ -42,7 +37,12 @@ public class GameWebSocket {
         try {
             JSONObject jsonStart = new JSONObject();
             jsonStart.put("status", "start");
-            jsonStart.put("enemyName", user.getEnemyName());
+            jsonStart.put("score1", user.getMyScore());
+            jsonStart.put("score2", user.getEnemyScore());
+            jsonStart.put("user1", user.getMyName());
+            jsonStart.put("user2", user.getEnemyName());
+            jsonStart.put("color1", user.getColor());
+            jsonStart.put("color2", user.getEnemy().getColor());
             jsonStart.put("field", gameMechanics.getGameFuild());
             session.getRemote().sendString(jsonStart.toString());
         } catch (Exception e) {
@@ -97,11 +97,12 @@ public class GameWebSocket {
     public void setNewField(GameUser user) {
         JSONObject jsonStart = new JSONObject();
         jsonStart.put("status", "move");
-        jsonStart.put("name", myName);
-        jsonStart.put("Score1", user.getMyScore());
-        jsonStart.put("Score2", user.getEnemyScore());
-        jsonStart.put("User1", user.getMyName());
-        jsonStart.put("User2", user.getEnemyName());
+        jsonStart.put("score1", user.getMyScore());
+        jsonStart.put("score2", user.getEnemyScore());
+        jsonStart.put("user1", user.getMyName());
+        jsonStart.put("user2", user.getEnemyName());
+        jsonStart.put("color1", user.getColor());
+        jsonStart.put("color2", user.getEnemy().getColor());
         jsonStart.put("field", user.getGameField());
         try {
             session.getRemote().sendString(jsonStart.toString());

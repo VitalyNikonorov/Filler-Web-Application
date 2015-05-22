@@ -9,6 +9,7 @@ public class GameUser {
     private GameUser enemy;
     private int myScore = 0;
     private int enemyScore = 0;
+    private int color;
 
     private int player = 0;
     private Integer[][] cells = new Integer[20][15];
@@ -33,6 +34,14 @@ public class GameUser {
     public int getEnemyScore() {
         return enemy.getMyScore();
     }
+
+    public void setColor(int color){
+        this.color = color;
+    }
+
+    public int getColor(){ return this.color; };
+
+    public void setScore(int score){ this.myScore = score; };
 
     public void incrementMyScore() {
         myScore++;

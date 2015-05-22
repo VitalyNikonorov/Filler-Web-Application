@@ -14,6 +14,7 @@ public class GameSession {
     private final long startTime;
     private final GameUser first;
     private final GameUser second;
+    private boolean overStatus = false;
 
     private Map<String, GameUser> users = new HashMap<>();
 
@@ -63,5 +64,11 @@ public class GameSession {
     public  boolean isFirstWin(){
         return first.getMyScore() > second.getMyScore();
     }
+
+    public  void changeOverStatus(){
+        this.overStatus = true;
+    }
+
+    public boolean getOverStatus(){ return overStatus; };
 
 }

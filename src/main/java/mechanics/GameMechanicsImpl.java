@@ -50,9 +50,14 @@ public class GameMechanicsImpl implements GameMechanics {
     public void move(String userName, int color) {
         GameSession myGameSession = nameToGame.get(userName);
         GameUser myUser = myGameSession.getSelf(userName);
-        myUser.move(color);
-        //myGameSession.getSecond().setEnemyScore(myUser.getMyScore());
-        webSocketService.notifyNewGameField(myUser);
+        GameUser enemyUser = myGameSession.getEnemy(userName);
+        if ((myUser.getColor() != color) && (enemyUser.getColor() != color) ) {
+            myUser.move(color);
+            webSocketService.notifyNewGameField(myUser);
+        }else{
+            myUser.setScore(-100);
+            myGameSession.changeOverStatus();
+        }
     }
 
     @Override
@@ -65,10 +70,16 @@ public class GameMechanicsImpl implements GameMechanics {
 
     private void gmStep() {
         for (GameSession session : allSessions) {
-            if (session.getSessionTime() > gameTime) {
+            if ( (session.getSessionTime() > gameTime)
+                    || (session.getFirst().getMyScore() + session.getFirst().getEnemyScore()) >= (20*15)
+                    || (session.getFirst().getMyScore() + session.getSecond().getMyScore()) >= (20*15)
+                    || session.getOverStatus() ) {
                 boolean firstWin = session.isFirstWin();
                 webSocketService.notifyGameOver(session.getFirst(), firstWin);
                 webSocketService.notifyGameOver(session.getSecond(), !firstWin);
+                nameToGame.remove(session.getFirst());
+                nameToGame.remove(session.getSecond());
+
                 allSessions.remove(session);/////////////////////////////////////////////////////////////////////////
             }
         }
@@ -85,6 +96,9 @@ public class GameMechanicsImpl implements GameMechanics {
 
         gameSession.getSecond().setGameField(gameField);
         gameSession.getSecond().setCells();
+
+        gameSession.getFirst().setColor(gameField[gameField.length - 1][0]);
+        gameSession.getSecond().setColor(gameField[0][gameField[0].length - 1]);
 
         nameToGame.put(first, gameSession);
         nameToGame.put(second, gameSession);
