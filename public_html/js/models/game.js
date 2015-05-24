@@ -12,7 +12,7 @@ define([
             self = this;
     	},
         start: function () {
-            this.ws = new WebSocket("ws://91.215.138.197:8080/gameplay");
+            this.ws = new WebSocket("ws://localhost:8080/gameplay");
             this.ws.onopen = this.open;
             this.ws.onmessage = this.message;
             this.ws.onclose = this.console;

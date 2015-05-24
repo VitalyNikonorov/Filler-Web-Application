@@ -13,6 +13,7 @@ public class GameMechanicsImpl implements GameMechanics {
     private static final int STEP_TIME = 100;
 
     private static final int gameTime = new Integer(xpathAdapter.getValue("resources/game.xml", "/class/matchTime")) * 1000;
+    public static final int width = 20;
 
     private DBService dbService;
 
@@ -26,7 +27,7 @@ public class GameMechanicsImpl implements GameMechanics {
 
     private String waiter;
 
-    private Integer[][] gameField = new Integer[20][15];
+    private Integer[][] gameField = new Integer[width][15];
 
     public GameMechanicsImpl(WebSocketService webSocketService, AccountService accountService, DBService dbService) {
         this.dbService = dbService;
@@ -84,7 +85,7 @@ public class GameMechanicsImpl implements GameMechanics {
     private void gmStep() {
         for (GameSession session : allSessions) {
             if ( (session.getSessionTime() > gameTime)
-                    || (session.getFirst().getMyScore() + session.getFirst().getEnemyScore()) >= (20*15)
+                   // || (session.getFirst().getMyScore() + session.getFirst().getEnemyScore()) >= (20*15)
                     || (session.getFirst().getMyScore() + session.getSecond().getMyScore()) >= (20*15)
                     || session.getOverStatus() ) {
                 boolean firstWin = session.isFirstWin();
