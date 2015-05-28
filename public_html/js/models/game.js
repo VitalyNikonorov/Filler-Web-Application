@@ -1,46 +1,57 @@
 define([
-    'backbone'
+    'backbone',
+    'collections/btns',
+    'models/board'
 ], function(
-    Backbone
+    Backbone,
+    buttonsCollection,
+    boardModel
 ){
     var self;
     var Game = Backbone.Model.extend({
-    	initialize: function () {
-            this.data = {};
-            console.log("gamemodel")
-            console.log(this)
+        board: boardModel,
+        buttons: buttonsCollection,
+        initialize: function () {
             self = this;
-    	},
-        start: function () {
-            this.ws = new WebSocket("ws://91.215.138.197:8080/gameplay");
-            this.ws.onopen = this.open;
-            this.ws.onmessage = this.message;
-            this.ws.onclose = this.console;
-            console.log("WebSocket opened");
-            console.log(this.ws)
-            
+            this.listenTo(this.board, "board:updated", this.gameUpdated);
+            this.listenTo(this.buttons, "buttons:checked", this.gameUpdated);
+        },
+        gameUpdated: function () {
+            this.trigger("game:updated");
+        },
+        connect: function () {
+            if (this.socket === undefined) {
+                this.socket = new WebSocket("ws://localhost:8080/gameplay");
+            }
+            this.socket.onopen = this.open;
+            this.socket.onmessage = this.message;
+            this.socket.onclose = this.console;         
         },
         open: function() {
-            console.log("gamemodel")
-            console.log(self)
-            console.log("gamemodel stop")
-            console.log("open");
-            console.log();
-            self.trigger('socket:open');
+            self.trigger("socket:open");
         },
         close: function() {
-            console.log("close");
-            console.log("data");
             self.trigger("socket:close")
         },
-        message: function(data) {
-            //console.log("message");
-            //console.log(data);
-            self.data = JSON.parse(data.data);
-            self.trigger("socket:message");
+        message: function(msg) {
+            var data = JSON.parse(msg.data);
+            console.log(data);
+            if (data.status == "start") {
+                self.trigger("game:start")
+                self.board.setBoard(data);
+                self.buttons.check(data);
+            } else if (data.status == "finish") {
+                self.board.stop();
+                self.trigger("game:stop");
+
+            } else if (data.status !== undefined) {
+                self.board.step(data);
+                self.buttons.check(data);
+                self.trigger("game:move");
+            }
         },
-        send_color: function(color) {
-            this.ws.send(JSON.stringify({"color": color}))
+        step: function(color) {
+            self.socket.send(JSON.stringify({"color": color}))
         }
      });
 

@@ -39,7 +39,7 @@ so we can ignore the csslint warning.
 
 .pure-form {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 200;    
+    font-weight: 200;     
 }
 
 .pure-form input[type="text"],
@@ -195,6 +195,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     margin: 0.5em 0 0.2em;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 400;
+    color: #d664de;
 }
 .pure-form fieldset {
     margin: 0;

@@ -2,11 +2,15 @@ define([
     'backbone',
     'tmpl/game',
     'models/game',
+    'views/board',
+    'views/btns',
     'jquery'
 ], function(
     Backbone,
     tmpl,
-    game,
+    gameModel,
+    boardView,
+    buttonsView,
     $
 ){
 
@@ -14,14 +18,26 @@ define([
 
         template: tmpl,
         className: "game-view",
-        game: game,
+        board: boardView,
+        game: gameModel,
+        buttons: buttonsView,
         events: {
-            "click .ready": 'ready',
-            "click .game-button_1": 'click_red',
-            "click .game-button_2": 'click_green',
-            "click .game-button_3": 'click_blue',
-            "click .game-button_4": 'click_yellow',
-            "click .game-button_5": 'click_pink'
+            "click .ready": 'ready'
+        },
+        initialize: function () {
+            this.listenTo(this.game, "game:updated", this.step)
+            this.listenTo(this.buttons, "color:selected", this.game.step)
+            this.listenTo(this.game, "game:stop", this.stop)
+            // this.render();
+            this.$el.html( this.template() );
+            this.boardDOM = this.$(".board");
+            this.buttonsDOM = this.$(".buttons");
+            this.buttonsDOM.append(this.buttons.$el)
+            this.boardDOM.html(this.board.render().$el)
+            this.hide();
+        },
+        stop: function () {
+            $(".ready").show();  
         },
         ready: function () {
             $.ajax({
@@ -30,54 +46,17 @@ define([
                 dataType: 'json',
                 context: this
             }).done(function() {
-                this.game.start();
-                console.log("gamestart");
+                this.game.connect();
             }).fail(function(data) {
-                console.log("fail");
-                console.log(data);
-                this.game.start();
-                console.log("gamestart");
+                this.game.connect();
             });
         },
-        click_red: function () {
-            this.game.send_color(1)
+        render: function () {
+            
         },
-        click_green: function () {
-            this.game.send_color(2)
-        },
-        click_blue: function () {
-            this.game.send_color(3)
-        },
-        click_yellow: function () {
-            this.game.send_color(4)
-        },
-        click_pink: function () {
-            this.game.send_color(5)
-        },
-        initialize: function () {
-            this.render();
-            this.hide();
-            this.listenTo(this.game, "socket:open", this.start_game);
-            this.listenTo(this.game, "socket:close", this.end_game);
-            this.listenTo(this.game, "socket:message", this.message);
-        },
-        render: function (data) {
-            if (data === undefined) {
-                data = {
-                'score': "one billion", 
-                'field': [[1,2,3,4,5,4,2,3,1],
-                          [5,4,2,1,2,3,4,2,5],
-                          [2,3,4,1,3,4,5,3,2],
-                          [2,3,5,5,1,1,2,3,4],
-                          [1,2,4,5,2,3,3,2,1],
-                          [4,2,1,2,3,4,5,5,3],
-                          [5,5,5,3,2,3,1,3,4],
-                          [3,4,5,5,4,3,1,2,3],
-                          [3,4,5,2,3,1,3,3,1]],
-                'h':9,
-                'w':9}
-            }
-            this.$el.html( this.template(data) );
+        step: function () {
+            $(".ready").hide();
+            this.boardDOM.html(this.board.render().$el);
         },
         show: function () {
             this.trigger("show", this);
@@ -85,63 +64,6 @@ define([
         },
         hide: function () {
             this.$el.hide();
-        },
-        start_game: function() {
-            //alert(this.game.data);
-        },
-        end_game: function() {
-
-        },
-        message: function() {
-            console.log("message func")
-            console.log(this.game.data)
-            console.log(this.game.data.status)
-            if (this.game.data.status == "start") {
-                var white = [0,0,0,0,0]
-                white[this.game.data.color1-1] = 1;
-                white[this.game.data.color2-1] = 1;
-                var obj = {
-                    
-                    'myScore': this.game.data.score1,
-                    'enemyScore': this.game.data.score2,
-                    'myName': this.game.data.user1,
-                    'enemyName': this.game.data.user2,
-                    'field': this.game.data.field,
-                    'h': this.game.data.field.length,
-                    'w': this.game.data.field[0].length,
-                    'white': white
-
-                }
-                console.log(obj)
-                this.render(obj)
-            } 
-            if (this.game.data.status == "move") {
-                var white = [0,0,0,0,0]
-                white[this.game.data.color1-1] = 1;
-                white[this.game.data.color2-1] = 1;
-
-                this.render({
-                    'myScore': this.game.data.score1,
-                    'enemyScore': this.game.data.score2,
-                    'myName': this.game.data.user1,
-                    'enemyName': this.game.data.user2,
-                    'field': this.game.data.field,
-                    'h': this.game.data.field.length,
-                    'w': this.game.data.field[0].length,
-                    'white': white
-                })
-            }
-            if (this.game.data.status == "finish") {
-                this.game.ws.close();
-                var str;
-                if (this.game.data.win) {
-                    str = "game over winner";
-                } else {
-                    str = "game over looser";
-                }
-                alert(str)
-                
-            }
         }
     });
 

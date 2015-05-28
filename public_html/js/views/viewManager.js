@@ -17,7 +17,7 @@ define([
         events: {'click .error_message_close': 'hide'},
         add: function (views) {
             this.views = views;
-            this.listenTo(this.model, "user:load", this.rerender);
+            this.listenTo(this.model, "user:load", this.user_load);
             this.listenTo(this.model, "user:logout", this.rerender);
             this.listenTo(this.model, "user:error:login", this.login_error);
             this.listenTo(this.model, "user:error:create", this.create_error)
@@ -45,6 +45,12 @@ define([
             _.forEach(this.views, function (arg) {
                 arg.hide();
             });
+        },
+        user_load: function () {
+            this.rerender();
+            window.setTimeout( function(){
+                 window.location = "#";
+             }, 200 );
         },
         rerender: function() {
             _.forEach(this.views, function (arg) {

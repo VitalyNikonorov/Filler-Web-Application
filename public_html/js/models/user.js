@@ -10,7 +10,6 @@ define([
     	sync: usync, 
         initialize: function () {
             this.fetch();
-            this.trigger("socket:open");
         }, 
     	signup: function(data) {
             this.logout();

@@ -63,13 +63,19 @@
   width: 210px;
   background-color: transparent;
   cursor: pointer;
-  border-color: #00f000; }
+  border-color: #ac26b5; }
   .button:hover {
-    border-color: #00ff00; }
+    border-color: #d664de; }
   .button span:nth-child(1) {
-    color: green; }
+    color: white; }
   .button span:nth-child(2) {
     color: grey; }
+  .button_red:hover {
+    border-color: #E9001E; }
+  .button_green:hover {
+    border-color: #73E81F; }
+  .button_blue:hover {
+    border-color: #2B428E; }
   .button span {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-style: normal;
@@ -496,22 +502,30 @@
     font-size: 30px;
     line-height: 30px;
     font-weight: 100;
-    color: blue; }
+    color: yellow; }
   .header-game {
     font-size: 50px;
     line-height: 50px;
     font-weight: 100;
-    color: red; }
+    color: yellow; }
   .header-other {
     font-size: 30px;
-    line-height: 30px;
-    font-weight: 100; }
+    line-height: 50px;
+    font-weight: 100;
+    color: #d664de; }
+  .header-name {
+    text-align: center;
+    font-family: 'Bauhaus 93';
+    font-size: 70px;
+    line-height: 100px;
+    color: yellow; }
 
 .game-board {
   border: 0px; }
   .game-board__row__cell {
     width: 30px;
-    height: 30px; }
+    height: 30px;
+    opacity: 0.73; }
     .game-board__row__cell_1 {
       background-color: red; }
     .game-board__row__cell_2 {
@@ -524,26 +538,21 @@
       background-color: pink; }
 
 .game-button-container {
-  margin-bottom: 20px;
   color: #0A416B;
-  padding-top: 10px;
-  clear: both; }
-
-.white_0 {
-  opacity: 1; }
-
-.white_1 {
-  opacity: 0.1; }
+  padding-top: 10px; }
 
 .game-button {
-  float: left;
+  display: inline-block;
   cursor: pointer;
-  margin-right: 10px;
-  width: 28px;
-  height: 28px; }
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 35px;
+  height: 35px;
+  opacity: 0.5; }
   .game-button:hover {
     -webkit-box-shadow: 0px 1px 3px #666666;
-    -moz-box-shadow: 0px 1px 3px #666666; }
+    -moz-box-shadow: 0px 1px 3px #666666;
+    opacity: 0.73; }
   .game-button_1 {
     background-color: red; }
   .game-button_2 {
@@ -554,6 +563,10 @@
     background-color: yellow; }
   .game-button_5 {
     background-color: pink; }
+  .game-button_disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    background: #CCC; }
 
 /*!
 Pure v0.6.0
@@ -740,7 +753,8 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 .pure-form label {
   margin: 0.5em 0 0.2em;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 400; }
+  font-weight: 400;
+  color: #d664de; }
 
 .pure-form fieldset {
   margin: 0;
@@ -954,7 +968,7 @@ https://github.com/yahoo/pure/blob/master/LICENSE.md
   border-collapse: collapse;
   border-spacing: 0;
   empty-cells: show;
-  border: 1px solid #cbcbcb;
+  border: 1px solid #d664de;
   font-size: 20px;
   font-weight: 100;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -962,14 +976,14 @@ https://github.com/yahoo/pure/blob/master/LICENSE.md
   font-variant: normal; }
 
 .pure-table caption {
-  color: #000;
+  color: #F8E514;
   font: italic 85%/1 arial, sans-serif;
   padding: 1em 0;
   text-align: center; }
 
 .pure-table td,
 .pure-table th {
-  border-left: 1px solid #cbcbcb;
+  border-left: 1px solid #A21961;
   /*  inner column border */
   border-width: 0 0 0 1px;
   font-size: inherit;
@@ -986,8 +1000,8 @@ there's a rowspan on the first cell. Case added to the tests. issue#432 */
   border-left-width: 0; }
 
 .pure-table thead {
-  background-color: #e0e0e0;
-  color: #000;
+  background-color: #d664de;
+  color: #FFF;
   text-align: left;
   vertical-align: bottom; }
 
@@ -997,7 +1011,8 @@ striping:
    odd  - #f2f2f2 (light gray)
 */
 .pure-table td {
-  background-color: transparent; }
+  background-color: transparent;
+  color: #FFF; }
 
 .pure-table-odd td {
   background-color: #f2f2f2; }
@@ -1008,7 +1023,7 @@ striping:
 
 /* BORDERED TABLES */
 .pure-table-bordered td {
-  border-bottom: 1px solid #cbcbcb; }
+  border-bottom: 1px solid #d664de; }
 
 .pure-table-bordered tbody > tr:last-child > td {
   border-bottom-width: 0; }
@@ -1017,9 +1032,196 @@ striping:
 .pure-table-horizontal td,
 .pure-table-horizontal th {
   border-width: 0 0 1px 0;
-  border-bottom: 1px solid #cbcbcb; }
+  border-bottom: 1px solid #d664de; }
 
 .pure-table-horizontal tbody > tr:last-child > td {
   border-bottom-width: 0; }
+
+body {
+  background-color: #5c1461;
+  font-color: #73E81F; }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  /* for demo only */
+  margin: 8px; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: inherit;
+  font-weight: bold;
+  color: inherit;
+  text-rendering: optimizelegibility; }
+
+h4 {
+  font-size: 14px; }
+
+h4, h5, h6 {
+  line-height: 18px; }
+
+p {
+  margin: 0 0 9px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px; }
+
+.close {
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 18px;
+  color: #000000;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.2;
+  filter: alpha(opacity=20); }
+
+.close:hover {
+  color: #000000;
+  text-decoration: none;
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+  cursor: pointer; }
+
+.alert {
+  padding: 8px 35px 8px 14px;
+  margin-bottom: 18px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: #fcf8e3;
+  border: 1px solid #fbeed5;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  color: #c09853; }
+
+.alert-heading {
+  color: inherit; }
+
+.alert .close {
+  position: relative;
+  top: -2px;
+  right: -21px;
+  line-height: 18px; }
+
+.alert-success {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #468847; }
+
+.alert-danger,
+.alert-error {
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #b94a48; }
+
+.alert-info {
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+  color: #3a87ad; }
+
+.alert-block {
+  padding-top: 14px;
+  padding-bottom: 14px; }
+
+.alert-block > p,
+.alert-block > ul {
+  margin-bottom: 0; }
+
+.alert-block p + p {
+  margin-top: 5px; }
+
+.loading {
+  background-color: #2980b9;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  margin-top: 0px;
+  top: 0px; }
+
+.loading-center {
+  width: 100%;
+  height: 100%;
+  position: relative; }
+
+.loading-center-absolute {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 118px;
+  width: 118px;
+  margin-top: -59px;
+  margin-left: -59px; }
+
+.object {
+  width: 20px;
+  height: 20px;
+  background-color: #FFF;
+  margin-right: 20px;
+  float: left;
+  margin-bottom: 20px; }
+
+.object:nth-child(3n+0) {
+  margin-right: 0px; }
+
+.object_one {
+  -webkit-animation: animate 1s -0.9s ease-in-out infinite;
+  animation: animate 1s -0.9s ease-in-out infinite; }
+
+.object_two {
+  -webkit-animation: animate 1s -0.8s ease-in-out infinite;
+  animation: animate 1s -0.8s ease-in-out infinite; }
+
+.object_three {
+  -webkit-animation: animate 1s -0.7s ease-in-out infinite;
+  animation: animate 1s -0.7s ease-in-out infinite; }
+
+.object_four {
+  -webkit-animation: animate 1s -0.6s ease-in-out infinite;
+  animation: animate 1s -0.6s ease-in-out infinite; }
+
+.object_five {
+  -webkit-animation: animate 1s -0.5s ease-in-out infinite;
+  animation: animate 1s -0.5s ease-in-out infinite; }
+
+.object_six {
+  -webkit-animation: animate 1s -0.4s ease-in-out infinite;
+  animation: animate 1s -0.4s ease-in-out infinite; }
+
+.object_seven {
+  -webkit-animation: animate 1s -0.3s ease-in-out infinite;
+  animation: animate 1s -0.3s ease-in-out infinite; }
+
+.object_eight {
+  -webkit-animation: animate 1s -0.2s ease-in-out infinite;
+  animation: animate 1s -0.2s ease-in-out infinite; }
+
+.object_nine {
+  -webkit-animation: animate 1s -0.1s ease-in-out infinite;
+  animation: animate 1s -0.1s ease-in-out infinite; }
+
+@-webkit-keyframes animate {
+  50% {
+    -ms-transform: scale(1.5, 1.5);
+    -webkit-transform: scale(1.5, 1.5);
+    transform: scale(1.5, 1.5); }
+  100% {
+    -ms-transform: scale(1, 1);
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1); } }
+@keyframes animate {
+  50% {
+    -ms-transform: scale(1.5, 1.5);
+    -webkit-transform: scale(1.5, 1.5);
+    transform: scale(1.5, 1.5); }
+  100% {
+    -ms-transform: scale(1, 1);
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1); } }
 
 /*# sourceMappingURL=my.css.map */

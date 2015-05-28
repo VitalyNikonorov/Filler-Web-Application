@@ -6,17 +6,25 @@
 		font-size: 30px;
 		line-height: 30px;
 		font-weight: 100;
-		color: blue;
+		color: yellow;
 	};
 	&-game {
 		font-size: 50px;
 		line-height: 50px;
 		font-weight: 100;
-		color: red;
+		color: yellow;
 	}
 	&-other {
 		font-size: 30px;
-		line-height: 30px;
+		line-height: 50px;
 		font-weight: 100;
+		color: #d664de;
+	}
+	&-name {
+		text-align: center;
+		font-family: 'Bauhaus 93';
+		font-size: 70px;
+		line-height: 100px;
+		color: yellow;
 	}
 }

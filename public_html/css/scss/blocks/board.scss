@@ -6,6 +6,7 @@ $cell-size: 30px;
 		&__cell {
 			width: $cell-size;
 			height: $cell-size;
+			opacity: 0.73;
 			&_1 {
 				background-color: red;
 			};
@@ -26,26 +27,22 @@ $cell-size: 30px;
 	};
 }
 .game-button-container {
-	margin-bottom: 20px;
+
     color: #0A416B;
     padding-top: 10px; 
-    clear:both;
-}
-.white_0 {
-	opacity: 1;
-}
-.white_1 {
-	opacity: 0.1;
 }
 .game-button {
-	float: left;
+	display: inline-block;
     cursor: pointer;
-    margin-right: 10px; 
-	width: $cell-size - 2;
-	height: $cell-size - 2;
+    margin-left: 5px;
+    margin-right: 5px;
+	width: $cell-size + 5;
+	height: $cell-size + 5;
+	opacity: 0.5;
 	&:hover {
   		-webkit-box-shadow: 0px 1px 3px #666666;
  		-moz-box-shadow: 0px 1px 3px #666666;
+ 		opacity: 0.73;
 	};
 	&_1 {
 		background-color: red;
@@ -61,5 +58,10 @@ $cell-size: 30px;
 	};
 	&_5 {
 		background-color: pink;
+	};
+	&_disabled {
+	  	pointer-events: none;
+	  	opacity: 0.5;
+		background: #CCC;
 	};
 }

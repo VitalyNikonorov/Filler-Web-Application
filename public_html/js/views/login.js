@@ -28,7 +28,6 @@ define([
             this.$el.html( this.template() );
         },
         show: function () {
-            console.log(this.model.toJSON())
             this.trigger('show', this);
             this.$el.show();
         },

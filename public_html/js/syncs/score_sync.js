@@ -21,13 +21,10 @@ define([
 							})	
 						})
 						collection.reset(result);
-						console.log(collection.toJSON())
 					}
 				})
 			}
 		}
-		
-
 		return method_map[method]()
 	}
 })

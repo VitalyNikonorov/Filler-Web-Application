@@ -24,8 +24,6 @@ define([
         },
         show: function () {
             this.trigger('show', this);
-            var temp = {}
-            console.log(this.model)
             this.render(this.model.toJSON())
             this.$el.show();
         },
