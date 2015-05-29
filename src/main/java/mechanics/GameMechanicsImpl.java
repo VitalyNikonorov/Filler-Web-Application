@@ -4,11 +4,14 @@ import base.*;
 import base.dataSets.UserDataSet;
 import dbService.DBServiceImpl;
 import main.ContextService;
+import main.MessageGetByName;
 import main.ThreadSettings;
 import main.TimeHelper;
 import messageSystem.Abonent;
 import messageSystem.Address;
+import messageSystem.Message;
 import messageSystem.MessageSystem;
+import org.eclipse.jetty.server.Authentication;
 import xpath.xpathAdapter;
 
 import java.util.*;
@@ -56,6 +59,10 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
         return messageSystem;
     }
 
+    UserDataSet getUserFromMessage(UserDataSet user){
+        return user;
+    };
+
     @Override
     public Address getAddress() {
         return address;
@@ -94,14 +101,6 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
         }
     }
 
-/*    @Override
-    public void run() {
-        while (true) {
-            gmStep();
-            TimeHelper.sleep(STEP_TIME);
-        }
-    }
-*/
     @Override
     public void run() {
         while (true) {
@@ -125,14 +124,18 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
                 webSocketService.notifyGameOver(session.getFirst(), firstWin);
                 webSocketService.notifyGameOver(session.getSecond(), !firstWin);
 
-                accountService.getUserByName(session.getFirst().getMyName());
-                accountService.getUserByName(session.getFirst().getMyName());
 
+                //UserDataSet user1 = accountService.getUserByName(session.getFirst().getMyName());
+                UserDataSet user1 = null;
+                Message messageGetUser1 = new MessageGetByName(getAddress(), messageSystem.getAddressService().getAccountServiceAddress(), session.getFirst().getMyName(), user1);
+                messageSystem.sendMessage(messageGetUser1);
 
-                UserDataSet user1 = accountService.getUserByName(session.getFirst().getMyName());
+                //UserDataSet user1 = messageSystem.sendMessage(session.getFirst().getMyName());
                 user1.setScore(user1.getScore() + session.getFirst().getMyScore() );
-                UserDataSet user2 = accountService.getUserByName(session.getSecond().getMyName());
-                user2.setScore(user2.getScore() + session.getSecond().getMyScore() );
+                //UserDataSet user2 = accountService.getUserByName(session.getSecond().getMyName());
+                UserDataSet user2 = null;
+                Message messageGetUser2 = new MessageGetByName(getAddress(), messageSystem.getAddressService().getAccountServiceAddress(), session.getSecond().getMyName(), user2);
+                messageSystem.sendMessage(messageGetUser2);
 
                 dbService.updateScore(user1);
                 dbService.updateScore(user2);
@@ -140,7 +143,7 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
                 nameToGame.remove(session.getFirst());
                 nameToGame.remove(session.getSecond());
 
-                allSessions.remove(session);/////////////////////////////////////////////////////////////////////////
+                allSessions.remove(session);
             }
         }
     }
@@ -184,13 +187,4 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
         return gameField;
     }
 
-    public Integer[][] inverceField(Integer[][] field){
-        Integer[][] inverce = new Integer[field.length][field[0].length];
-        for (int i = 0; i < field.length; i++){
-            for (int j = 0; j < field[0].length; j++){
-                inverce[i][j] = field[field.length - i - 1][field[0].length - j - 1];
-            }
-        }
-        return inverce;
-    }
 }
