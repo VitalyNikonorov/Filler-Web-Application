@@ -73,14 +73,14 @@ public class Main {
         WebSocketService webSocketService = new WebSocketServiceImpl();
         DBService dbService = new DBServiceImpl();
         AccountService accountService = new AccountServiceImpl(dbService, messageSystem);
-        GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService, accountService, dbService, messageSystem);
+        GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService, dbService, messageSystem);
 
 
 
         final Thread accountServiceThread = new Thread(new AccountServiceImpl(dbService,messageSystem));
         accountServiceThread.setDaemon(true);
         accountServiceThread.setName("Account Service");
-        final Thread gameMechanicsThread = new Thread(new GameMechanicsImpl(webSocketService, accountService, dbService, messageSystem));
+        final Thread gameMechanicsThread = new Thread(new GameMechanicsImpl(webSocketService, dbService, messageSystem));
         gameMechanicsThread.setDaemon(true);
         gameMechanicsThread.setName("Game Mechanics");
 

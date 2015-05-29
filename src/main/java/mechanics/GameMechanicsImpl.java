@@ -17,7 +17,6 @@ import xpath.xpathAdapter;
 import java.util.*;
 
 public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
-    private static final int STEP_TIME = 100;
     private static final int HEIGHT = 20;
     private static final int WIDTH = 15;
 
@@ -30,8 +29,6 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
 
     private WebSocketService webSocketService;
 
-    private AccountService accountService;
-
     private Map<String, GameSession> nameToGame = new HashMap<>();
 
     private Set<GameSession> allSessions = new HashSet<>();
@@ -40,28 +37,17 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
 
     private Integer[][] gameField = new Integer[HEIGHT][WIDTH];
 
-    public GameMechanicsImpl(WebSocketService webSocketService, AccountService accountService, DBService dbService, MessageSystem messageSystem) {
+    public GameMechanicsImpl(WebSocketService webSocketService, DBService dbService, MessageSystem messageSystem) {
         this.dbService = dbService;
         this.webSocketService = webSocketService;
-        this.accountService = accountService;
         this.messageSystem = messageSystem;
         messageSystem.addService(this);
         messageSystem.getAddressService().registerGameMechanics(this);
     }
-/*
-    public GameMechanicsImpl(WebSocketService webSocketService) {
-        this.webSocketService = webSocketService;
-    }
-*/
-    //public GameMechanicsImpl() { }
 
     public MessageSystem getMessageSystem() {
         return messageSystem;
     }
-
-    UserDataSet getUserFromMessage(UserDataSet user){
-        return user;
-    };
 
     @Override
     public Address getAddress() {
