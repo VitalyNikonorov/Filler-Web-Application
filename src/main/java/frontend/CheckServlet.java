@@ -18,7 +18,7 @@ import java.util.Map;
  * Created by Виталий on 31.03.2015.
  */
 public class CheckServlet extends HttpServlet {
-    private AccountService accountService = new AccountServiceImpl();
+    private AccountService accountService;
     private ContextService contextService;
 
     public CheckServlet(ContextService contextService) {

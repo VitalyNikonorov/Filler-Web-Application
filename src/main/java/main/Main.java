@@ -9,6 +9,7 @@ import chat.WebSocketChatServlet;
 import dbService.DBServiceImpl;
 import frontend.*;
 import mechanics.GameMechanicsImpl;
+import messageSystem.MessageSystem;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -68,18 +69,34 @@ public class Main {
     private static ContextService createContextServices(){
         ContextService contextService = new ContextService();
 
+        final MessageSystem messageSystem = new MessageSystem();
         WebSocketService webSocketService = new WebSocketServiceImpl();
         DBService dbService = new DBServiceImpl();
-        AccountService accountService = new AccountServiceImpl(dbService);
-        GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService, accountService, dbService);
+        AccountService accountService = new AccountServiceImpl(dbService, messageSystem);
+        GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService, accountService, dbService, messageSystem);
+
+
+
+        final Thread accountServiceThread = new Thread(new AccountServiceImpl(dbService,messageSystem));
+        accountServiceThread.setDaemon(true);
+        accountServiceThread.setName("Account Service");
+        final Thread gameMechanicsThread = new Thread(new GameMechanicsImpl(webSocketService, accountService, dbService, messageSystem));
+        gameMechanicsThread.setDaemon(true);
+        gameMechanicsThread.setName("Game Mechanics");
+
+
 
         contextService.add(accountService.getClass(), accountService);
         contextService.add(gameMechanics.getClass(), gameMechanics);
         contextService.add(webSocketService.getClass(), webSocketService);
         contextService.add(dbService.getClass(), dbService);
+        contextService.add(messageSystem.getClass(), messageSystem);
 
         String status = dbService.getLocalStatus();
         System.out.println(status);
+
+        accountServiceThread.start();
+        gameMechanicsThread.start();
         return contextService;
     }
 

@@ -4,13 +4,22 @@ import base.*;
 import base.dataSets.UserDataSet;
 import dbService.DBServiceImpl;
 import main.ContextService;
+import main.ThreadSettings;
 import main.TimeHelper;
+import messageSystem.Abonent;
+import messageSystem.Address;
+import messageSystem.MessageSystem;
 import xpath.xpathAdapter;
 
 import java.util.*;
 
-public class GameMechanicsImpl implements GameMechanics {
+public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
     private static final int STEP_TIME = 100;
+    private static final int HEIGHT = 20;
+    private static final int WIDTH = 15;
+
+    private final Address address = new Address();
+    private final MessageSystem messageSystem;
 
     private static final int gameTime = new Integer(xpathAdapter.getValue("resources/game.xml", "/class/matchTime")) * 1000;
 
@@ -26,19 +35,31 @@ public class GameMechanicsImpl implements GameMechanics {
 
     private String waiter;
 
-    private Integer[][] gameField = new Integer[20][15];
+    private Integer[][] gameField = new Integer[HEIGHT][WIDTH];
 
-    public GameMechanicsImpl(WebSocketService webSocketService, AccountService accountService, DBService dbService) {
+    public GameMechanicsImpl(WebSocketService webSocketService, AccountService accountService, DBService dbService, MessageSystem messageSystem) {
         this.dbService = dbService;
         this.webSocketService = webSocketService;
         this.accountService = accountService;
+        this.messageSystem = messageSystem;
+        messageSystem.addService(this);
+        messageSystem.getAddressService().registerGameMechanics(this);
     }
 /*
     public GameMechanicsImpl(WebSocketService webSocketService) {
         this.webSocketService = webSocketService;
     }
 */
-    public GameMechanicsImpl() { }
+    //public GameMechanicsImpl() { }
+
+    public MessageSystem getMessageSystem() {
+        return messageSystem;
+    }
+
+    @Override
+    public Address getAddress() {
+        return address;
+    }
 
     public void addUser(String user) {
         if (waiter != null) {
@@ -73,11 +94,24 @@ public class GameMechanicsImpl implements GameMechanics {
         }
     }
 
-    @Override
+/*    @Override
     public void run() {
         while (true) {
             gmStep();
             TimeHelper.sleep(STEP_TIME);
+        }
+    }
+*/
+    @Override
+    public void run() {
+        while (true) {
+            gmStep();
+            messageSystem.execForAbonent(this);
+            try {
+                Thread.sleep(ThreadSettings.SERVICE_SLEEP_TIME);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 

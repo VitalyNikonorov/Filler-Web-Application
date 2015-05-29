@@ -17,7 +17,7 @@ import java.util.Map;
 import java.io.BufferedReader;
 
 public class SignUpServlet extends HttpServlet {
-    private AccountService accountService = new AccountServiceImpl();
+    private AccountService accountService;
     private ContextService contextService;
     private DBService dbService;
 

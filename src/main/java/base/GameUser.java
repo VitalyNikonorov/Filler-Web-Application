@@ -216,7 +216,7 @@ public class GameUser {
         myScore = score;
     }
 
-    public Integer[][] inverceField(Integer[][] field){
+/*    public Integer[][] inverceField(Integer[][] field){
         Integer[][] inverce = new Integer[field.length][field[0].length];
         for (int i = 0; i < field.length; i++){
             for (int j = 0; j < field[0].length; j++){
@@ -225,5 +225,5 @@ public class GameUser {
         }
         return inverce;
     }
-
+*/
 }

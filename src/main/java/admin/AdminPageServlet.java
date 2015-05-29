@@ -18,7 +18,7 @@ import java.util.Map;
  * Created by Виталий on 06.03.2015.
  */
 public class AdminPageServlet extends HttpServlet {
-    private AccountService accountService = new AccountServiceImpl();
+    private AccountService accountService;
     private ContextService contextService;
 
     public AdminPageServlet(ContextService contextService) {

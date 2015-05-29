@@ -22,10 +22,10 @@ import base.WebSocketService;
 @WebServlet(name = "WebSocketGameServlet", urlPatterns = {"/gameplay"})
 public class WebSocketGameServlet extends WebSocketServlet {
    private final static int IDLE_TIME = 60 * 1000;
-    private AccountService accountService = new AccountServiceImpl();
+    private AccountService accountService;
     private WebSocketService webSocketService = new WebSocketServiceImpl();
     private ContextService contextService;
-    private GameMechanics gameMechanics = new GameMechanicsImpl();
+    private GameMechanics gameMechanics;
 
     public WebSocketGameServlet(ContextService contextService) {
         this.contextService = contextService;

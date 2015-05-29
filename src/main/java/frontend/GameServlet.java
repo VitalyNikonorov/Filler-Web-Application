@@ -30,8 +30,8 @@ public class GameServlet extends HttpServlet {
 
     public GameServlet(ContextService contextService) {
         this.contextService = contextService;
-        this.accountService = (AccountService) contextService.get((new AccountServiceImpl()).getClass());
-        this.gameMechanics = (GameMechanics) contextService.get((new GameMechanicsImpl()).getClass());
+        this.accountService = (AccountService) contextService.get(accountService.getClass());
+        this.gameMechanics = (GameMechanics) contextService.get(gameMechanics.getClass());
         //this.webSocketService = (WebSocketService) contextService.get(webSocketService.getClass());
     }
 

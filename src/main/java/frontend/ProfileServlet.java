@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by Виталий on 06.03.2015.
  */
 public class ProfileServlet extends HttpServlet {
-    private AccountService accountService = new AccountServiceImpl();
+    private AccountService accountService;
     private ContextService contextService;
     private DBService dbService;
 

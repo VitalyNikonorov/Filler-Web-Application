@@ -3,14 +3,20 @@ package main;
 import base.AccountService;
 import base.DBService;
 import base.dataSets.UserDataSet;
+import messageSystem.Abonent;
+import messageSystem.Address;
+import messageSystem.MessageSystem;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class AccountServiceImpl implements AccountService {
+public class AccountServiceImpl implements AccountService, Abonent, Runnable {
 
     private DBService dbService;
     private Map<String, UserDataSet> sessions = new HashMap<>();
     private Map<String, String> userSessions = new HashMap<>();
+    private final Address address = new Address();
+    private final MessageSystem messageSystem;
 
     public void addSessions(String sessionId, UserDataSet userProfile) {
         sessions.put(sessionId, userProfile);
@@ -50,9 +56,31 @@ public class AccountServiceImpl implements AccountService {
         return userSessions.get(sessionId);
     }
 
-    public AccountServiceImpl(DBService dbService){
-        this.dbService = dbService;
+    @Override
+    public Address getAddress() {
+        return address;
     }
 
-    public AccountServiceImpl(){}
+    public MessageSystem getMessageSystem() {
+        return messageSystem;
+    }
+
+    public AccountServiceImpl(DBService dbService, MessageSystem messageSystem){
+        this.dbService = dbService;
+        this.messageSystem = messageSystem;
+        messageSystem.addService(this);
+        messageSystem.getAddressService().registerAccountService(this);
+    }
+
+    @Override
+    public void run() {
+        while (true){
+            messageSystem.execForAbonent(this);
+            try {
+                Thread.sleep(ThreadSettings.SERVICE_SLEEP_TIME);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

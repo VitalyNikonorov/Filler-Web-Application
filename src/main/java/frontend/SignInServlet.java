@@ -23,7 +23,7 @@ import java.util.Map;
  * Edited by WAATeam
  */
 public class SignInServlet extends HttpServlet {
-    private AccountService accountService = new AccountServiceImpl();
+    private AccountService accountService;
     private ContextService contextService;
     private DBService dbService;
 
