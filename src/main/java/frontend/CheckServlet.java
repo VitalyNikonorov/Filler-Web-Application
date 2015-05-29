@@ -23,7 +23,7 @@ public class CheckServlet extends HttpServlet {
 
     public CheckServlet(ContextService contextService) {
         this.contextService = contextService;
-        accountService = (AccountService) contextService.get(accountService.getClass());
+        accountService = (AccountService) contextService.get(AccountServiceImpl.class);
     }
 
     public void doGet(HttpServletRequest request,

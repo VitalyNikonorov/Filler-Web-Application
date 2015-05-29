@@ -25,7 +25,7 @@ public class ScoresServlet extends HttpServlet {
 
 
     public ScoresServlet(ContextService contextService) {
-        accountService = (AccountService) contextService.get(accountService.getClass());
+        accountService = (AccountService) contextService.get(AccountServiceImpl.class);
         dbService = (DBService) contextService.get(DBServiceImpl.class);
     }
 

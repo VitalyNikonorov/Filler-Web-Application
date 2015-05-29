@@ -29,8 +29,8 @@ public class WebSocketGameServlet extends WebSocketServlet {
 
     public WebSocketGameServlet(ContextService contextService) {
         this.contextService = contextService;
-        this.accountService = (AccountService) contextService.get(accountService.getClass());
-        this.gameMechanics = (GameMechanics) contextService.get(gameMechanics.getClass());
+        this.accountService = (AccountService) contextService.get(AccountServiceImpl.class);
+        this.gameMechanics = (GameMechanics) contextService.get(GameMechanicsImpl.class);
         this.webSocketService = (WebSocketService) contextService.get(webSocketService.getClass());
     }
 /**/

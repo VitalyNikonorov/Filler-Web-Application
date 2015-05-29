@@ -23,7 +23,7 @@ public class SignUpServlet extends HttpServlet {
 
     public SignUpServlet(ContextService contextService) {
         this.contextService = contextService;
-        accountService = (AccountService) contextService.get(accountService.getClass());
+        accountService = (AccountService) contextService.get(AccountServiceImpl.class);
         dbService = (DBService) contextService.get(DBServiceImpl.class);
     }
 

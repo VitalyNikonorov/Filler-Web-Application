@@ -23,7 +23,7 @@ public class SignOutServlet extends HttpServlet {
 
     public SignOutServlet(ContextService contextService) {
         this.contextService = contextService;
-        accountService = (AccountService) contextService.get(accountService.getClass());
+        accountService = (AccountService) contextService.get(AccountServiceImpl.class);
     }
 
     public void doPost(HttpServletRequest request,

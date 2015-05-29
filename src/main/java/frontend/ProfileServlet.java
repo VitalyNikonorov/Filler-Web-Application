@@ -27,7 +27,7 @@ public class ProfileServlet extends HttpServlet {
 
     public ProfileServlet(ContextService contextService) {
         this.contextService = contextService;
-        accountService = (AccountService) contextService.get(accountService.getClass());
+        accountService = (AccountService) contextService.get(AccountServiceImpl.class);
         dbService = (DBService) contextService.get(DBServiceImpl.class);
     }
 
