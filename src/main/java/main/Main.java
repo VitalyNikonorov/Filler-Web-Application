@@ -50,7 +50,6 @@ public class Main {
         server.setHandler(handlers);
 
         server.start();
-        //server.join();
         GameMechanics gameMechanics = (GameMechanics) contextService.get(GameMechanicsImpl.class);
         gameMechanics.run();
     }
@@ -80,6 +79,7 @@ public class Main {
         final Thread accountServiceThread = new Thread(new AccountServiceImpl(dbService,messageSystem));
         accountServiceThread.setDaemon(true);
         accountServiceThread.setName("Account Service");
+
         final Thread gameMechanicsThread = new Thread(new GameMechanicsImpl(webSocketService, dbService, messageSystem));
         gameMechanicsThread.setDaemon(true);
         gameMechanicsThread.setName("Game Mechanics");
@@ -97,6 +97,7 @@ public class Main {
 
         accountServiceThread.start();
         gameMechanicsThread.start();
+
         return contextService;
     }
 

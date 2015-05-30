@@ -13,15 +13,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by Виталий on 29.05.2015.
  */
 public final class AddressService {
-   // private Address frontEnd;
     private Address gameMechanics;
     private List<Address> accountServiceList = new ArrayList<>();
-
     private AtomicInteger accountServiceCounter = new AtomicInteger();
-
-/*    public void registerFrontEnd(FrontEnd frontEnd) {
-        this.frontEnd = frontEnd.getAddress();
-    }*/
 
     public void registerGameMechanics(GameMechanicsImpl gameMechanics) {
         this.gameMechanics = gameMechanics.getAddress();
@@ -31,10 +25,6 @@ public final class AddressService {
         accountServiceList.add(accountService.getAddress());
     }
 
-   /* public Address getFrontEndAddress() {
-        return frontEnd;
-    }
-*/
     public Address getGameMechanicsAddress() {
         return gameMechanics;
     }
