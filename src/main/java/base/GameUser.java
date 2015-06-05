@@ -12,7 +12,7 @@ public class GameUser {
     private int color;
 
     private int player = 0;
-    private Integer[][] cells = new Integer[20][15];
+    private Integer[][] cells = new Integer[19][15];
     private Integer[][] gameField;
 
     public GameUser(String myName) {

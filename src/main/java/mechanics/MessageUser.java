@@ -9,16 +9,14 @@ import messageSystem.Address;
  */
 public final class MessageUser extends MessageToGM {
     private UserDataSet user;
-    private UserDataSet varUser;
 
-    public MessageUser(Address from, Address to, UserDataSet user, UserDataSet varUser) {
+    public MessageUser(Address from, Address to, UserDataSet user) {
         super(from, to);
         this.user = user;
-        this.varUser = varUser;
     }
 
     @Override
     protected void exec(GameMechanicsImpl gameMechanics) {
-        varUser = user;
+        gameMechanics.upScore(user);
     }
 }

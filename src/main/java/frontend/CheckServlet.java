@@ -1,6 +1,5 @@
 package frontend;
 
-
 import base.AccountService;
 import main.AccountServiceImpl;
 import main.ContextService;
@@ -23,7 +22,7 @@ public class CheckServlet extends HttpServlet {
 
     public CheckServlet(ContextService contextService) {
         this.contextService = contextService;
-        accountService = (AccountService) contextService.get(AccountServiceImpl.class);
+        accountService = (AccountService) this.contextService.get(AccountServiceImpl.class);
     }
 
     public void doGet(HttpServletRequest request,

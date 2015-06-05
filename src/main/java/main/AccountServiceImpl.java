@@ -18,6 +18,10 @@ public class AccountServiceImpl implements AccountService, Abonent, Runnable {
     private final Address address = new Address();
     private final MessageSystem messageSystem;
 
+    public DBService getDbService() {
+        return dbService;
+    }
+
     public void addSessions(String sessionId, UserDataSet userProfile) {
         sessions.put(sessionId, userProfile);
     }

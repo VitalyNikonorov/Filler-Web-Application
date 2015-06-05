@@ -2,22 +2,18 @@ package mechanics;
 
 import base.*;
 import base.dataSets.UserDataSet;
-import dbService.DBServiceImpl;
-import main.ContextService;
-import main.MessageGetByName;
+import main.MsgUpScore;
 import main.ThreadSettings;
-import main.TimeHelper;
 import messageSystem.Abonent;
 import messageSystem.Address;
 import messageSystem.Message;
 import messageSystem.MessageSystem;
-import org.eclipse.jetty.server.Authentication;
 import xpath.xpathAdapter;
 
 import java.util.*;
 
 public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
-    private static final int HEIGHT = 20;
+    private static final int HEIGHT = 19;
     private static final int WIDTH = 15;
 
     private final Address address = new Address();
@@ -102,29 +98,20 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
 
     private void gmStep() {
         for (GameSession session : allSessions) {
-            if ( (session.getSessionTime() > gameTime)
-                    || (session.getFirst().getMyScore() + session.getFirst().getEnemyScore()) >= (20*15)
-                    || (session.getFirst().getMyScore() + session.getSecond().getMyScore()) >= (20*15)
+            if ( (session.getSessionTime() > 35000)//gameTime)
+                    || (session.getFirst().getMyScore() + session.getFirst().getEnemyScore()) >= (HEIGHT*WIDTH)
+                    || (session.getFirst().getMyScore() + session.getSecond().getMyScore()) >= (HEIGHT*WIDTH)
                     || session.getOverStatus() ) {
                 boolean firstWin = session.isFirstWin();
                 webSocketService.notifyGameOver(session.getFirst(), firstWin);
                 webSocketService.notifyGameOver(session.getSecond(), !firstWin);
 
+                Message upScore = new MsgUpScore(getAddress(), messageSystem.getAddressService().getAccountServiceAddress(), session.getFirst().getMyName(), session.getFirst().getMyScore(),
+                        session.getSecond().getMyName(), session.getFirst().getEnemyScore());
+                messageSystem.sendMessage(upScore);
 
-                //UserDataSet user1 = accountService.getUserByName(session.getFirst().getMyName());
-                UserDataSet user1 = null;
-                Message messageGetUser1 = new MessageGetByName(getAddress(), messageSystem.getAddressService().getAccountServiceAddress(), session.getFirst().getMyName(), user1);
-                messageSystem.sendMessage(messageGetUser1);
-
-                //UserDataSet user1 = messageSystem.sendMessage(session.getFirst().getMyName());
-                user1.setScore(user1.getScore() + session.getFirst().getMyScore() );
-                //UserDataSet user2 = accountService.getUserByName(session.getSecond().getMyName());
-                UserDataSet user2 = null;
-                Message messageGetUser2 = new MessageGetByName(getAddress(), messageSystem.getAddressService().getAccountServiceAddress(), session.getSecond().getMyName(), user2);
-                messageSystem.sendMessage(messageGetUser2);
-
-                dbService.updateScore(user1);
-                dbService.updateScore(user2);
+                //Message messageGetUser2 = new MsgUpScore(getAddress(), messageSystem.getAddressService().getAccountServiceAddress(), session.getSecond().getMyName(), session.getFirst().getMyScore());
+                //messageSystem.sendMessage(messageGetUser2);
 
                 nameToGame.remove(session.getFirst());
                 nameToGame.remove(session.getSecond());
@@ -134,11 +121,17 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
         }
     }
 
+    public void upScore(UserDataSet user){
+
+        dbService.updateScore(user);
+
+    }
+
     private void starGame(String first) {
         String second = waiter;
         GameSession gameSession = new GameSession(first, second);
         allSessions.add(gameSession);
-        gameField = generateField(20, 15);
+        gameField = generateField(HEIGHT, WIDTH);
 
         gameSession.getFirst().setGameField(gameField);
         gameSession.getFirst().setCells();
