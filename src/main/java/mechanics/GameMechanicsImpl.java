@@ -73,14 +73,26 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
         GameSession myGameSession = nameToGame.get(userName);
         GameUser myUser = myGameSession.getSelf(userName);
         GameUser enemyUser = myGameSession.getEnemy(userName);
-        if ((myUser.getColor() != color) && (enemyUser.getColor() != color) ) {
-            myUser.move(color);
-            myUser.setColor(color);
-            webSocketService.notifyNewGameField(myUser);
-        }else{
+        GameSession enemyGameSession = nameToGame.get(myUser.getEnemyName());
+        GameUser turn = myGameSession.getTurn();
+        if(turn.getMyName().equals(myUser.getMyName())) {
+            if ((myUser.getColor() != color) && (enemyUser.getColor() != color)) {
+                myUser.move(color);
+                myUser.setColor(color);
+                myGameSession.setTurn(enemyUser);
+                enemyGameSession.setTurn(enemyUser);
+                myUser.setTurn(enemyUser.getMyName());
+                enemyUser.setTurn(enemyUser.getMyName());
+                webSocketService.notifyNewGameField(myUser);
+            } else {
+                myUser.setScore(-100);
+                myGameSession.changeOverStatus();
+            }
+        } else {
             myUser.setScore(-100);
             myGameSession.changeOverStatus();
         }
+
     }
 
     @Override
@@ -98,7 +110,7 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
 
     private void gmStep() {
         for (GameSession session : allSessions) {
-            if ( (session.getSessionTime() > 35000)//gameTime)
+            if ( (session.getSessionTime() > gameTime)
                     || (session.getFirst().getMyScore() + session.getFirst().getEnemyScore()) >= (HEIGHT*WIDTH)
                     || (session.getFirst().getMyScore() + session.getSecond().getMyScore()) >= (HEIGHT*WIDTH)
                     || session.getOverStatus() ) {
@@ -108,10 +120,6 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
 
                 Message upScore = new MsgUpScore(getAddress(), messageSystem.getAddressService().getAccountServiceAddress(), session);
                 messageSystem.sendMessage(upScore);
-
-                //Message messageGetUser2 = new MsgUpScore(getAddress(), messageSystem.getAddressService().getAccountServiceAddress(), session.getSecond().getMyName(), session.getFirst().getMyScore());
-                //messageSystem.sendMessage(messageGetUser2);
-                //allSessions.remove(session);
             }
         }
     }
@@ -132,8 +140,16 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
     private void starGame(String first) {
         String second = waiter;
         GameSession gameSession = new GameSession(first, second);
+        gameSession.setTurn(gameSession.getFirst());
+
         allSessions.add(gameSession);
         gameField = generateField(HEIGHT, WIDTH);
+
+        gameSession.getFirst().setTurn(gameSession.getFirst().getMyName());
+        gameSession.getSecond().setTurn(gameSession.getFirst().getMyName());
+
+        gameSession.getFirst().setFirstTurn(gameSession.getFirst().getMyName());
+        gameSession.getSecond().setFirstTurn(gameSession.getFirst().getMyName());
 
         gameSession.getFirst().setGameField(gameField);
         gameSession.getFirst().setCells();

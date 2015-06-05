@@ -37,12 +37,22 @@ public class GameWebSocket {
         try {
             JSONObject jsonStart = new JSONObject();
             jsonStart.put("status", "start");
-            jsonStart.put("score1", user.getMyScore());
-            jsonStart.put("score2", user.getEnemyScore());
-            jsonStart.put("user1", user.getMyName());
-            jsonStart.put("user2", user.getEnemyName());
-            jsonStart.put("color1", user.getColor());
-            jsonStart.put("color2", user.getEnemy().getColor());
+            jsonStart.put("turn", user.getTurn());
+            if(user.getFirstTurn().equals(user.getEnemyName())){
+                jsonStart.put("score1", user.getMyScore());
+                jsonStart.put("score2", user.getEnemyScore());
+                jsonStart.put("user1", user.getMyName());
+                jsonStart.put("user2", user.getEnemyName());
+                jsonStart.put("color1", user.getColor());
+                jsonStart.put("color2", user.getEnemy().getColor());
+            }else{
+                jsonStart.put("score2", user.getMyScore());
+                jsonStart.put("score1", user.getEnemyScore());
+                jsonStart.put("user2", user.getMyName());
+                jsonStart.put("user1", user.getEnemyName());
+                jsonStart.put("color2", user.getColor());
+                jsonStart.put("color1", user.getEnemy().getColor());
+            }
             jsonStart.put("field", gameMechanics.getGameFuild());
             session.getRemote().sendString(jsonStart.toString());
         } catch (Exception e) {
@@ -97,12 +107,22 @@ public class GameWebSocket {
     public void setNewField(GameUser user) {
         JSONObject jsonStart = new JSONObject();
         jsonStart.put("status", "move");
-        jsonStart.put("score1", user.getMyScore());
-        jsonStart.put("score2", user.getEnemyScore());
-        jsonStart.put("user1", user.getMyName());
-        jsonStart.put("user2", user.getEnemyName());
-        jsonStart.put("color1", user.getColor());
-        jsonStart.put("color2", user.getEnemy().getColor());
+        jsonStart.put("turn", user.getTurn());
+        if(user.getFirstTurn().equals(user.getEnemyName())){
+            jsonStart.put("score1", user.getMyScore());
+            jsonStart.put("score2", user.getEnemyScore());
+            jsonStart.put("user1", user.getMyName());
+            jsonStart.put("user2", user.getEnemyName());
+            jsonStart.put("color1", user.getColor());
+            jsonStart.put("color2", user.getEnemy().getColor());
+        }else{
+            jsonStart.put("score2", user.getMyScore());
+            jsonStart.put("score1", user.getEnemyScore());
+            jsonStart.put("user2", user.getMyName());
+            jsonStart.put("user1", user.getEnemyName());
+            jsonStart.put("color2", user.getColor());
+            jsonStart.put("color1", user.getEnemy().getColor());
+        }
         jsonStart.put("field", user.getGameField());
         try {
             session.getRemote().sendString(jsonStart.toString());

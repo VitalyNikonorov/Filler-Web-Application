@@ -64,19 +64,13 @@ public class SignInServlet extends HttpServlet {
                     accountService.addSessions(session.getId(), profile);
                 } else {
                     jsonResponse.put("status", 400);
-                    Map<String, Object> passMap = new HashMap<>();
-                    passMap.put("error", "badvalue");
-                    passMap.put("value", "");
-                    responseMap.put("password", passMap);
+                    responseMap.put("error", "bad pass or login");
                     jsonResponse.put("body", responseMap);
 
                 }
             } else {
                 jsonResponse.put("status", 400);
-                Map<String, Object> nameMap = new HashMap<>();
-                nameMap.put("error", "doesn't exist");
-                nameMap.put("value", "");
-                responseMap.put("name", nameMap);
+                responseMap.put("error", "bad pass or login");
                 jsonResponse.put("body", responseMap);
             }
         }else{

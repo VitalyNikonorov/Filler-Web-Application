@@ -55,10 +55,7 @@ public class SignUpServlet extends HttpServlet {
             response.getWriter().println(jsonResponse);
         }catch (Exception e){
                 jsonResponse.put("status", 400);
-                Map<String, Object> nameMap = new HashMap<>();
-                nameMap.put("error", "already exists");
-                nameMap.put("value", jsonRequest.get("email").toString());
-                responseMap.put("name", nameMap);
+                responseMap.put("error", " name already exists");
                 jsonResponse.put("body", responseMap);
                 response.getWriter().println(jsonResponse);
         }

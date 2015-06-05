@@ -14,6 +14,18 @@ public class GameSession {
     private final long startTime;
     private final GameUser first;
     private final GameUser second;
+
+    private GameUser turn;
+
+    public void setTurn(GameUser turn) {
+        this.turn = turn;
+    }
+
+    public GameUser getTurn() {
+        return turn;
+    }
+
+
     private boolean overStatus = false;
 
     private Map<String, GameUser> users = new HashMap<>();

@@ -6,6 +6,8 @@ package base;
 public class GameUser {
     private final String myName;
     private String enemyName;
+    private String turn;
+    private String firstTurn;
     private GameUser enemy;
     private int myScore = 0;
     private int enemyScore = 0;
@@ -21,6 +23,22 @@ public class GameUser {
 
     public String getMyName() {
         return myName;
+    }
+
+    public String getFirstTurn() {
+        return firstTurn;
+    }
+
+    public void setFirstTurn(String userName){
+        this.firstTurn = userName;
+    }
+
+    public String getTurn() {
+        return turn;
+    }
+
+    public void setTurn(String userName){
+        this.turn = userName;
     }
 
     public String getEnemyName() {
