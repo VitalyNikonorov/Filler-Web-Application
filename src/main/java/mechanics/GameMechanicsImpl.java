@@ -106,17 +106,12 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
                 webSocketService.notifyGameOver(session.getFirst(), firstWin);
                 webSocketService.notifyGameOver(session.getSecond(), !firstWin);
 
-                Message upScore = new MsgUpScore(getAddress(), messageSystem.getAddressService().getAccountServiceAddress(), session.getFirst().getMyName(), session.getFirst().getMyScore(),
-                        session.getSecond().getMyName(), session.getFirst().getEnemyScore());
+                Message upScore = new MsgUpScore(getAddress(), messageSystem.getAddressService().getAccountServiceAddress(), session);
                 messageSystem.sendMessage(upScore);
 
                 //Message messageGetUser2 = new MsgUpScore(getAddress(), messageSystem.getAddressService().getAccountServiceAddress(), session.getSecond().getMyName(), session.getFirst().getMyScore());
                 //messageSystem.sendMessage(messageGetUser2);
-
-                nameToGame.remove(session.getFirst());
-                nameToGame.remove(session.getSecond());
-
-                allSessions.remove(session);
+                //allSessions.remove(session);
             }
         }
     }
@@ -125,6 +120,13 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
 
         dbService.updateScore(user);
 
+    }
+
+    public void removeGame(GameSession session){
+        System.out.println("Remove game " + session.getFirst().getMyName() + " - " + session.getSecond().getMyName());
+        nameToGame.remove(session.getFirst());
+        nameToGame.remove(session.getSecond());
+        allSessions.remove(session);
     }
 
     private void starGame(String first) {
