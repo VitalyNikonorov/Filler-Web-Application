@@ -1,5 +1,5 @@
 .loading{
-	background-color: #2980b9;
+	background-color: #5c1461;
 	height: 100%;
 	width: 100%;
 	position: fixed;
@@ -26,14 +26,12 @@
 .object{
 	width: 20px;
 	height: 20px;
-	background-color: #FFF;
+	background-color: #ff00ff;
 	margin-right: 20px;
 	float: left;
 	margin-bottom: 20px;
 	}
-.object:nth-child(3n+0) {
-	margin-right: 0px;
-}
+
 
 
 .object_one {
@@ -47,6 +45,7 @@
 .object_three {
     -webkit-animation: animate 1s -0.7s ease-in-out infinite ;
 	animation: animate 1s -0.7s ease-in-out infinite ;
+	margin-right: 0px;
 	}
 .object_four {
     -webkit-animation: animate 1s -0.6s ease-in-out infinite ;
@@ -59,6 +58,7 @@
 .object_six {
     -webkit-animation: animate 1s -0.4s ease-in-out infinite ;
 	animation: animate 1s -0.4s ease-in-out infinite ;
+	margin-right: 0px;
 	}
 .object_seven {
     -webkit-animation: animate 1s -0.3s ease-in-out infinite ;
@@ -71,6 +71,7 @@
 .object_nine {
     -webkit-animation: animate 1s -0.1s ease-in-out infinite ;
 	animation: animate 1s -0.1s ease-in-out infinite ;
+	margin-right: 0px;
 	}
 
 @-webkit-keyframes animate {

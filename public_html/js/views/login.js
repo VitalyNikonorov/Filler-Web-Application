@@ -14,7 +14,7 @@ define([
         model: usermodel,
         template: tmpl,
         className: "login-view",
-        events: {'click .submit': 'submit'},
+        events: {'submit': 'submit'},
         submit: function (event) {
             event.preventDefault();
             var result = $(".login-form").serializeObject();

@@ -20,6 +20,12 @@ define([
         render: function () {
             this.$el.html(this.template(this.board.toJSON()));
             return this;
+        },
+        hide: function () {
+            this.$el.hide();
+        },
+        show: function () {
+            this.$el.show();
         }
     });
 

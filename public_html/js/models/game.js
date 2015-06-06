@@ -25,13 +25,14 @@ define([
             }
             this.socket.onopen = this.open;
             this.socket.onmessage = this.message;
-            this.socket.onclose = this.console;         
+            this.socket.onclose = this.close;         
         },
         open: function() {
             self.trigger("socket:open");
         },
         close: function() {
             self.trigger("socket:close")
+            self.socket = undefined;
         },
         message: function(msg) {
             var data = JSON.parse(msg.data);
@@ -40,9 +41,10 @@ define([
                 self.trigger("game:start")
                 self.board.setBoard(data);
                 self.buttons.check(data);
+                alert("begin")
             } else if (data.status == "finish") {
                 self.board.stop();
-                self.trigger("game:stop");
+                self.trigger("game:stop", data);
 
             } else if (data.status !== undefined) {
                 self.board.step(data);

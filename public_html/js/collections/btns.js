@@ -2,12 +2,14 @@ define([
     'backbone',
     'models/btn',
     'models/game',
-    'underscore'
+    'underscore',
+    'models/user'
 ], function(
     Backbone,
     Btn,
     game,
-    _
+    _,
+    user
 ){
 
     var BtnCollection = Backbone.Collection.extend({
@@ -44,7 +46,8 @@ define([
         check: function (data) {
             _.forEach(this.models, function (val) {
                 if (val.get("id") == data.color1 ||
-                    val.get("id") == data.color2) {
+                    val.get("id") == data.color2 || 
+                    data.turn == user.get("name")) {
                     val.set({"disabled": true});
                 } else {
                     val.set({"disabled": false});

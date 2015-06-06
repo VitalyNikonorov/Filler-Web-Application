@@ -15,6 +15,7 @@ public class GameSession {
     private final GameUser first;
     private final GameUser second;
 
+    private boolean delMe = false;
     private GameUser turn;
 
     public void setTurn(GameUser turn) {
@@ -25,7 +26,6 @@ public class GameSession {
         return turn;
     }
 
-
     private boolean overStatus = false;
 
     private Map<String, GameUser> users = new HashMap<>();
@@ -34,7 +34,6 @@ public class GameSession {
         startTime = new Date().getTime();
         GameUser gameUser1 = new GameUser(user1);
         gameUser1.setEnemyName(user2);
-
 
         GameUser gameUser2 = new GameUser(user2);
         gameUser2.setEnemyName(user1);
@@ -83,4 +82,9 @@ public class GameSession {
 
     public boolean getOverStatus(){ return overStatus; };
 
+    public void setDelMe(){
+        this.delMe = true;
+    }
+
+    public boolean getDelMe(){ return delMe; };
 }

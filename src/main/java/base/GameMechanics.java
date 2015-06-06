@@ -14,4 +14,6 @@ public interface GameMechanics {
     public void move(String userName, int color);
 
     public void run();
+
+    public void delGame(String userName);
 }

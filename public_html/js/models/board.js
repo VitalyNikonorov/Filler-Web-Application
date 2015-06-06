@@ -17,20 +17,7 @@ define([
             this.set({
                 "playing": false
             })
-
-            // this.set({
-            //     'board': [[1,2,3,4,5,4,2,3,1],
-            //               [5,4,2,1,2,3,4,2,5],
-            //               [2,3,4,1,3,4,5,3,2],
-            //               [2,3,5,5,1,1,2,3,4],
-            //               [1,2,4,5,2,3,3,2,1],
-            //               [4,2,1,2,3,4,5,5,3],
-            //               [5,5,5,3,2,3,1,3,4],
-            //               [3,4,5,5,4,3,1,2,3],
-            //               [3,4,5,2,3,1,3,3,1]],
-            //     'width': 9,
-            //     'height': 9
-            // })            
+       
         },
         stop: function () {
             this.clear();
@@ -56,7 +43,9 @@ define([
                 "board": data.field,
                 "width": data.field[0].length,
                 "height": data.field.length,
-                "playing": true
+                "playing": true,
+                "user1": data.user1,
+                "user2": data.user2,
             });
             this.trigger("board:updated");
         }

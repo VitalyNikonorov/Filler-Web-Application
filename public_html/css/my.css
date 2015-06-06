@@ -66,17 +66,19 @@
   border-color: #ac26b5; }
   .button:hover {
     border-color: #d664de; }
-  .button span:nth-child(1) {
-    color: white; }
-  .button span:nth-child(2) {
+  .button__text__1 {
+    color: green; }
+  .button__text__2 {
     color: grey; }
+  .button__text__3 {
+    color: green; }
   .button_red:hover {
     border-color: #E9001E; }
   .button_green:hover {
     border-color: #73E81F; }
   .button_blue:hover {
     border-color: #2B428E; }
-  .button span {
+  .button__text {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-style: normal;
     font-variant: normal;
@@ -91,11 +93,11 @@
   border-style: none;
   height: 65px;
   display: inline-block; }
-  .button span {
+  .button__text, .button__text__1, .button__text__2, .button__text__3 {
     position: absolute;
     box-sizing: border-box;
     display: block; }
-  .button > span > span:nth-child(3), .button:before, .button:after, .button > :first-child, .button > :first-child:before, .button > :first-child:after {
+  .button__text__3, .button:before, .button:after, .button > :first-child, .button > :first-child:before, .button > :first-child:after {
     border-color: inherit;
     display: block;
     -moz-transition: border-color 0.3s ease;
@@ -107,9 +109,9 @@
     position: absolute;
     box-sizing: border-box;
     content: ' '; }
-  .button > span > span:nth-child(3), .button:before, .button:after, .button > :first-child:before, .button > :first-child:after {
+  .button__text__3, .button:before, .button:after, .button > :first-child:before, .button > :first-child:after {
     border-width: 3px; }
-  .button > span > span:nth-child(3) {
+  .button__text__3 {
     border-radius: 3px; }
   .button:before {
     border-radius: 3px 0 0 3px; }
@@ -124,25 +126,25 @@
     left: 0;
     width: inherit;
     height: inherit; }
-  .button > span span {
+  .button__text_d {
     width: inherit;
     text-align: center;
     -moz-transition: opacity 0.6s ease, top 0.5s ease;
     -webkit-transition: opacity 0.6s ease, top 0.5s ease;
     transition: opacity 0.6s ease, top 0.5s ease; }
-  .button > span > span:nth-child(1) {
+  .button__text__1 {
     opacity: 1;
     top: 18px; }
-  .button > span > span:nth-child(2) {
+  .button__text__2 {
     top: 37px;
     opacity: 0; }
-  .button:hover > span > span:nth-child(1) {
+  .button:hover .button__text__1 {
     opacity: 0;
     top: 2px; }
-  .button:hover > span > span:nth-child(2) {
+  .button:hover .button__text__2 {
     opacity: 1;
     top: 18px; }
-  .button > span > span:nth-child(3) {
+  .button__text__3 {
     top: 28%;
     height: 44%;
     width: inherit;
@@ -568,19 +570,6 @@
     opacity: 0.5;
     background: #CCC; }
 
-/*!
-Pure v0.6.0
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-https://github.com/yahoo/pure/blob/master/LICENSE.md
-*/
-/*csslint box-model:false*/
-/*
-Box-model set to false because we're setting a height on select elements, which
-also have border and padding. This is done because some browsers don't render
-the padding. We explicitly set the box-model for select elements to border-box,
-so we can ignore the csslint warning.
-*/
 .form-control {
   display: block;
   width: 100%;
@@ -608,37 +597,22 @@ so we can ignore the csslint warning.
 .pure-form {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 200; }
+  .pure-form__input_text, .pure-form__input_pass, .pure-form__input_email {
+    padding: 0.5em 0.6em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    vertical-align: middle;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: block;
+    margin: 0.25em 0; }
+    .pure-form__input_text:focus, .pure-form__input_pass:focus, .pure-form__input_email:focus {
+      outline: 0;
+      border-color: #129FEA; }
 
-.pure-form input[type="text"],
-.pure-form input[type="password"],
-.pure-form input[type="email"],
-.pure-form input[type="url"],
-.pure-form input[type="date"],
-.pure-form input[type="month"],
-.pure-form input[type="time"],
-.pure-form input[type="datetime"],
-.pure-form input[type="datetime-local"],
-.pure-form input[type="week"],
-.pure-form input[type="number"],
-.pure-form input[type="search"],
-.pure-form input[type="tel"],
-.pure-form input[type="color"],
-.pure-form select,
-.pure-form textarea {
-  padding: 0.5em 0.6em;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-shadow: inset 0 1px 3px #ddd;
-  border-radius: 4px;
-  vertical-align: middle;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box; }
-
-/*
-Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
-since IE8 won't execute CSS that contains a CSS3 selector.
-*/
 .pure-form input:not([type]) {
   padding: 0.5em 0.6em;
   display: inline-block;
@@ -649,106 +623,9 @@ since IE8 won't execute CSS that contains a CSS3 selector.
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-/* Chrome (as of v.32/34 on OS X) needs additional room for color to display. */
-/* May be able to remove this tweak as color inputs become more standardized across browsers. */
-.pure-form input[type="color"] {
-  padding: 0.2em 0.5em; }
-
-.pure-form input[type="text"]:focus,
-.pure-form input[type="password"]:focus,
-.pure-form input[type="email"]:focus,
-.pure-form input[type="url"]:focus,
-.pure-form input[type="date"]:focus,
-.pure-form input[type="month"]:focus,
-.pure-form input[type="time"]:focus,
-.pure-form input[type="datetime"]:focus,
-.pure-form input[type="datetime-local"]:focus,
-.pure-form input[type="week"]:focus,
-.pure-form input[type="number"]:focus,
-.pure-form input[type="search"]:focus,
-.pure-form input[type="tel"]:focus,
-.pure-form input[type="color"]:focus,
-.pure-form select:focus,
-.pure-form textarea:focus {
-  outline: 0;
-  border-color: #129FEA; }
-
-/*
-Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
-since IE8 won't execute CSS that contains a CSS3 selector.
-*/
 .pure-form input:not([type]):focus {
   outline: 0;
   border-color: #129FEA; }
-
-.pure-form input[type="file"]:focus,
-.pure-form input[type="radio"]:focus,
-.pure-form input[type="checkbox"]:focus {
-  outline: thin solid #129FEA;
-  outline: 1px auto #129FEA; }
-
-.pure-form .pure-checkbox,
-.pure-form .pure-radio {
-  margin: 0.5em 0;
-  display: block; }
-
-.pure-form input[type="text"][disabled],
-.pure-form input[type="password"][disabled],
-.pure-form input[type="email"][disabled],
-.pure-form input[type="url"][disabled],
-.pure-form input[type="date"][disabled],
-.pure-form input[type="month"][disabled],
-.pure-form input[type="time"][disabled],
-.pure-form input[type="datetime"][disabled],
-.pure-form input[type="datetime-local"][disabled],
-.pure-form input[type="week"][disabled],
-.pure-form input[type="number"][disabled],
-.pure-form input[type="search"][disabled],
-.pure-form input[type="tel"][disabled],
-.pure-form input[type="color"][disabled],
-.pure-form select[disabled],
-.pure-form textarea[disabled] {
-  cursor: not-allowed;
-  background-color: #eaeded;
-  color: #cad2d3; }
-
-/*
-Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
-since IE8 won't execute CSS that contains a CSS3 selector.
-*/
-.pure-form input:not([type])[disabled] {
-  cursor: not-allowed;
-  background-color: #eaeded;
-  color: #cad2d3; }
-
-.pure-form input[readonly],
-.pure-form select[readonly],
-.pure-form textarea[readonly] {
-  background-color: #eee;
-  /* menu hover bg color */
-  color: #777;
-  /* menu text color */
-  border-color: #ccc; }
-
-.pure-form input:focus:invalid,
-.pure-form textarea:focus:invalid,
-.pure-form select:focus:invalid {
-  color: #b94a48;
-  border-color: #e9322d; }
-
-.pure-form input[type="file"]:focus:invalid:focus,
-.pure-form input[type="radio"]:focus:invalid:focus,
-.pure-form input[type="checkbox"]:focus:invalid:focus {
-  outline-color: #e9322d; }
-
-.pure-form select {
-  /* Normalizes the height; padding is not sufficient. */
-  height: 2.25em;
-  border: 1px solid #ccc;
-  background-color: white; }
-
-.pure-form select[multiple] {
-  height: auto; }
 
 .pure-form label {
   margin: 0.5em 0 0.2em;
@@ -769,202 +646,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
   color: #333;
   border-bottom: 1px solid #e5e5e5; }
 
-.pure-form-stacked input[type="text"],
-.pure-form-stacked input[type="password"],
-.pure-form-stacked input[type="email"],
-.pure-form-stacked input[type="url"],
-.pure-form-stacked input[type="date"],
-.pure-form-stacked input[type="month"],
-.pure-form-stacked input[type="time"],
-.pure-form-stacked input[type="datetime"],
-.pure-form-stacked input[type="datetime-local"],
-.pure-form-stacked input[type="week"],
-.pure-form-stacked input[type="number"],
-.pure-form-stacked input[type="search"],
-.pure-form-stacked input[type="tel"],
-.pure-form-stacked input[type="color"],
-.pure-form-stacked input[type="file"],
-.pure-form-stacked select,
-.pure-form-stacked label,
-.pure-form-stacked textarea {
-  display: block;
-  margin: 0.25em 0; }
-
-/*
-Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
-since IE8 won't execute CSS that contains a CSS3 selector.
-*/
-.pure-form-stacked input:not([type]) {
-  display: block;
-  margin: 0.25em 0; }
-
-.pure-form-aligned input,
-.pure-form-aligned textarea,
-.pure-form-aligned select,
-.pure-form-aligned .pure-help-inline,
-.pure-form-message-inline {
-  display: inline-block;
-  *display: inline;
-  *zoom: 1;
-  vertical-align: middle; }
-
-.pure-form-aligned textarea {
-  vertical-align: top; }
-
-/* Aligned Forms */
-.pure-form-aligned .pure-control-group {
-  margin-bottom: 0.5em; }
-
-.pure-form-aligned .pure-control-group label {
-  text-align: right;
-  display: inline-block;
-  vertical-align: middle;
-  width: 100%;
-  margin: 0 1em 0 0; }
-
-.pure-form-aligned .pure-controls {
-  margin: 1.5em 0 0 11em; }
-
-/* Rounded Inputs */
-.pure-form input.pure-input-rounded,
-.pure-form .pure-input-rounded {
-  border-radius: 2em;
-  padding: 0.5em 1em; }
-
-/* Grouped Inputs */
-.pure-form .pure-group fieldset {
-  margin-bottom: 10px; }
-
-.pure-form .pure-group input,
-.pure-form .pure-group textarea {
-  display: block;
-  padding: 10px;
-  margin: 0 0 -1px;
-  border-radius: 0;
-  position: relative;
-  top: -1px; }
-
-.pure-form .pure-group input:focus,
-.pure-form .pure-group textarea:focus {
-  z-index: 3; }
-
-.pure-form .pure-group input:first-child,
-.pure-form .pure-group textarea:first-child {
-  top: 1px;
-  border-radius: 4px 4px 0 0;
-  margin: 0; }
-
-.pure-form .pure-group input:first-child:last-child,
-.pure-form .pure-group textarea:first-child:last-child {
-  top: 1px;
-  border-radius: 4px;
-  margin: 0; }
-
-.pure-form .pure-group input:last-child,
-.pure-form .pure-group textarea:last-child {
-  top: -2px;
-  border-radius: 0 0 4px 4px;
-  margin: 0; }
-
-.pure-form .pure-group button {
-  margin: 0.35em 0; }
-
-.pure-form .pure-input-1 {
-  width: 100%; }
-
-.pure-form .pure-input-2-3 {
-  width: 66%; }
-
-.pure-form .pure-input-1-2 {
-  width: 50%; }
-
-.pure-form .pure-input-1-3 {
-  width: 33%; }
-
-.pure-form .pure-input-1-4 {
-  width: 25%; }
-
-/* Inline help for forms */
-/* NOTE: pure-help-inline is deprecated. Use .pure-form-message-inline instead. */
-.pure-form .pure-help-inline,
-.pure-form-message-inline {
-  display: inline-block;
-  padding-left: 0.3em;
-  color: #666;
-  vertical-align: middle;
-  font-size: 0.875em; }
-
-/* Block help for forms */
-.pure-form-message {
-  display: block;
-  color: #666;
-  font-size: 0.875em; }
-
-@media only screen and (max-width: 480px) {
-  .pure-form button[type="submit"] {
-    margin: 0.7em 0 0; }
-
-  .pure-form input:not([type]),
-  .pure-form input[type="text"],
-  .pure-form input[type="password"],
-  .pure-form input[type="email"],
-  .pure-form input[type="url"],
-  .pure-form input[type="date"],
-  .pure-form input[type="month"],
-  .pure-form input[type="time"],
-  .pure-form input[type="datetime"],
-  .pure-form input[type="datetime-local"],
-  .pure-form input[type="week"],
-  .pure-form input[type="number"],
-  .pure-form input[type="search"],
-  .pure-form input[type="tel"],
-  .pure-form input[type="color"],
-  .pure-form label {
-    margin-bottom: 0.3em;
-    display: block; }
-
-  .pure-group input:not([type]),
-  .pure-group input[type="text"],
-  .pure-group input[type="password"],
-  .pure-group input[type="email"],
-  .pure-group input[type="url"],
-  .pure-group input[type="date"],
-  .pure-group input[type="month"],
-  .pure-group input[type="time"],
-  .pure-group input[type="datetime"],
-  .pure-group input[type="datetime-local"],
-  .pure-group input[type="week"],
-  .pure-group input[type="number"],
-  .pure-group input[type="search"],
-  .pure-group input[type="tel"],
-  .pure-group input[type="color"] {
-    margin-bottom: 0; }
-
-  .pure-form-aligned .pure-control-group label {
-    margin-bottom: 0.3em;
-    text-align: left;
-    display: block;
-    width: 100%; }
-
-  .pure-form-aligned .pure-controls {
-    margin: 1.5em 0 0 0; }
-
-  /* NOTE: pure-help-inline is deprecated. Use .pure-form-message-inline instead. */
-  .pure-form .pure-help-inline,
-  .pure-form-message-inline,
-  .pure-form-message {
-    display: block;
-    font-size: 0.75em;
-    /* Increased bottom padding to make it group with its related input element. */
-    padding: 0.2em 0 0.8em; } }
-/*!
-Pure v0.6.0
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-https://github.com/yahoo/pure/blob/master/LICENSE.md
-*/
 .pure-table {
-  /* Remove spacing between table cells (from Normalize.css) */
   border-collapse: collapse;
   border-spacing: 0;
   empty-cells: show;
@@ -993,83 +675,24 @@ https://github.com/yahoo/pure/blob/master/LICENSE.md
   padding: 0.5em 1em;
   /* cell padding */ }
 
-/* Consider removing this next declaration block, as it causes problems when
-there's a rowspan on the first cell. Case added to the tests. issue#432 */
-.pure-table td:first-child,
-.pure-table th:first-child {
-  border-left-width: 0; }
-
 .pure-table thead {
   background-color: #d664de;
   color: #FFF;
   text-align: left;
   vertical-align: bottom; }
 
-/*
-striping:
-   even - #fff (white)
-   odd  - #f2f2f2 (light gray)
-*/
 .pure-table td {
   background-color: transparent;
   color: #FFF; }
 
-.pure-table-odd td {
-  background-color: #f2f2f2; }
-
-/* nth-child selector for modern browsers */
-.pure-table-striped tr:nth-child(2n-1) td {
-  background-color: #f2f2f2; }
-
-/* BORDERED TABLES */
-.pure-table-bordered td {
-  border-bottom: 1px solid #d664de; }
-
-.pure-table-bordered tbody > tr:last-child > td {
-  border-bottom-width: 0; }
-
-/* HORIZONTAL BORDERED TABLES */
 .pure-table-horizontal td,
 .pure-table-horizontal th {
   border-width: 0 0 1px 0;
   border-bottom: 1px solid #d664de; }
 
-.pure-table-horizontal tbody > tr:last-child > td {
-  border-bottom-width: 0; }
-
 body {
   background-color: #5c1461;
   font-color: #73E81F; }
-
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  /* for demo only */
-  margin: 8px; }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-  font-family: inherit;
-  font-weight: bold;
-  color: inherit;
-  text-rendering: optimizelegibility; }
-
-h4 {
-  font-size: 14px; }
-
-h4, h5, h6 {
-  line-height: 18px; }
-
-p {
-  margin: 0 0 9px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  line-height: 18px; }
 
 .close {
   float: right;
@@ -1128,15 +751,8 @@ p {
   padding-top: 14px;
   padding-bottom: 14px; }
 
-.alert-block > p,
-.alert-block > ul {
-  margin-bottom: 0; }
-
-.alert-block p + p {
-  margin-top: 5px; }
-
 .loading {
-  background-color: #2980b9;
+  background-color: #5c1461;
   height: 100%;
   width: 100%;
   position: fixed;
@@ -1161,13 +777,10 @@ p {
 .object {
   width: 20px;
   height: 20px;
-  background-color: #FFF;
+  background-color: #ff00ff;
   margin-right: 20px;
   float: left;
   margin-bottom: 20px; }
-
-.object:nth-child(3n+0) {
-  margin-right: 0px; }
 
 .object_one {
   -webkit-animation: animate 1s -0.9s ease-in-out infinite;
@@ -1179,7 +792,8 @@ p {
 
 .object_three {
   -webkit-animation: animate 1s -0.7s ease-in-out infinite;
-  animation: animate 1s -0.7s ease-in-out infinite; }
+  animation: animate 1s -0.7s ease-in-out infinite;
+  margin-right: 0px; }
 
 .object_four {
   -webkit-animation: animate 1s -0.6s ease-in-out infinite;
@@ -1191,7 +805,8 @@ p {
 
 .object_six {
   -webkit-animation: animate 1s -0.4s ease-in-out infinite;
-  animation: animate 1s -0.4s ease-in-out infinite; }
+  animation: animate 1s -0.4s ease-in-out infinite;
+  margin-right: 0px; }
 
 .object_seven {
   -webkit-animation: animate 1s -0.3s ease-in-out infinite;
@@ -1203,7 +818,8 @@ p {
 
 .object_nine {
   -webkit-animation: animate 1s -0.1s ease-in-out infinite;
-  animation: animate 1s -0.1s ease-in-out infinite; }
+  animation: animate 1s -0.1s ease-in-out infinite;
+  margin-right: 0px; }
 
 @-webkit-keyframes animate {
   50% {

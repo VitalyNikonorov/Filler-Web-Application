@@ -34,6 +34,12 @@ define([
             _.forEach(this.views, function(val) {
                 this.$el.append(val.$el);
             }, this)
+        },
+        hide: function () {
+            this.$el.hide();
+        },
+        show: function () {
+            this.$el.show();
         }
     });
     return new View ();

@@ -120,14 +120,16 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
 
                 Message upScore = new MsgUpScore(getAddress(), messageSystem.getAddressService().getAccountServiceAddress(), session);
                 messageSystem.sendMessage(upScore);
+                session.setDelMe();
+            }
+            if ( session.getDelMe() == true ){
+                allSessions.remove(session);
             }
         }
     }
 
     public void upScore(UserDataSet user){
-
         dbService.updateScore(user);
-
     }
 
     public void removeGame(GameSession session){
@@ -136,6 +138,8 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
         nameToGame.remove(session.getSecond());
         allSessions.remove(session);
     }
+
+
 
     private void starGame(String first) {
         String second = waiter;
@@ -182,6 +186,10 @@ public class GameMechanicsImpl implements GameMechanics, Abonent, Runnable {
 
     public Integer[][] getGameFuild(){
         return gameField;
+    }
+
+    public void delGame(String userName){
+        nameToGame.remove(userName);
     }
 
 }

@@ -28,7 +28,7 @@ define([
         },
         render: function(args) {
             if (typeof(args)==='undefined') args = {};
-            this.$el.html( this.template(args) );
+            this.$el.html( this.template(JSON.stringify(JSON.parse(args)["body"]["error"])) );
         },
         show: function () {
             this.$el.show();
@@ -47,15 +47,15 @@ define([
             });
         },
         user_load: function () {
-            this.rerender();
+            this.views["mainView"].render();
+            this.views["profileView"].render();
             window.setTimeout( function(){
                  window.location = "#";
              }, 200 );
         },
         rerender: function() {
-            _.forEach(this.views, function (arg) {
-                arg.render();
-            });
+           this.views["mainView"].render();
+            this.views["profileView"].render();
         },
         login_error: function (data) {
             this.render(JSON.stringify(data))

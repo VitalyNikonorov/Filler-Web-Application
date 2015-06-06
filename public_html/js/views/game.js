@@ -28,35 +28,50 @@ define([
             this.listenTo(this.game, "game:updated", this.step)
             this.listenTo(this.buttons, "color:selected", this.game.step)
             this.listenTo(this.game, "game:stop", this.stop)
-            // this.render();
-            this.$el.html( this.template() );
-            this.boardDOM = this.$(".board");
-            this.buttonsDOM = this.$(".buttons");
-            this.buttonsDOM.append(this.buttons.$el)
-            this.boardDOM.html(this.board.render().$el)
-            this.hide();
+            this.render();
+            
+            //this.hide();
+            this.board.hide();
+            this.buttons.hide();
         },
-        stop: function () {
-            $(".ready").show();  
+        stop: function (msg) {
+            if(msg["win"]) {
+                alert("win");
+            } else {
+                alert("lose")
+            }
+            $(".ready").show(); 
+            this.board.hide(); 
+            this.buttons.hide();
         },
         ready: function () {
+            alert("ready")
             $.ajax({
                 method: 'POST',
                 url: "/game.html",
                 dataType: 'json',
                 context: this
-            }).done(function() {
+            }).done(function(data) {
+                console.log(data)
                 this.game.connect();
             }).fail(function(data) {
+                console.log(data);
                 this.game.connect();
             });
         },
         render: function () {
-            
+            this.$el.html( this.template() );
+            this.boardDOM = this.$(".board");
+            this.buttonsDOM = this.$(".buttons");
+            this.buttonsDOM.html(this.buttons.$el)
+            this.boardDOM.html(this.board.render().$el);
         },
         step: function () {
             $(".ready").hide();
-            this.boardDOM.html(this.board.render().$el);
+            this.board.show();
+            this.buttons.show();
+            this.board.render();
+            
         },
         show: function () {
             this.trigger("show", this);

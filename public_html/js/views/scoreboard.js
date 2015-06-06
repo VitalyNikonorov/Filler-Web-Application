@@ -16,10 +16,11 @@ define([
             this.hide();
         },
         render: function () {
-            this.scores.fetch()
+            this.scores.fetch();
             this.$el.html( this.template(this.scores.toJSON()));
         },
         show: function () {
+            this.render();
             this.trigger('show', this);
             this.$el.show();
         },
