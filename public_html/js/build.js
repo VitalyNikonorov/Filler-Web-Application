@@ -13155,7 +13155,7 @@ define("backbone", ["underscore","jquery"], (function (global) {
     };
 }(this)));
 
-define('tmpl/main',[],function () { return function (__fest_context){"use strict";var __fest_self=this,__fest_buf="",__fest_chunks=[],__fest_chunk,__fest_attrs=[],__fest_select,__fest_if,__fest_iterator,__fest_to,__fest_fn,__fest_html="",__fest_blocks={},__fest_params,__fest_element,__fest_debug_file="",__fest_debug_line="",__fest_debug_block="",__fest_htmlchars=/[&<>"]/g,__fest_htmlchars_test=/[&<>"]/,__fest_short_tags = {"area":true,"base":true,"br":true,"col":true,"command":true,"embed":true,"hr":true,"img":true,"input":true,"keygen":true,"link":true,"meta":true,"param":true,"source":true,"wbr":true},__fest_element_stack = [],__fest_htmlhash={"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"},__fest_jschars=/[\\'"\/\n\r\t\b\f<>]/g,__fest_jschars_test=/[\\'"\/\n\r\t\b\f<>]/,__fest_jshash={"\"":"\\\"","\\":"\\\\","/":"\\/","\n":"\\n","\r":"\\r","\t":"\\t","\b":"\\b","\f":"\\f","'":"\\'","<":"\\u003C",">":"\\u003E"},___fest_log_error;if(typeof __fest_error === "undefined"){___fest_log_error = (typeof console !== "undefined" && console.error) ? function(){return Function.prototype.apply.call(console.error, console, arguments)} : function(){};}else{___fest_log_error=__fest_error};function __fest_log_error(msg){___fest_log_error(msg+"\nin block \""+__fest_debug_block+"\" at line: "+__fest_debug_line+"\nfile: "+__fest_debug_file)}function __fest_replaceHTML(chr){return __fest_htmlhash[chr]}function __fest_replaceJS(chr){return __fest_jshash[chr]}function __fest_extend(dest, src){for(var i in src)if(src.hasOwnProperty(i))dest[i]=src[i];}function __fest_param(fn){fn.param=true;return fn}function __fest_call(fn, params,cp){if(cp)for(var i in params)if(typeof params[i]=="function"&&params[i].param)params[i]=params[i]();return fn.call(__fest_self,params)}function __fest_escapeJS(s){if (typeof s==="string") {if (__fest_jschars_test.test(s))return s.replace(__fest_jschars,__fest_replaceJS);} else if (typeof s==="undefined")return "";return s;}function __fest_escapeHTML(s){if (typeof s==="string") {if (__fest_htmlchars_test.test(s))return s.replace(__fest_htmlchars,__fest_replaceHTML);} else if (typeof s==="undefined")return "";return s;}var json=__fest_context;__fest_buf+=("<div class=\"grid__row\"><div class=\"grid__module grid__module_col_4 grid__module_span_1\"><div class=\"header header-welcome\">");try{__fest_if=json}catch(e){__fest_if=false;__fest_log_error(e.message);}if(__fest_if){__fest_buf+=("Welcome back, ");try{__fest_buf+=(__fest_escapeHTML(json))}catch(e){__fest_log_error(e.message + "7");}__fest_buf+=("!");}else{__fest_buf+=("Welcome, friend!");}__fest_buf+=("</div><a href=\"#scoreboard\" class=\"button\"><div class=\"button__text\"><div class=\"button__text__1 button__text_d\"></div><div class=\"button__text__2 button__text_d\"></div><div class=\"button__text__3 button__text_d\">Score board</div></div></a><br/><a href=\"#game\" class=\"button button_green\"><div class=\"button__text\"><div class=\"button__text__1 button__text_d\"></div><div class=\"button__text__2 button__text_d\"></div><div class=\"button__text__3 button__text_d\">Game</div></div></a><br/>");try{__fest_if=json}catch(e){__fest_if=false;__fest_log_error(e.message);}if(__fest_if){__fest_buf+=("<a class=\"button button_green button-logout\"><div class=\"button__text\"><div class=\"button__text__1 button__text_d\"></div><div class=\"button__text__2 button__text_d\"></div><div class=\"button__text__3 button__text_d\">Log out</div></div></a><br/><a href=\"#profile\" class=\"button button_blue\"><div class=\"button__text\"><div class=\"button__text__1 button__text_d\"></div><div class=\"button__text__2 button__text_d\"></div><div class=\"button__text__3 button__text_d\">Profile</div></div></a><br/>");}else{__fest_buf+=("<a href=\"#login\" class=\"button button_blue\"><div class=\"button__text\"><div class=\"button__text__1 button__text_d\"></div><div class=\"button__text__2 button__text_d\"></div><div class=\"button__text__3 button__text_d\">Log in</div></div></a><br/><a href=\"#registration\" class=\"button button_blue\"><div class=\"button__text\"><div class=\"button__text__1 button__text_d\"></div><div class=\"button__text__2 button__text_d\"></div><div class=\"button__text__3 button__text_d\">Registration</div></div></a>");}__fest_buf+=("</div></div>");__fest_to=__fest_chunks.length;if (__fest_to) {__fest_iterator = 0;for (;__fest_iterator<__fest_to;__fest_iterator++) {__fest_chunk=__fest_chunks[__fest_iterator];if (typeof __fest_chunk==="string") {__fest_html+=__fest_chunk;} else {__fest_fn=__fest_blocks[__fest_chunk.name];if (__fest_fn) __fest_html+=__fest_call(__fest_fn,__fest_chunk.params,__fest_chunk.cp);}}return __fest_html+__fest_buf;} else {return __fest_buf;}} ; });
+define('tmpl/main',[],function () { return function (__fest_context){"use strict";var __fest_self=this,__fest_buf="",__fest_chunks=[],__fest_chunk,__fest_attrs=[],__fest_select,__fest_if,__fest_iterator,__fest_to,__fest_fn,__fest_html="",__fest_blocks={},__fest_params,__fest_element,__fest_debug_file="",__fest_debug_line="",__fest_debug_block="",__fest_htmlchars=/[&<>"]/g,__fest_htmlchars_test=/[&<>"]/,__fest_short_tags = {"area":true,"base":true,"br":true,"col":true,"command":true,"embed":true,"hr":true,"img":true,"input":true,"keygen":true,"link":true,"meta":true,"param":true,"source":true,"wbr":true},__fest_element_stack = [],__fest_htmlhash={"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"},__fest_jschars=/[\\'"\/\n\r\t\b\f<>]/g,__fest_jschars_test=/[\\'"\/\n\r\t\b\f<>]/,__fest_jshash={"\"":"\\\"","\\":"\\\\","/":"\\/","\n":"\\n","\r":"\\r","\t":"\\t","\b":"\\b","\f":"\\f","'":"\\'","<":"\\u003C",">":"\\u003E"},___fest_log_error;if(typeof __fest_error === "undefined"){___fest_log_error = (typeof console !== "undefined" && console.error) ? function(){return Function.prototype.apply.call(console.error, console, arguments)} : function(){};}else{___fest_log_error=__fest_error};function __fest_log_error(msg){___fest_log_error(msg+"\nin block \""+__fest_debug_block+"\" at line: "+__fest_debug_line+"\nfile: "+__fest_debug_file)}function __fest_replaceHTML(chr){return __fest_htmlhash[chr]}function __fest_replaceJS(chr){return __fest_jshash[chr]}function __fest_extend(dest, src){for(var i in src)if(src.hasOwnProperty(i))dest[i]=src[i];}function __fest_param(fn){fn.param=true;return fn}function __fest_call(fn, params,cp){if(cp)for(var i in params)if(typeof params[i]=="function"&&params[i].param)params[i]=params[i]();return fn.call(__fest_self,params)}function __fest_escapeJS(s){if (typeof s==="string") {if (__fest_jschars_test.test(s))return s.replace(__fest_jschars,__fest_replaceJS);} else if (typeof s==="undefined")return "";return s;}function __fest_escapeHTML(s){if (typeof s==="string") {if (__fest_htmlchars_test.test(s))return s.replace(__fest_htmlchars,__fest_replaceHTML);} else if (typeof s==="undefined")return "";return s;}var json=__fest_context;__fest_buf+=("<div class=\"grid__row\"><div class=\"grid__module grid__module_col_4 grid__module_span_1\"><div class=\"header header-welcome\">");try{__fest_if=json}catch(e){__fest_if=false;__fest_log_error(e.message);}if(__fest_if){__fest_buf+=("Welcome back, ");try{__fest_buf+=(__fest_escapeHTML(json))}catch(e){__fest_log_error(e.message + "7");}__fest_buf+=("!");}else{__fest_buf+=("Welcome, friend!");}__fest_buf+=("</div><a href=\"#scoreboard\" class=\"button\"><div class=\"button__text\"><div class=\"button__text__1 button__text_d\"></div><div class=\"button__text__2 button__text_d\"></div><div class=\"button__text__3 button__text_d\">Scoreboard</div></div></a><br/><a href=\"#game\" class=\"button button_green\"><div class=\"button__text\"><div class=\"button__text__1 button__text_d\"></div><div class=\"button__text__2 button__text_d\"></div><div class=\"button__text__3 button__text_d\">Game</div></div></a><br/>");try{__fest_if=json}catch(e){__fest_if=false;__fest_log_error(e.message);}if(__fest_if){__fest_buf+=("<a class=\"button button_green button-logout\"><div class=\"button__text\"><div class=\"button__text__1 button__text_d\"></div><div class=\"button__text__2 button__text_d\"></div><div class=\"button__text__3 button__text_d\">Log out</div></div></a><br/><a href=\"#profile\" class=\"button button_blue\"><div class=\"button__text\"><div class=\"button__text__1 button__text_d\"></div><div class=\"button__text__2 button__text_d\"></div><div class=\"button__text__3 button__text_d\">Profile</div></div></a><br/>");}else{__fest_buf+=("<a href=\"#login\" class=\"button button_blue\"><div class=\"button__text\"><div class=\"button__text__1 button__text_d\"></div><div class=\"button__text__2 button__text_d\"></div><div class=\"button__text__3 button__text_d\">Log in</div></div></a><br/><a href=\"#registration\" class=\"button button_blue\"><div class=\"button__text\"><div class=\"button__text__1 button__text_d\"></div><div class=\"button__text__2 button__text_d\"></div><div class=\"button__text__3 button__text_d\">Registration</div></div></a>");}__fest_buf+=("</div></div>");__fest_to=__fest_chunks.length;if (__fest_to) {__fest_iterator = 0;for (;__fest_iterator<__fest_to;__fest_iterator++) {__fest_chunk=__fest_chunks[__fest_iterator];if (typeof __fest_chunk==="string") {__fest_html+=__fest_chunk;} else {__fest_fn=__fest_blocks[__fest_chunk.name];if (__fest_fn) __fest_html+=__fest_call(__fest_fn,__fest_chunk.params,__fest_chunk.cp);}}return __fest_html+__fest_buf;} else {return __fest_buf;}} ; });
 define('syncs/user_sync',[
     'jquery',
 	'backbone',
@@ -13177,6 +13177,7 @@ define('syncs/user_sync',[
 					}).done(function (data){
 						if (data.status == 200) {
 							model.login(data);
+							window.setTimeout( function(){}, 200 )
 							model.trigger("user:load");
 						} else {
 							model.clear();
@@ -13476,12 +13477,14 @@ define('collections/btns',[
     'backbone',
     'models/btn',
     'models/game',
-    'underscore'
+    'underscore',
+    'models/user'
 ], function(
     Backbone,
     Btn,
     game,
-    _
+    _,
+    user
 ){
 
     var BtnCollection = Backbone.Collection.extend({
@@ -13518,7 +13521,8 @@ define('collections/btns',[
         check: function (data) {
             _.forEach(this.models, function (val) {
                 if (val.get("id") == data.color1 ||
-                    val.get("id") == data.color2) {
+                    val.get("id") == data.color2 || 
+                    data.turn != user.get("name")) {
                     val.set({"disabled": true});
                 } else {
                     val.set({"disabled": false});
@@ -13550,20 +13554,7 @@ define('models/board',[
             this.set({
                 "playing": false
             })
-
-            // this.set({
-            //     'board': [[1,2,3,4,5,4,2,3,1],
-            //               [5,4,2,1,2,3,4,2,5],
-            //               [2,3,4,1,3,4,5,3,2],
-            //               [2,3,5,5,1,1,2,3,4],
-            //               [1,2,4,5,2,3,3,2,1],
-            //               [4,2,1,2,3,4,5,5,3],
-            //               [5,5,5,3,2,3,1,3,4],
-            //               [3,4,5,5,4,3,1,2,3],
-            //               [3,4,5,2,3,1,3,3,1]],
-            //     'width': 9,
-            //     'height': 9
-            // })            
+       
         },
         stop: function () {
             this.clear();
@@ -13589,7 +13580,9 @@ define('models/board',[
                 "board": data.field,
                 "width": data.field[0].length,
                 "height": data.field.length,
-                "playing": true
+                "playing": true,
+                "user1": data.user1,
+                "user2": data.user2,
             });
             this.trigger("board:updated");
         }
@@ -13620,28 +13613,28 @@ define('models/game',[
         },
         connect: function () {
             if (this.socket === undefined) {
-                this.socket = new WebSocket("ws://91.215.138.197:80/gameplay");
+                this.socket = new WebSocket("ws://localhost:8080/gameplay");
             }
             this.socket.onopen = this.open;
             this.socket.onmessage = this.message;
-            this.socket.onclose = this.console;         
+            this.socket.onclose = this.close;         
         },
         open: function() {
             self.trigger("socket:open");
         },
         close: function() {
             self.trigger("socket:close")
+            self.socket = undefined;
         },
         message: function(msg) {
             var data = JSON.parse(msg.data);
-            console.log(data);
             if (data.status == "start") {
                 self.trigger("game:start")
                 self.board.setBoard(data);
                 self.buttons.check(data);
             } else if (data.status == "finish") {
                 self.board.stop();
-                self.trigger("game:stop");
+                self.trigger("game:stop", data);
 
             } else if (data.status !== undefined) {
                 self.board.step(data);
@@ -13679,6 +13672,12 @@ define('views/board',[
         render: function () {
             this.$el.html(this.template(this.board.toJSON()));
             return this;
+        },
+        hide: function () {
+            this.$el.hide();
+        },
+        show: function () {
+            this.$el.show();
         }
     });
 
@@ -13758,24 +13757,33 @@ define('views/btns',[
             _.forEach(this.views, function(val) {
                 this.$el.append(val.$el);
             }, this)
+        },
+        hide: function () {
+            this.$el.hide();
+        },
+        show: function () {
+            this.$el.show();
         }
     });
     return new View ();
 });
+define('tmpl/success',[],function () { return function (__fest_context){"use strict";var __fest_self=this,__fest_buf="",__fest_chunks=[],__fest_chunk,__fest_attrs=[],__fest_select,__fest_if,__fest_iterator,__fest_to,__fest_fn,__fest_html="",__fest_blocks={},__fest_params,__fest_element,__fest_debug_file="",__fest_debug_line="",__fest_debug_block="",__fest_htmlchars=/[&<>"]/g,__fest_htmlchars_test=/[&<>"]/,__fest_short_tags = {"area":true,"base":true,"br":true,"col":true,"command":true,"embed":true,"hr":true,"img":true,"input":true,"keygen":true,"link":true,"meta":true,"param":true,"source":true,"wbr":true},__fest_element_stack = [],__fest_htmlhash={"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"},__fest_jschars=/[\\'"\/\n\r\t\b\f<>]/g,__fest_jschars_test=/[\\'"\/\n\r\t\b\f<>]/,__fest_jshash={"\"":"\\\"","\\":"\\\\","/":"\\/","\n":"\\n","\r":"\\r","\t":"\\t","\b":"\\b","\f":"\\f","'":"\\'","<":"\\u003C",">":"\\u003E"},___fest_log_error;if(typeof __fest_error === "undefined"){___fest_log_error = (typeof console !== "undefined" && console.error) ? function(){return Function.prototype.apply.call(console.error, console, arguments)} : function(){};}else{___fest_log_error=__fest_error};function __fest_log_error(msg){___fest_log_error(msg+"\nin block \""+__fest_debug_block+"\" at line: "+__fest_debug_line+"\nfile: "+__fest_debug_file)}function __fest_replaceHTML(chr){return __fest_htmlhash[chr]}function __fest_replaceJS(chr){return __fest_jshash[chr]}function __fest_extend(dest, src){for(var i in src)if(src.hasOwnProperty(i))dest[i]=src[i];}function __fest_param(fn){fn.param=true;return fn}function __fest_call(fn, params,cp){if(cp)for(var i in params)if(typeof params[i]=="function"&&params[i].param)params[i]=params[i]();return fn.call(__fest_self,params)}function __fest_escapeJS(s){if (typeof s==="string") {if (__fest_jschars_test.test(s))return s.replace(__fest_jschars,__fest_replaceJS);} else if (typeof s==="undefined")return "";return s;}function __fest_escapeHTML(s){if (typeof s==="string") {if (__fest_htmlchars_test.test(s))return s.replace(__fest_htmlchars,__fest_replaceHTML);} else if (typeof s==="undefined")return "";return s;}var json=__fest_context;__fest_buf+=("<div class=\"grid__row\"><div class=\"grid__module grid__module_col_3 grid__module_span_3\"><div class=\"alert alert-success\"><a class=\"success_message_close close\" data-dismiss=\"alert\">×</a><strong>Game over!</strong> You ");try{__fest_buf+=(__fest_escapeHTML(json))}catch(e){__fest_log_error(e.message + "5");}__fest_buf+=("</div></div></div>");__fest_to=__fest_chunks.length;if (__fest_to) {__fest_iterator = 0;for (;__fest_iterator<__fest_to;__fest_iterator++) {__fest_chunk=__fest_chunks[__fest_iterator];if (typeof __fest_chunk==="string") {__fest_html+=__fest_chunk;} else {__fest_fn=__fest_blocks[__fest_chunk.name];if (__fest_fn) __fest_html+=__fest_call(__fest_fn,__fest_chunk.params,__fest_chunk.cp);}}return __fest_html+__fest_buf;} else {return __fest_buf;}} ; });
 define('views/game',[
     'backbone',
     'tmpl/game',
     'models/game',
     'views/board',
     'views/btns',
-    'jquery'
+    'jquery',
+    'tmpl/success'
 ], function(
     Backbone,
     tmpl,
     gameModel,
     boardView,
     buttonsView,
-    $
+    $,
+    Success
 ){
 
     var View = Backbone.View.extend({
@@ -13785,23 +13793,35 @@ define('views/game',[
         board: boardView,
         game: gameModel,
         buttons: buttonsView,
+        success: Success, 
         events: {
-            "click .ready": 'ready'
+            "click .ready": "ready",
         },
         initialize: function () {
             this.listenTo(this.game, "game:updated", this.step)
             this.listenTo(this.buttons, "color:selected", this.game.step)
             this.listenTo(this.game, "game:stop", this.stop)
-            // this.render();
-            this.$el.html( this.template() );
-            this.boardDOM = this.$(".board");
-            this.buttonsDOM = this.$(".buttons");
-            this.buttonsDOM.append(this.buttons.$el)
-            this.boardDOM.html(this.board.render().$el)
-            this.hide();
+            this.render();
+            
+            this.board.hide();
+            this.buttons.hide();
         },
-        stop: function () {
-            $(".ready").show();  
+        stop: function (msg) {
+            if(msg["win"]) {
+                this.$el.prepend(this.success("win"));;
+            } else {
+                this.$el.prepend(this.success("lose"));
+            }
+            
+
+            $(".success_message_close").click(function () {
+                $(".alert-success").remove();
+            })
+
+
+            $(".ready").show(); 
+            this.board.hide(); 
+            this.buttons.hide();
         },
         ready: function () {
             $.ajax({
@@ -13809,18 +13829,25 @@ define('views/game',[
                 url: "/game.html",
                 dataType: 'json',
                 context: this
-            }).done(function() {
+            }).done(function(data) {
                 this.game.connect();
             }).fail(function(data) {
                 this.game.connect();
             });
         },
         render: function () {
-            
+            this.$el.html( this.template() );
+            this.boardDOM = this.$(".board");
+            this.buttonsDOM = this.$(".buttons");
+            this.buttonsDOM.html(this.buttons.$el)
+            this.boardDOM.html(this.board.render().$el);
         },
         step: function () {
             $(".ready").hide();
-            this.boardDOM.html(this.board.render().$el);
+            this.board.show();
+            this.buttons.show();
+            this.board.render();
+            
         },
         show: function () {
             this.trigger("show", this);
@@ -13900,7 +13927,7 @@ define('views/registration',[
 
     return new View();
 });
-define('tmpl/profile',[],function () { return function (__fest_context){"use strict";var __fest_self=this,__fest_buf="",__fest_chunks=[],__fest_chunk,__fest_attrs=[],__fest_select,__fest_if,__fest_iterator,__fest_to,__fest_fn,__fest_html="",__fest_blocks={},__fest_params,__fest_element,__fest_debug_file="",__fest_debug_line="",__fest_debug_block="",__fest_htmlchars=/[&<>"]/g,__fest_htmlchars_test=/[&<>"]/,__fest_short_tags = {"area":true,"base":true,"br":true,"col":true,"command":true,"embed":true,"hr":true,"img":true,"input":true,"keygen":true,"link":true,"meta":true,"param":true,"source":true,"wbr":true},__fest_element_stack = [],__fest_htmlhash={"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"},__fest_jschars=/[\\'"\/\n\r\t\b\f<>]/g,__fest_jschars_test=/[\\'"\/\n\r\t\b\f<>]/,__fest_jshash={"\"":"\\\"","\\":"\\\\","/":"\\/","\n":"\\n","\r":"\\r","\t":"\\t","\b":"\\b","\f":"\\f","'":"\\'","<":"\\u003C",">":"\\u003E"},___fest_log_error;if(typeof __fest_error === "undefined"){___fest_log_error = (typeof console !== "undefined" && console.error) ? function(){return Function.prototype.apply.call(console.error, console, arguments)} : function(){};}else{___fest_log_error=__fest_error};function __fest_log_error(msg){___fest_log_error(msg+"\nin block \""+__fest_debug_block+"\" at line: "+__fest_debug_line+"\nfile: "+__fest_debug_file)}function __fest_replaceHTML(chr){return __fest_htmlhash[chr]}function __fest_replaceJS(chr){return __fest_jshash[chr]}function __fest_extend(dest, src){for(var i in src)if(src.hasOwnProperty(i))dest[i]=src[i];}function __fest_param(fn){fn.param=true;return fn}function __fest_call(fn, params,cp){if(cp)for(var i in params)if(typeof params[i]=="function"&&params[i].param)params[i]=params[i]();return fn.call(__fest_self,params)}function __fest_escapeJS(s){if (typeof s==="string") {if (__fest_jschars_test.test(s))return s.replace(__fest_jschars,__fest_replaceJS);} else if (typeof s==="undefined")return "";return s;}function __fest_escapeHTML(s){if (typeof s==="string") {if (__fest_htmlchars_test.test(s))return s.replace(__fest_htmlchars,__fest_replaceHTML);} else if (typeof s==="undefined")return "";return s;}var json=__fest_context;__fest_buf+=("<div><h3>profile</h3></div><div class=\"your-name\">Name:");try{__fest_buf+=(__fest_escapeHTML(json.name))}catch(e){__fest_log_error(e.message + "7");}__fest_buf+=("<br/>Email:");try{__fest_buf+=(__fest_escapeHTML(json.email))}catch(e){__fest_log_error(e.message + "8");}__fest_buf+=("<br/>Id");try{__fest_buf+=(__fest_escapeHTML(json.id))}catch(e){__fest_log_error(e.message + "9");}__fest_buf+=("</div><br/><a href=\"#\" class=\"btn btn-danger\">back</a>");__fest_to=__fest_chunks.length;if (__fest_to) {__fest_iterator = 0;for (;__fest_iterator<__fest_to;__fest_iterator++) {__fest_chunk=__fest_chunks[__fest_iterator];if (typeof __fest_chunk==="string") {__fest_html+=__fest_chunk;} else {__fest_fn=__fest_blocks[__fest_chunk.name];if (__fest_fn) __fest_html+=__fest_call(__fest_fn,__fest_chunk.params,__fest_chunk.cp);}}return __fest_html+__fest_buf;} else {return __fest_buf;}} ; });
+define('tmpl/profile',[],function () { return function (__fest_context){"use strict";var __fest_self=this,__fest_buf="",__fest_chunks=[],__fest_chunk,__fest_attrs=[],__fest_select,__fest_if,__fest_iterator,__fest_to,__fest_fn,__fest_html="",__fest_blocks={},__fest_params,__fest_element,__fest_debug_file="",__fest_debug_line="",__fest_debug_block="",__fest_htmlchars=/[&<>"]/g,__fest_htmlchars_test=/[&<>"]/,__fest_short_tags = {"area":true,"base":true,"br":true,"col":true,"command":true,"embed":true,"hr":true,"img":true,"input":true,"keygen":true,"link":true,"meta":true,"param":true,"source":true,"wbr":true},__fest_element_stack = [],__fest_htmlhash={"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"},__fest_jschars=/[\\'"\/\n\r\t\b\f<>]/g,__fest_jschars_test=/[\\'"\/\n\r\t\b\f<>]/,__fest_jshash={"\"":"\\\"","\\":"\\\\","/":"\\/","\n":"\\n","\r":"\\r","\t":"\\t","\b":"\\b","\f":"\\f","'":"\\'","<":"\\u003C",">":"\\u003E"},___fest_log_error;if(typeof __fest_error === "undefined"){___fest_log_error = (typeof console !== "undefined" && console.error) ? function(){return Function.prototype.apply.call(console.error, console, arguments)} : function(){};}else{___fest_log_error=__fest_error};function __fest_log_error(msg){___fest_log_error(msg+"\nin block \""+__fest_debug_block+"\" at line: "+__fest_debug_line+"\nfile: "+__fest_debug_file)}function __fest_replaceHTML(chr){return __fest_htmlhash[chr]}function __fest_replaceJS(chr){return __fest_jshash[chr]}function __fest_extend(dest, src){for(var i in src)if(src.hasOwnProperty(i))dest[i]=src[i];}function __fest_param(fn){fn.param=true;return fn}function __fest_call(fn, params,cp){if(cp)for(var i in params)if(typeof params[i]=="function"&&params[i].param)params[i]=params[i]();return fn.call(__fest_self,params)}function __fest_escapeJS(s){if (typeof s==="string") {if (__fest_jschars_test.test(s))return s.replace(__fest_jschars,__fest_replaceJS);} else if (typeof s==="undefined")return "";return s;}function __fest_escapeHTML(s){if (typeof s==="string") {if (__fest_htmlchars_test.test(s))return s.replace(__fest_htmlchars,__fest_replaceHTML);} else if (typeof s==="undefined")return "";return s;}var json=__fest_context;__fest_buf+=("<div class=\"grid__row\"><div class=\"grid__module grid__module_col_4 grid__module_span_1\">");try{__fest_if=json.name}catch(e){__fest_if=false;__fest_log_error(e.message);}if(__fest_if){__fest_buf+=("<div class=\"header header-welcome\">Your profile, ");try{__fest_buf+=(__fest_escapeHTML(json.name))}catch(e){__fest_log_error(e.message + "8");}__fest_buf+=("!</div><table class=\"pure-table pure-table-horizontal\"><tr><td>Name:</td><td>");try{__fest_buf+=(__fest_escapeHTML(json.name))}catch(e){__fest_log_error(e.message + "14");}__fest_buf+=("</td></tr><tr><td>Email:</td><td>");try{__fest_buf+=(__fest_escapeHTML(json.email))}catch(e){__fest_log_error(e.message + "18");}__fest_buf+=("</td></tr><tr><td>id:</td><td>");try{__fest_buf+=(__fest_escapeHTML(json.id))}catch(e){__fest_log_error(e.message + "22");}__fest_buf+=("</td></tr></table>");}else{__fest_buf+=("<div class=\"header header-welcome\">Friend, please, login!</div>");}__fest_buf+=("<br/><a href=\"#\" class=\"button button_red\"><div class=\"button__text\"><div class=\"button__text__1 button__text_d\"></div><div class=\"button__text__2 button__text_d\"></div><div class=\"button__text__3 button__text_d\">Back</div></div></a></div></div>");__fest_to=__fest_chunks.length;if (__fest_to) {__fest_iterator = 0;for (;__fest_iterator<__fest_to;__fest_iterator++) {__fest_chunk=__fest_chunks[__fest_iterator];if (typeof __fest_chunk==="string") {__fest_html+=__fest_chunk;} else {__fest_fn=__fest_blocks[__fest_chunk.name];if (__fest_fn) __fest_html+=__fest_call(__fest_fn,__fest_chunk.params,__fest_chunk.cp);}}return __fest_html+__fest_buf;} else {return __fest_buf;}} ; });
 define('views/profile',[
     'backbone',
     'tmpl/profile',
@@ -13969,7 +13996,7 @@ define('views/viewManager',[
         },
         render: function(args) {
             if (typeof(args)==='undefined') args = {};
-            this.$el.html( this.template(args) );
+            this.$el.html( this.template(JSON.stringify(JSON.parse(args)["body"]["error"])) );
         },
         show: function () {
             this.$el.show();
@@ -13988,15 +14015,15 @@ define('views/viewManager',[
             });
         },
         user_load: function () {
-            this.rerender();
+            this.views["mainView"].render();
+            this.views["profileView"].render();
             window.setTimeout( function(){
                  window.location = "#";
              }, 200 );
         },
         rerender: function() {
-            _.forEach(this.views, function (arg) {
-                arg.render();
-            });
+           this.views["mainView"].render();
+            this.views["profileView"].render();
         },
         login_error: function (data) {
             this.render(JSON.stringify(data))
