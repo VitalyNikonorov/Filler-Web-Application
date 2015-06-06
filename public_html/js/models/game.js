@@ -36,12 +36,10 @@ define([
         },
         message: function(msg) {
             var data = JSON.parse(msg.data);
-            console.log(data);
             if (data.status == "start") {
                 self.trigger("game:start")
                 self.board.setBoard(data);
                 self.buttons.check(data);
-                alert("begin")
             } else if (data.status == "finish") {
                 self.board.stop();
                 self.trigger("game:stop", data);

@@ -13620,7 +13620,7 @@ define('models/game',[
         },
         connect: function () {
             if (this.socket === undefined) {
-                this.socket = new WebSocket("ws://localhost:8080/gameplay");
+                this.socket = new WebSocket("ws://91.215.138.197:80/gameplay");
             }
             this.socket.onopen = this.open;
             this.socket.onmessage = this.message;

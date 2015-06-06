@@ -4,14 +4,16 @@ define([
     'models/game',
     'views/board',
     'views/btns',
-    'jquery'
+    'jquery',
+    'tmpl/success'
 ], function(
     Backbone,
     tmpl,
     gameModel,
     boardView,
     buttonsView,
-    $
+    $,
+    Success
 ){
 
     var View = Backbone.View.extend({
@@ -21,8 +23,9 @@ define([
         board: boardView,
         game: gameModel,
         buttons: buttonsView,
+        success: Success, 
         events: {
-            "click .ready": 'ready'
+            "click .ready": "ready",
         },
         initialize: function () {
             this.listenTo(this.game, "game:updated", this.step)
@@ -30,32 +33,35 @@ define([
             this.listenTo(this.game, "game:stop", this.stop)
             this.render();
             
-            //this.hide();
             this.board.hide();
             this.buttons.hide();
         },
         stop: function (msg) {
             if(msg["win"]) {
-                alert("win");
+                this.$el.prepend(this.success("win"));;
             } else {
-                alert("lose")
+                this.$el.prepend(this.success("lose"));
             }
+            
+
+            $(".success_message_close").click(function () {
+                $(".alert-success").remove();
+            })
+
+
             $(".ready").show(); 
             this.board.hide(); 
             this.buttons.hide();
         },
         ready: function () {
-            alert("ready")
             $.ajax({
                 method: 'POST',
                 url: "/game.html",
                 dataType: 'json',
                 context: this
             }).done(function(data) {
-                console.log(data)
                 this.game.connect();
             }).fail(function(data) {
-                console.log(data);
                 this.game.connect();
             });
         },

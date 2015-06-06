@@ -47,7 +47,7 @@ define([
             _.forEach(this.models, function (val) {
                 if (val.get("id") == data.color1 ||
                     val.get("id") == data.color2 || 
-                    data.turn == user.get("name")) {
+                    data.turn != user.get("name")) {
                     val.set({"disabled": true});
                 } else {
                     val.set({"disabled": false});
