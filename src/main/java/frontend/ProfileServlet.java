@@ -42,15 +42,18 @@ public class ProfileServlet extends HttpServlet {
             response.sendRedirect("/api/v1/auth/signin");
         }
         String name = "", password = "", email = "";
+        int id = 1;
         if (accountService.isExist(session.getId())) {
             name = accountService.getSessions(session.getId()).getName();
             password = accountService.getSessions(session.getId()).getPassword();
             email = accountService.getSessions(session.getId()).getEmail();
+            id = accountService.getSessions(session.getId()).getId();
         }
 
         pageVariables.put("login", name);
         pageVariables.put("password", password);
         pageVariables.put("email", email);
+        pageVariables.put("id", id);
 
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().println(PageGenerator.getPage("profile.html", pageVariables));

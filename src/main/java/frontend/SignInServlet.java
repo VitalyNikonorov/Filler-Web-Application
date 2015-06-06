@@ -54,7 +54,7 @@ public class SignInServlet extends HttpServlet {
             if (profile != null) {
                 if (profile.getPassword().equals(jsonRequest.get("password").toString())) {
                     jsonResponse.put("status", 200);
-                    responseMap.put("id", 1);
+                    responseMap.put("id", profile.getId());
                     responseMap.put("name", profile.getName());
                     responseMap.put("password", "");
                     responseMap.put("email", profile.getEmail());
